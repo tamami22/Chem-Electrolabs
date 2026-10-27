@@ -1,0 +1,18 @@
+[
+  { "symbol": "Li", "name": "Lithium",   "E0": -3.04, "halfReactionOx": "Li → Li⁺ + e⁻",          "halfReactionRed": "Li⁺ + e⁻ → Li",          "ion": "Li⁺",  "color": "#E0F2FE" },
+  { "symbol": "K",  "name": "Kalium",    "E0": -2.92, "halfReactionOx": "K → K⁺ + e⁻",            "halfReactionRed": "K⁺ + e⁻ → K",            "ion": "K⁺",   "color": "#DDD6FE" },
+  { "symbol": "Ca", "name": "Kalsium",   "E0": -2.87, "halfReactionOx": "Ca → Ca²⁺ + 2e⁻",        "halfReactionRed": "Ca²⁺ + 2e⁻ → Ca",        "ion": "Ca²⁺", "color": "#FDE68A" },
+  { "symbol": "Na", "name": "Natrium",   "E0": -2.71, "halfReactionOx": "Na → Na⁺ + e⁻",          "halfReactionRed": "Na⁺ + e⁻ → Na",          "ion": "Na⁺",  "color": "#FED7AA" },
+  { "symbol": "Mg", "name": "Magnesium", "E0": -2.37, "halfReactionOx": "Mg → Mg²⁺ + 2e⁻",       "halfReactionRed": "Mg²⁺ + 2e⁻ → Mg",       "ion": "Mg²⁺", "color": "#D9F99D" },
+  { "symbol": "Al", "name": "Aluminium", "E0": -1.66, "halfReactionOx": "Al → Al³⁺ + 3e⁻",       "halfReactionRed": "Al³⁺ + 3e⁻ → Al",       "ion": "Al³⁺", "color": "#E0E7FF" },
+  { "symbol": "Zn", "name": "Seng",      "E0": -0.76, "halfReactionOx": "Zn → Zn²⁺ + 2e⁻",       "halfReactionRed": "Zn²⁺ + 2e⁻ → Zn",       "ion": "Zn²⁺", "color": "#BAE6FD" },
+  { "symbol": "Fe", "name": "Besi",      "E0": -0.44, "halfReactionOx": "Fe → Fe²⁺ + 2e⁻",       "halfReactionRed": "Fe²⁺ + 2e⁻ → Fe",       "ion": "Fe²⁺", "color": "#FECACA" },
+  { "symbol": "Ni", "name": "Nikel",     "E0": -0.25, "halfReactionOx": "Ni → Ni²⁺ + 2e⁻",       "halfReactionRed": "Ni²⁺ + 2e⁻ → Ni",       "ion": "Ni²⁺", "color": "#A7F3D0" },
+  { "symbol": "Sn", "name": "Timah",     "E0": -0.14, "halfReactionOx": "Sn → Sn²⁺ + 2e⁻",       "halfReactionRed": "Sn²⁺ + 2e⁻ → Sn",       "ion": "Sn²⁺", "color": "#FEF9C3" },
+  { "symbol": "Pb", "name": "Timbal",    "E0": -0.13, "halfReactionOx": "Pb → Pb²⁺ + 2e⁻",       "halfReactionRed": "Pb²⁺ + 2e⁻ → Pb",       "ion": "Pb²⁺", "color": "#F3F4F6" },
+  { "symbol": "H",  "name": "Hidrogen",  "E0":  0.00, "halfReactionOx": "H₂ → 2H⁺ + 2e⁻",        "halfReactionRed": "2H⁺ + 2e⁻ → H₂",        "ion": "H⁺",   "color": "#FFFFFF" },
+  { "symbol": "Cu", "name": "Tembaga",   "E0":  0.34, "halfReactionOx": "Cu → Cu²⁺ + 2e⁻",       "halfReactionRed": "Cu²⁺ + 2e⁻ → Cu",       "ion": "Cu²⁺", "color": "#FED7AA" },
+  { "symbol": "Hg", "name": "Raksa",     "E0":  0.79, "halfReactionOx": "Hg → Hg²⁺ + 2e⁻",       "halfReactionRed": "Hg²⁺ + 2e⁻ → Hg",       "ion": "Hg²⁺", "color": "#E9D5FF" },
+  { "symbol": "Ag", "name": "Perak",     "E0":  0.80, "halfReactionOx": "Ag → Ag⁺ + e⁻",          "halfReactionRed": "Ag⁺ + e⁻ → Ag",          "ion": "Ag⁺",  "color": "#F1F5F9" },
+  { "symbol": "Au", "name": "Emas",      "E0":  1.50, "halfReactionOx": "Au → Au³⁺ + 3e⁻",        "halfReactionRed": "Au³⁺ + 3e⁻ → Au",        "ion": "Au³⁺", "color": "#FDE68A" }
+]

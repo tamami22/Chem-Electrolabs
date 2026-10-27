@@ -1,0 +1,191 @@
+{
+  "curriculum": "Kurikulum Merdeka / K13 Kimia XII SMA",
+  "topic": "Elektrokimia (Electrochemistry)",
+  "totalModules": 5,
+  "totalLearningGoals": 7,
+  "nodes": [
+    {
+      "id": "node-prereq",
+      "type": "prereq",
+      "num": 0,
+      "slug": "prasyarat-redoks",
+      "title": "Prasyarat: Bilangan Oksidasi & Redoks",
+      "subtitle": "Pondasi Konsep Kimia Kelas X & XI",
+      "tpCode": "Prasyarat",
+      "tpDesc": "Mengingat kembali konsep penentuan bilangan oksidasi, transfer elektron, dan membedakan spesi reduktor vs oksidator.",
+      "duration": "10 menit",
+      "color": "#64748B",
+      "badge": "Pondasi",
+      "prerequisites": [],
+      "unlockedAlways": true,
+      "tripleRep": {
+        "makro": "Warna karat besi, pemutih pakaian, nyala kembang api.",
+        "submikro": "Perpindahan elektron antar ion/atom pereaksi.",
+        "simbolik": "Aturan penentuan bilangan oksidasi unsur & senyawa."
+      },
+      "indicators": [
+        "Menentukan bilangan oksidasi atom dalam ion atau senyawa",
+        "Mengidentifikasi spesi yang mengalami oksidasi dan reduksi",
+        "Menentukan oksidator dan reduktor"
+      ]
+    },
+    {
+      "id": "node-1",
+      "type": "module",
+      "num": 1,
+      "slug": "1-redoks",
+      "title": "Modul 1: Reaksi Redoks",
+      "subtitle": "Jembatan Menuju Elektrokimia",
+      "tpCode": "TP1",
+      "tpDesc": "Menjelaskan reaksi redoks dalam elektrokimia dengan menghubungkan gejala makroskopik, gambaran submikroskopik (transfer elektron/ion), dan representasi simbolik (persamaan & biloks).",
+      "duration": "25 menit",
+      "color": "#0EA5E9",
+      "badge": "Dasar Wajib",
+      "prerequisites": ["node-prereq"],
+      "tripleRep": {
+        "makro": "Pencelupan paku besi ke dalam larutan CuSO₄ menghasilkan endapan tembaga kecokelatan dan pemudaran warna biru.",
+        "submikro": "Atom Fe melepaskan 2e⁻ menjadi ion Fe²⁺ ke larutan; ion Cu²⁺ menangkap 2e⁻ membentuk atom Cu(s) pada permukaan paku.",
+        "simbolik": "Fe(s) + Cu²⁺(aq) → Fe²⁺(aq) + Cu(s) ; Biloks Fe: 0 → +2 (oksidasi), Cu: +2 → 0 (reduksi)."
+      },
+      "indicators": [
+        "Menganalisis transfer elektron pada reaksi redoks spontan",
+        "Menghubungkan perubahan fisik nyata dengan perubahan level atomik",
+        "Menuliskan persamaan setengah reaksi reduksi dan oksidasi"
+      ]
+    },
+    {
+      "id": "node-2",
+      "type": "module",
+      "num": 2,
+      "slug": "2-sel-volta",
+      "title": "Modul 2: Sel Volta",
+      "subtitle": "Pembangkit Arus dari Reaksi Spontan",
+      "tpCode": "TP2 & TP3",
+      "tpDesc": "Menganalisis prinsip kerja sel volta: peran anode-katode, arah aliran elektron & ion jembatan garam, penulisan notasi sel, dan perhitungan E°sel.",
+      "duration": "35 menit",
+      "color": "#10B981",
+      "badge": "Simulasi Interaktif ⭐",
+      "isKeyFeature": true,
+      "prerequisites": ["node-1"],
+      "tripleRep": {
+        "makro": "Jarum voltmeter menyimpang ke nilai positif (+1,10 V) dan lampu menyala saat kedua gelas kimia dihubungkan kawat dan jembatan garam.",
+        "submikro": "Elektron mengalir dari elektrode seng (anode) ke tembaga (katode) melalui kawat. Ion K⁺ bergerak ke katode dan Cl⁻ ke anode menjaga netralitas muatan.",
+        "simbolik": "Zn(s) | Zn²⁺(aq, 1 M) || Cu²⁺(aq, 1 M) | Cu(s) ; E°sel = E°katode − E°anode = +0,34 − (−0,76) = +1,10 V."
+      },
+      "indicators": [
+        "Menentukan kutub anode (-) dan katode (+) pada sel volta",
+        "Menghitung potensial sel standar (E°sel) menggunakan deret volta",
+        "Menuliskan diagram/notasi sel volta secara tepat",
+        "Mengoperasikan simulasi interaktif VoltaCellSimulator"
+      ]
+    },
+    {
+      "id": "node-3",
+      "type": "module",
+      "num": 3,
+      "slug": "3-elektrolisis",
+      "title": "Modul 3: Sel Elektrolisis",
+      "subtitle": "Mengubah Energi Listrik Menjadi Reaksi Kimia",
+      "tpCode": "TP2 & TP4",
+      "tpDesc": "Menganalisis proses elektrolisis: produk anode–katode pada larutan/lelehan, reaksi setengah sel, serta pengaruh elektrode inert vs aktif.",
+      "duration": "35 menit",
+      "color": "#A855F7",
+      "badge": "Simulasi Reaksi",
+      "prerequisites": ["node-1"],
+      "tripleRep": {
+        "makro": "Munculnya gelembung gas tak berwarna di elektrode dan endapan logam berkilau saat dialiri arus DC dari baterai.",
+        "submikro": "Kation tertarik ke katode (-) menerima elektron (reduksi); anion/molekul air tertarik ke anode (+) melepas elektron (oksidasi).",
+        "simbolik": "Elektrolisis larutan KI: Katode: 2H₂O(l) + 2e⁻ → H₂(g) + 2OH⁻(aq) ; Anode: 2I⁻(aq) → I₂(s) + 2e⁻."
+      },
+      "indicators": [
+        "Membedakan sel volta dan sel elektrolisis secara komparatif",
+        "Meramalkan produk katode dan anode berdasarkan wujud (larutan vs lelehan)",
+        "Menganalisis peran elektrode aktif (misal Cu, Ag) pada penyepuhan logam (electroplating)"
+      ]
+    },
+    {
+      "id": "node-4",
+      "type": "module",
+      "num": 4,
+      "slug": "4-faraday",
+      "title": "Modul 4: Hukum Faraday",
+      "subtitle": "Aspek Kuantitatif Elektrolisis",
+      "tpCode": "TP5",
+      "tpDesc": "Menerapkan Hukum Faraday I dan II untuk menghitung massa endapan logam, volume gas (STP), kuat arus, dan waktu elektrolisis langkah demi langkah.",
+      "duration": "30 menit",
+      "color": "#F59E0B",
+      "badge": "Kalkulator Kuantitatif",
+      "prerequisites": ["node-3"],
+      "tripleRep": {
+        "makro": "Massa lapisan perak pada sendok bertambah sebanding dengan lamanya waktu penyepuhan dan besarnya arus listrik.",
+        "submikro": "Setiap 1 mol elektron (1 Faraday = 96.500 Coulomb) mengendapkan sejumlah mol kation sesuai dengan valensinya.",
+        "simbolik": "w = (e · i · t) / 96.500 ; di mana e = Ar / n, w dalam gram, i dalam Ampere, t dalam detik."
+      },
+      "indicators": [
+        "Menghubungkan muatan listrik (Q = i · t) dengan mol elektron (F)",
+        "Menghitung massa endapan logam di katode dengan Hukum Faraday I",
+        "Menghitung volume gas yang dihasilkan pada kondisi standar (STP)",
+        "Membandingkan hasil dua sel elektrolisis seri dengan Hukum Faraday II"
+      ]
+    },
+    {
+      "id": "node-5",
+      "type": "module",
+      "num": 5,
+      "slug": "5-korosi",
+      "title": "Modul 5: Korosi & Pencegahan",
+      "subtitle": "Aplikasi Elektrokimia di Kehidupan Nyata",
+      "tpCode": "TP6",
+      "tpDesc": "Menganalisis fenomena korosi logam (sel volta mikroskopik), faktor-faktor yang mempercepat korosi, dan strategi pencegahan berbasis elektrokimia.",
+      "duration": "25 menit",
+      "color": "#EF4444",
+      "badge": "Aplikasi Konseptual",
+      "prerequisites": ["node-2", "node-3"],
+      "tripleRep": {
+        "makro": "Besi berkarat berwarna cokelat kemerahan keropos akibat kontak dengan air dan udara lembap di lingkungan terbuka.",
+        "submikro": "Tetesan air bertindak sebagai elektrolit mikrosel: daerah anodik besi teroksidasi jadi Fe²⁺, elektron mengalir ke daerah katodik mereduksi oksigen.",
+        "simbolik": "Anode: 2Fe(s) → 2Fe²⁺(aq) + 4e⁻ ; Katode: O₂(g) + 2H₂O(l) + 4e⁻ → 4OH⁻(aq) ; Karat: Fe₂O₃·xH₂O(s)."
+      },
+      "indicators": [
+        "Menjelaskan mekanisme elektrokimia terjadinya korosi besi",
+        "Menganalisis faktor pemercepat korosi (air, oksigen, elektrolit, pH)",
+        "Menerapkan prinsip perlindungan katodik (sacrificial anode seperti Mg/Zn pada pipa baja)"
+      ]
+    },
+    {
+      "id": "node-assessment",
+      "type": "assessment",
+      "num": 6,
+      "slug": "asesmen",
+      "title": "Asesmen Akhir Elektrokimia",
+      "subtitle": "Evaluasi Pemahaman Tiga Representasi",
+      "tpCode": "TP7",
+      "tpDesc": "Mengomunikasikan hasil analisis elektrokimia dan menguji penguasaan konsep melalui 15 butir instrumen tes representasional komprehensif.",
+      "duration": "40 menit",
+      "color": "#3B82F6",
+      "badge": "Evaluasi Akhir",
+      "prerequisites": ["node-2", "node-4", "node-5"],
+      "tripleRep": {
+        "makro": "Analisis kasus visual eksperimen nyata & pengamatan laboratorium.",
+        "submikro": "Penjelasan diagram pergerakan partikel ion dan elektron.",
+        "simbolik": "Perhitungan potensial sel, penulisan reaksi redoks dan stoikiometri Faraday."
+      },
+      "indicators": [
+        "Menyelesaikan soal transfer antar representasi (Makro ↔ Submikro ↔ Simbolik)",
+        "Memprediksi spontanitas dan nilai E°sel dari data tabel",
+        "Mendapatkan sertifikat capaian kompetensi digital"
+      ]
+    }
+  ],
+  "connections": [
+    { "from": "node-prereq", "to": "node-1", "label": "Pondasi Biloks" },
+    { "from": "node-1", "to": "node-2", "label": "Reaksi Spontan (Sel Volta)" },
+    { "from": "node-1", "to": "node-3", "label": "Reaksi Non-Spontan (Elektrolisis)" },
+    { "from": "node-3", "to": "node-4", "label": "Aspek Kuantitatif" },
+    { "from": "node-2", "to": "node-5", "label": "Prinsip Korosi & Deret Volta" },
+    { "from": "node-3", "to": "node-5", "label": "Pelapisan Logam (Elektroplating)" },
+    { "from": "node-2", "to": "node-assessment", "label": "Evaluasi TP3" },
+    { "from": "node-4", "to": "node-assessment", "label": "Evaluasi TP5" },
+    { "from": "node-5", "to": "node-assessment", "label": "Evaluasi TP6 & TP7" }
+  ]
+}

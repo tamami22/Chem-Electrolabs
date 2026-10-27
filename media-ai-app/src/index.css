@@ -1,0 +1,142 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+@import "tailwindcss";
+
+/* ─── Design Tokens (PRD §5.2) ─────────────────────────────── */
+:root {
+  /* Brand Colors */
+  --ce-primary:        #0EA5E9;
+  --ce-primary-dark:   #0284C7;
+  --ce-secondary:      #10B981;
+  --ce-accent:         #F59E0B;
+  --ce-anode-color:    #EF4444;
+  --ce-katode-color:   #3B82F6;
+  --ce-electron-color: #FACC15;
+
+  /* Neutrals */
+  --ce-dark:           #0F172A;
+  --ce-dark-2:         #1E293B;
+  --ce-dark-3:         #334155;
+  --ce-muted:          #64748B;
+  --ce-light:          #F8FAFC;
+  --ce-white:          #FFFFFF;
+
+  /* Glassmorphism */
+  --ce-glass-bg:       rgba(255,255,255,0.06);
+  --ce-glass-border:   rgba(255,255,255,0.12);
+  --ce-glass-blur:     12px;
+
+  /* Spacing & radius */
+  --ce-radius-sm:      6px;
+  --ce-radius:         12px;
+  --ce-radius-lg:      20px;
+  --ce-radius-full:    9999px;
+}
+
+/* ─── Base ─────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  background-color: var(--ce-dark);
+  color: var(--ce-light);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── Scrollbar ────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--ce-dark-2); }
+::-webkit-scrollbar-thumb { background: var(--ce-dark-3); border-radius: var(--ce-radius-full); }
+::-webkit-scrollbar-thumb:hover { background: var(--ce-muted); }
+
+/* ─── Animations ───────────────────────────────────────────── */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-10px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(14,165,233,0.3); }
+  50%       { box-shadow: 0 0 40px rgba(14,165,233,0.6); }
+}
+
+@keyframes electron-flow {
+  0%   { stroke-dashoffset: 200; }
+  100% { stroke-dashoffset: 0; }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes particle-drift {
+  0%   { transform: translateY(0) translateX(0) scale(1); opacity: 0.6; }
+  100% { transform: translateY(-120px) translateX(30px) scale(0); opacity: 0; }
+}
+
+/* ─── Utility Classes ──────────────────────────────────────── */
+.animate-float       { animation: float 4s ease-in-out infinite; }
+.animate-pulse-glow  { animation: pulse-glow 2.5s ease-in-out infinite; }
+.animate-fade-in-up  { animation: fadeInUp 0.6s ease-out both; }
+.animate-fade-in     { animation: fadeIn 0.4s ease-out both; }
+.animate-scale-in    { animation: scaleIn 0.4s ease-out both; }
+
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+.delay-400 { animation-delay: 0.4s; }
+.delay-500 { animation-delay: 0.5s; }
+.delay-600 { animation-delay: 0.6s; }
+.delay-700 { animation-delay: 0.7s; }
+
+.glass {
+  background: var(--ce-glass-bg);
+  border: 1px solid var(--ce-glass-border);
+  backdrop-filter: blur(var(--ce-glass-blur));
+  -webkit-backdrop-filter: blur(var(--ce-glass-blur));
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, var(--ce-primary), var(--ce-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.shimmer-text {
+  background: linear-gradient(90deg, var(--ce-primary) 0%, var(--ce-secondary) 50%, var(--ce-primary) 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 3s linear infinite;
+}
+
+/* ─── Focus & Accessibility ────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--ce-primary);
+  outline-offset: 3px;
+  border-radius: var(--ce-radius-sm);
+}
