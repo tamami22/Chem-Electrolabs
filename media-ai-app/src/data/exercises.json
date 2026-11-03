@@ -1,0 +1,48 @@
+{
+  "module1": [
+    {
+      "id": "ex-m1-01",
+      "type": "matching",
+      "title": "Mencocokkan Triple Representation (Redoks)",
+      "instruction": "Tarik dan letakkan pernyataan di bawah ini ke dalam kategori representasi yang tepat.",
+      "categories": [
+        { "id": "makro", "label": "Makroskopik" },
+        { "id": "submikro", "label": "Submikroskopik" },
+        { "id": "simbolik", "label": "Simbolik" }
+      ],
+      "items": [
+        { "id": "item1", "text": "Warna larutan berubah dari biru menjadi pudar.", "categoryId": "makro", "explanation": "Perubahan warna adalah gejala yang bisa diamati langsung oleh mata (makroskopik)." },
+        { "id": "item2", "text": "Atom Zn melepaskan 2 elektron menjadi ion Zn²⁺.", "categoryId": "submikro", "explanation": "Transfer elektron melibatkan partikel yang tidak terlihat mata (submikroskopik)." },
+        { "id": "item3", "text": "Zn(s) + Cu²⁺(aq) → Zn²⁺(aq) + Cu(s)", "categoryId": "simbolik", "explanation": "Persamaan reaksi kimia adalah representasi simbolik." }
+      ]
+    }
+  ],
+  "module2": [
+    {
+      "id": "ex-m2-01",
+      "type": "matching",
+      "title": "Melabeli Komponen Sel Volta",
+      "instruction": "Pasangkan komponen sel volta dengan fungsinya yang benar.",
+      "categories": [],
+      "items": [
+        { "id": "m2a", "text": "Anode (Zn)", "matchId": "m2a-target", "matchText": "Tempat terjadinya oksidasi, elektron dilepaskan." },
+        { "id": "m2b", "text": "Katode (Cu)", "matchId": "m2b-target", "matchText": "Tempat terjadinya reduksi, elektron ditangkap." },
+        { "id": "m2c", "text": "Jembatan Garam", "matchId": "m2c-target", "matchText": "Menjaga kenetralan muatan dengan mengalirkan ion." }
+      ]
+    }
+  ],
+  "module4": [
+    {
+      "id": "ex-m4-01",
+      "type": "ordering",
+      "title": "Langkah Perhitungan Hukum Faraday",
+      "instruction": "Urutkan langkah-langkah untuk menghitung massa zat hasil elektrolisis dengan benar.",
+      "items": [
+        { "id": "step2", "text": "Hitung mol elektron (n_e = Q / 96500)", "order": 2 },
+        { "id": "step1", "text": "Hitung total muatan listrik (Q = I × t)", "order": 1 },
+        { "id": "step3", "text": "Gunakan perbandingan mol elektron dengan mol zat", "order": 3 },
+        { "id": "step4", "text": "Kalikan mol zat dengan massa molar (Ar/Mr) untuk mendapat massa", "order": 4 }
+      ]
+    }
+  ]
+}

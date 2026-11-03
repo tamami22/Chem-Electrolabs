@@ -3,6 +3,7 @@ import Header from './components/ui/Header'
 import Footer from './components/ui/Footer'
 import HomePage from './pages/HomePage'
 import LearningMapPage from './pages/LearningMapPage'
+import ExercisesPage from './pages/ExercisesPage'
 
 /* ─── Placeholder component untuk halaman yang belum dibuat ──────── */
 function ComingSoon({ title }) {
@@ -56,8 +57,9 @@ export default function App() {
           {/* Modul 1–5 */}
           <Route path="/modul/:slug" element={<ComingSoon title="Modul Elektrokimia" />} />
 
-          {/* Latihan */}
-          <Route path="/latihan" element={<ComingSoon title="Latihan Interaktif" />} />
+          {/* Latihan Interaktif & Cek Pemahaman (F8 & F9) */}
+          <Route path="/latihan" element={<ExercisesPage />} />
+          <Route path="/test" element={<ExercisesPage />} />
 
           {/* Asesmen Akhir */}
           <Route path="/asesmen" element={<ComingSoon title="Asesmen Akhir" />} />

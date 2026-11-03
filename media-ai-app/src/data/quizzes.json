@@ -1,0 +1,72 @@
+{
+  "module1": [
+    {
+      "id": "q-m1-01",
+      "question": "Dalam reaksi $2Mg(s) + O_2(g) \\rightarrow 2MgO(s)$, zat yang mengalami oksidasi adalah...",
+      "options": [
+        { "id": "A", "text": "Mg, karena bilangan oksidasinya naik dari 0 ke +2" },
+        { "id": "B", "text": "O₂, karena bilangan oksidasinya turun dari 0 ke -2" },
+        { "id": "C", "text": "MgO, karena merupakan hasil reaksi" },
+        { "id": "D", "text": "Mg, karena menangkap elektron" }
+      ],
+      "correctAnswer": "A",
+      "explanation": "Oksidasi adalah kenaikan bilangan oksidasi (biloks). Mg berubah dari biloks 0 (unsur bebas) menjadi +2 dalam MgO."
+    }
+  ],
+  "module2": [
+    {
+      "id": "q-m2-01",
+      "question": "Diketahui data potensial reduksi standar:\n$Zn^{2+} + 2e^- \\rightarrow Zn \\quad E^\\circ = -0,76 V$\n$Cu^{2+} + 2e^- \\rightarrow Cu \\quad E^\\circ = +0,34 V$\nBerapakah potensial sel ($E^\\circ_{sel}$) yang dihasilkan?",
+      "options": [
+        { "id": "A", "text": "+1,10 V" },
+        { "id": "B", "text": "+0,42 V" },
+        { "id": "C", "text": "-0,42 V" },
+        { "id": "D", "text": "-1,10 V" }
+      ],
+      "correctAnswer": "A",
+      "explanation": "Gunakan rumus $E^\\circ_{sel} = E^\\circ_{katode} - E^\\circ_{anode}$. Karena Cu memiliki E° lebih besar, Cu adalah katode. Maka $E^\\circ_{sel} = 0,34 - (-0,76) = +1,10 V$."
+    }
+  ],
+  "module3": [
+    {
+      "id": "q-m3-01",
+      "question": "Pada elektrolisis larutan $CuSO_4$ menggunakan elektrode karbon (inert), gas apakah yang dihasilkan di anode?",
+      "options": [
+        { "id": "A", "text": "Gas Hidrogen ($H_2$)" },
+        { "id": "B", "text": "Gas Oksigen ($O_2$)" },
+        { "id": "C", "text": "Gas Klorin ($Cl_2$)" },
+        { "id": "D", "text": "Tidak ada gas yang dihasilkan" }
+      ],
+      "correctAnswer": "B",
+      "explanation": "Karena elektrode inert (karbon) dan anionnya adalah sisa asam oksi ($SO_4^{2-}$), maka yang teroksidasi di anode adalah air ($H_2O$), menghasilkan gas Oksigen ($O_2$)."
+    }
+  ],
+  "module4": [
+    {
+      "id": "q-m4-01",
+      "question": "Arus listrik sebesar 2 Ampere dialirkan ke dalam larutan $AgNO_3$ selama 965 detik. Massa perak (Ag) yang mengendap di katode adalah... (Ar Ag = 108)",
+      "options": [
+        { "id": "A", "text": "0,216 gram" },
+        { "id": "B", "text": "2,16 gram" },
+        { "id": "C", "text": "21,6 gram" },
+        { "id": "D", "text": "1,08 gram" }
+      ],
+      "correctAnswer": "B",
+      "explanation": "Langkah 1: $Q = I \\times t = 2 \\times 965 = 1930 C$. Langkah 2: $mol\\ e^- = Q / 96500 = 0,02\\ mol$. Langkah 3: Reaksi $Ag^+ + e^- \\rightarrow Ag$, mol Ag = mol e- = 0,02 mol. Langkah 4: Massa = $0,02 \\times 108 = 2,16\\ gram$."
+    }
+  ],
+  "module5": [
+    {
+      "id": "q-m5-01",
+      "question": "Proses perlindungan besi dari korosi dengan cara melapisi besi menggunakan logam yang lebih aktif (seperti Magnesium) disebut...",
+      "options": [
+        { "id": "A", "text": "Galvanisasi" },
+        { "id": "B", "text": "Elektroplating" },
+        { "id": "C", "text": "Proteksi Katodik" },
+        { "id": "D", "text": "Pelapisan Plastik" }
+      ],
+      "correctAnswer": "C",
+      "explanation": "Proteksi katodik menggunakan logam pelindung yang lebih aktif (E° lebih negatif). Logam yang lebih aktif akan teroksidasi (berkorban) untuk melindungi besi."
+    }
+  ]
+}
