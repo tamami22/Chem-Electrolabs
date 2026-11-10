@@ -1,0 +1,12 @@
+{
+  "name": "chem-electrolabs",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "npm run dev --prefix media-ai-app",
+    "build": "npm run build --prefix media-ai-app",
+    "lint": "npm run lint --prefix media-ai-app",
+    "preview": "npm run preview --prefix media-ai-app"
+  }
+}
