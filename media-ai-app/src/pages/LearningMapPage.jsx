@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import {
   Zap, FlaskConical, Calculator, Shield, BookOpen, GraduationCap,
-  CheckCircle2, Circle, Lock, Unlock, ArrowRight, ChevronRight,
-  Info, Sparkles, RotateCcw, Eye, Atom, Hash, Clock, Target, Compass
+  CheckCircle2, Circle, Lock, ArrowRight, ChevronRight,
+  Sparkles, RotateCcw, Eye, Atom, Hash, Clock, Target, Compass
 } from 'lucide-react'
 import learningPathData from '../data/learning-path.json'
 

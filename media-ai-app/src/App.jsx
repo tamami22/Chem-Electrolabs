@@ -3,6 +3,7 @@ import Header from './components/ui/Header'
 import Footer from './components/ui/Footer'
 import HomePage from './pages/HomePage'
 import LearningMapPage from './pages/LearningMapPage'
+import Module1Page from './pages/Module1Page'
 
 /* ─── Placeholder component untuk halaman yang belum dibuat ──────── */
 function ComingSoon({ title }) {
@@ -54,6 +55,7 @@ export default function App() {
           <Route path="/peta" element={<LearningMapPage />} />
 
           {/* Modul 1–5 */}
+          <Route path="/modul/1-redoks" element={<Module1Page />} />
           <Route path="/modul/:slug" element={<ComingSoon title="Modul Elektrokimia" />} />
 
           {/* Latihan */}

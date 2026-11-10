@@ -1,0 +1,272 @@
+{
+  "id": "1-redoks",
+  "num": 1,
+  "slug": "1-redoks",
+  "title": "Modul 1: Reaksi Redoks",
+  "subtitle": "Jembatan Menuju Elektrokimia dalam Tiga Representasi",
+  "tpCode": "TP1",
+  "tpTitle": "Reaksi Redoks dalam Elektrokimia",
+  "tpDesc": "Menjelaskan reaksi redoks dalam elektrokimia dengan menghubungkan gejala makroskopik, gambaran submikroskopik (transfer elektron/ion), dan representasi simbolik (persamaan & biloks).",
+  "duration": "25 menit",
+  "badge": "Dasar Wajib",
+  "color": "#0EA5E9",
+  "prerequisites": [
+    "Konsep Bilangan Oksidasi (Biloks)",
+    "Penulisan Persamaan Reaksi Kimia Dasar"
+  ],
+  "learningOutcomes": [
+    "Menganalisis reaksi redoks sebagai proses pelepasan elektron (oksidasi) dan penerimaan elektron (reduksi).",
+    "Menghubungkan gejala nyata makroskopik (perubahan warna larutan, pembentukan endapan tembaga) dengan level submikroskopik (migrasi elektron dan kation).",
+    "Menuliskan persamaan reaksi setengah sel (oksidasi dan reduksi), reaksi redoks total, serta perubahan bilangan oksidasi secara simbolik.",
+    "Mengidentifikasi zat yang bertindak sebagai reduktor (pereduksi) dan oksidator (pengoksidasi) dalam reaksi kimia spontan."
+  ],
+  "steps": [
+    {
+      "stepNumber": 1,
+      "title": "Hakikat Reaksi Redoks & Transfer Elektron",
+      "summary": "Reaksi redoks pada dasarnya adalah serah-terima elektron antarpartikel pereaksi.",
+      "content": {
+        "makro": {
+          "title": "Gejala Makroskopik: Fakta di Laboratorium",
+          "description": "Dalam kehidupan sehari-hari dan di laboratorium, reaksi redoks dapat diamati secara visual. Salah satu eksperimen klasik adalah mencelupkan sebatang paku besi abu-abu mengilap ke dalam larutan tembaga(II) sulfat (CuSO₄) yang berwarna biru jernih.",
+          "observations": [
+            "Warna biru larutan tembaga(II) sulfat perlahan-lahan memudar dan berubah menjadi hijau pucat.",
+            "Permukaan paku besi mulai diselimuti lapisan padatan berwarna merah kecokelatan (lapisan tembaga murni).",
+            "Setelah beberapa waktu, massa batang paku besi yang tidak terlapisi tampak sedikit menyusut atau keropos."
+          ],
+          "keyQuestion": "Apa yang sebenarnya terjadi di balik perubahan warna dan pembentukan endapan merah bata tersebut?"
+        },
+        "submikro": {
+          "title": "Tingkat Submikroskopik: Perjalanan Partikel & Elektron",
+          "description": "Jika kita dapat melihat ke tingkat atom dan ion pada antarmuka antara permukaan paku besi dan larutan air, terjadi proses perpindahan elektron langsung:",
+          "points": [
+            "Atom-atom besi (Fe) pada permukaan paku melepaskan 2 elektron valensinya: Fe → Fe²⁺ + 2e⁻. Ion Fe²⁺ yang terbentuk larut ke dalam air, menyebabkan larutan perlahan kehijauan.",
+            "Dua elektron yang ditinggalkan di permukaan besi ditarik kuat oleh kation tembaga (Cu²⁺) yang terlarut di air.",
+            "Kation Cu²⁺ menangkap 2 elektron tersebut: Cu²⁺ + 2e⁻ → Cu(s). Atom Cu netral menempel pada kisi logam paku sebagai lapisan tembaga padat berwarna merah kecokelatan.",
+            "Ion sulfat (SO₄²⁻) tidak mengalami perubahan dan bertindak sebagai ion pendamping (spektator)."
+          ],
+          "highlight": "Kunci elektrokimia: Reaksi ini adalah aliran elektron lokal. Jika kita dapat memisahkan tempat pelepasan elektron dari tempat penangkapan elektron dengan kawat eksternal, kita akan menghasilkan arus listrik!"
+        },
+        "simbolik": {
+          "title": "Representasi Simbolik: Persamaan Kimia & Biloks",
+          "description": "Secara simbolik kimia, proses di atas diuraikan menjadi dua persamaan setengah reaksi dan perubahan bilangan oksidasi (biloks):",
+          "halfReactions": [
+            {
+              "type": "Oksidasi (Pelepasan Elektron)",
+              "equation": "\\text{Fe}(s) \\rightarrow \\text{Fe}^{2+}(aq) + 2e^-",
+              "explanation": "Besi melepaskan 2 elektron. Bilangan oksidasi Fe naik dari 0 menjadi +2."
+            },
+            {
+              "type": "Reduksi (Penangkapan Elektron)",
+              "equation": "\\text{Cu}^{2+}(aq) + 2e^- \\rightarrow \\text{Cu}(s)",
+              "explanation": "Ion tembaga menangkap 2 elektron. Bilangan oksidasi Cu turun dari +2 menjadi 0."
+            }
+          ],
+          "totalEquation": "\\text{Fe}(s) + \\text{Cu}^{2+}(aq) \\rightarrow \\text{Fe}^{2+}(aq) + \\text{Cu}(s)",
+          "mnemonic": "Jembatan Keledai: OIL RIG (Oxidation Is Loss, Reduction Is Gain) atau PEO-PER (Pelepasan Elektron = Oksidasi, Penangkapan Elektron = Reduksi)."
+        }
+      }
+    },
+    {
+      "stepNumber": 2,
+      "title": "Menentukan Reduktor, Oksidator, & Perubahan Biloks",
+      "summary": "Membedakan zat yang mengalami reaksi dengan perannya terhadap zat pereaksi lainnya.",
+      "content": {
+        "makro": {
+          "title": "Gejala Makroskopik: Efek Tindakan Antar Zat",
+          "description": "Paku besi menyebabkan ion tembaga berubah menjadi endapan padat logam tembaga. Sebaliknya, ion tembaga menyebabkan paku besi larut dan teroksidasi.",
+          "observations": [
+            "Besi menyebabkan tembaga tereduksi (maka besi adalah agen pereduksi atau reduktor).",
+            "Larutan tembaga menyebabkan besi teroksidasi (maka larutan tembaga adalah agen pengoksidasi atau oksidator).",
+            "Terlihat endapan Cu(s) sebagai hasil reduksi dan ion Fe²⁺(aq) sebagai hasil oksidasi."
+          ],
+          "keyQuestion": "Bagaimana cara cepat menentukan reduktor dan oksidator dari persamaan reaksi?"
+        },
+        "submikro": {
+          "title": "Tingkat Submikroskopik: Pendonor vs Akseptor Elektron",
+          "description": "Di tingkat partikulat, konsep reduktor dan oksidator sangat intuitif:",
+          "points": [
+            "Reduktor (Pereduksi) = Spesi yang mendonorkan/memberikan elektron ke spesi lain (dirinya sendiri kehilangan elektron sehingga teroksidasi).",
+            "Oksidator (Pengoksidasi) = Spesi yang menarik/menerima elektron dari spesi lain (dirinya sendiri mendapatkan elektron sehingga tereduksi).",
+            "Elektron tidak pernah melayang bebas dalam larutan air; perpindahan elektron terjadi seketika saat Cu²⁺ menabrak permukaan elektrode Fe."
+          ],
+          "highlight": "Ingat: Reduktor mengalami oksidasi, Oksidator mengalami reduksi!"
+        },
+        "simbolik": {
+          "title": "Representasi Simbolik: Pemetaan Peran Zat",
+          "description": "Mari petakan setiap spesi dalam reaksi Fe + CuSO₄ → FeSO₄ + Cu:",
+          "mapping": [
+            { "term": "Reduktor (Pereduksi)", "species": "\\text{Fe}(s)", "reason": "Biloks naik dari 0 ke +2 (mengalami oksidasi)" },
+            { "term": "Oksidator (Pengoksidasi)", "species": "\\text{Cu}^{2+}(aq) \\text{ atau } \\text{CuSO}_4", "reason": "Biloks turun dari +2 ke 0 (mengalami reduksi)" },
+            { "term": "Hasil Oksidasi", "species": "\\text{Fe}^{2+}(aq) \\text{ atau } \\text{FeSO}_4", "reason": "Spesi yang terbentuk dari reaksi oksidasi Fe" },
+            { "term": "Hasil Reduksi", "species": "\\text{Cu}(s)", "reason": "Spesi padat yang terbentuk dari reduksi Cu²⁺" }
+          ],
+          "biloxSummary": "Perubahan Biloks: \\Delta \\text{Biloks Fe} = +2 \\text{ (Oksidasi)} \\quad \\Longleftrightarrow \\quad \\Delta \\text{Biloks Cu} = -2 \\text{ (Reduksi)}"
+        }
+      }
+    },
+    {
+      "stepNumber": 3,
+      "title": "Kereaktifan Logam & Arah Aliran Spontan",
+      "summary": "Mengapa reaksi Fe + Cu²⁺ berlangsung spontan, tetapi Cu + Fe²⁺ tidak bereaksi sama sekali?",
+      "content": {
+        "makro": {
+          "title": "Gejala Makroskopik: Uji Sebaliknya di Lab",
+          "description": "Jika kita membalik percobaan dengan mencelupkan keping tembaga (Cu) ke dalam larutan besi(II) sulfat (FeSO₄):",
+          "observations": [
+            "Tidak terjadi perubahan warna sama sekali pada larutan.",
+            "Keping tembaga tetap mengilap tanpa endapan baru.",
+            "Reaksi sebaliknya ini TIDAK berlangsung spontan pada kondisi standar."
+          ],
+          "keyQuestion": "Faktor apa yang menentukan logam mana yang bisa mendesak logam lain dari larutannya?"
+        },
+        "submikro": {
+          "title": "Tingkat Submikroskopik: Kecenderungan Melepas Elektron",
+          "description": "Setiap unsur logam memiliki afinitas dan kecenderungan yang berbeda untuk mempertahankan atau melepaskan elektron valensinya:",
+          "points": [
+            "Atom Fe memiliki energi ionisasi dan kecenderungan melepas elektron yang lebih besar daripada atom Cu.",
+            "Sebaliknya, kation Cu²⁺ memiliki daya tarik terhadap elektron (afinitas elektron) yang lebih tinggi dibandingkan ion Fe²⁺.",
+            "Oleh karena itu, elektron hanya dapat mengalir secara alami (spontan) dari logam yang lebih reaktif (mudah teroksidasi) ke kation logam yang kurang reaktif (mudah tereduksi)."
+          ],
+          "highlight": "Inilah prinsip dasar Deret Volta yang akan menjadi jantung kerja Sel Volta pada Modul 2!"
+        },
+        "simbolik": {
+          "title": "Representasi Simbolik: Nilai Potensial Reduksi Standar (E°)",
+          "description": "Kecenderungan relatif ini dinyatakan kuantitatif melalui Potensial Reduksi Standar (E°):",
+          "halfReactions": [
+            {
+              "type": "Tembaga",
+              "equation": "\\text{Cu}^{2+}(aq) + 2e^- \\rightarrow \\text{Cu}(s) \\quad E^\\circ = +0{,}34\\text{ V}",
+              "explanation": "E° lebih positif → Cu²⁺ sangat mudah menangkap elektron (kuat sebagai oksidator)."
+            },
+            {
+              "type": "Besi",
+              "equation": "\\text{Fe}^{2+}(aq) + 2e^- \\rightarrow \\text{Fe}(s) \\quad E^\\circ = -0{,}44\\text{ V}",
+              "explanation": "E° lebih negatif → Fe lebih mudah melepaskan elektron (kuat sebagai reduktor)."
+            }
+          ],
+          "totalEquation": "E^\\circ_\\text{reaksi} = E^\\circ_\\text{reduksi} - E^\\circ_\\text{oksidasi} = (+0{,}34\\text{ V}) - (-0{,}44\\text{ V}) = +0{,}78\\text{ V} > 0 \\text{ (Spontan!)}",
+          "mnemonic": "Aturan Emas: Logam dengan E° lebih negatif mendesak ion logam dengan E° lebih positif."
+        }
+      }
+    }
+  ],
+  "interactiveLab": {
+    "title": "Laboratorium Virtual: Eksperimen Pencelupan Paku Besi (Fe) dalam CuSO₄",
+    "description": "Uji dan amati interaksi paku besi di dalam larutan tembaga(II) sulfat secara makroskopik dan zoom submikroskopik.",
+    "substances": [
+      { "name": "Besi Padat", "formula": "Fe(s)", "color": "#94A3B8" },
+      { "name": "Larutan Tembaga(II) Sulfat", "formula": "CuSO_4(aq)", "color": "#0284C7" }
+    ]
+  },
+  "matchingExercise": {
+    "title": "Latihan Mencocokkan: Tiga Level Representasi Redoks",
+    "instruction": "Pilihlah pasangan yang sesuai antara Fenomena Makroskopik, Penjelasan Submikroskopik, dan Persamaan Simbolik dengan mengklik kartu yang relevan.",
+    "items": [
+      {
+        "id": "match-1",
+        "makro": "Warna biru cerah larutan CuSO₄ memudar seiring berjalannya reaksi.",
+        "submikro": "Konsentrasi ion kation Cu²⁺ bebas dalam larutan air berkurang karena menangkap elektron dan berubah jadi logam Cu netral.",
+        "simbolik": "\\text{Cu}^{2+}(aq) + 2e^- \\rightarrow \\text{Cu}(s)",
+        "explanation": "Warna biru larutan tembaga sulfat berasal dari ion terhidrasi Cu²⁺. Saat ion ini tereduksi menjadi endapan Cu(s), warna birunya perlahan sirna."
+      },
+      {
+        "id": "match-2",
+        "makro": "Muncul lapisan kerak padat berwarna merah kecokelatan di permukaan paku besi.",
+        "submikro": "Atom-atom Cu netral yang baru terbentuk mengkristal dan menempel pada kisi permukaan logam paku.",
+        "simbolik": "\\text{Cu}(s) \\quad [\\text{Biloks: } +2 \\rightarrow 0]",
+        "explanation": "Lapisan merah bata tersebut adalah logam tembaga murni Cu(s) yang merupakan hasil reduksi ion Cu²⁺."
+      },
+      {
+        "id": "match-3",
+        "makro": "Batang paku besi perlahan menipis dan keropos di bagian yang tercelup.",
+        "submikro": "Atom-atom Fe netral pada kisi logam melepaskan 2 elektron dan terlepas ke larutan air sebagai ion Fe²⁺.",
+        "simbolik": "\\text{Fe}(s) \\rightarrow \\text{Fe}^{2+}(aq) + 2e^-",
+        "explanation": "Besi teroksidasi menjadi kation Fe²⁺ yang larut dalam air, sehingga paku kehilangan massa atomik padatnya."
+      },
+      {
+        "id": "match-4",
+        "makro": "Kawat tembaga dicelupkan ke larutan perak nitrat (AgNO₃) menghasilkan jarum-jarum kristal perak berkilau.",
+        "submikro": "Atom Cu mendonorkan elektron kepada dua ion Ag⁺, menghasilkan kristal perak Ag(s) dan ion Cu²⁺.",
+        "simbolik": "\\text{Cu}(s) + 2\\text{Ag}^+(aq) \\rightarrow \\text{Cu}^{2+}(aq) + 2\\text{Ag}(s)",
+        "explanation": "Karena Cu memiliki E° lebih rendah (-anode relatif terhadap Ag), Cu mendonorkan elektron secara spontan kepada kation Ag⁺."
+      }
+    ]
+  },
+  "quiz": {
+    "title": "Cek Pemahaman Formatif: Modul 1",
+    "description": "Jawab 5 pertanyaan konsep berikut untuk menguji pemahaman Anda mengenai representasi redoks, kemudian selesaikan soal refleksi uraian mandiri.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "Pada reaksi antara paku besi (Fe) dengan larutan tembaga(II) sulfat (CuSO₄), alasan mendasar mengapa reaksi ini dikategorikan sebagai reaksi redoks elektrokimia adalah...",
+        "options": [
+          { "id": "A", "text": "Terjadi pembentukan gas hidrogen akibat reaksi logam dengan air." },
+          { "id": "B", "text": "Terjadi perpindahan (transfer) elektron secara langsung dari atom Fe kepada ion Cu²⁺.", "isCorrect": true },
+          { "id": "C", "text": "Ion sulfat (SO₄²⁻) mengalami penguraian menjadi gas belerang dioksida." },
+          { "id": "D", "text": "Hanya terjadi perubahan wujud fisik tanpa melibatkan perpindahan muatan elektron." }
+        ],
+        "feedbackCorrect": "Tepat sekali! Kunci utama reaksi redoks elektrokimia adalah adanya serah-terima elektron langsung antara spesi pendonor (Fe) dan akseptor (Cu²⁺).",
+        "feedbackIncorrect": "Kurang tepat. Reaksi ini murni didorong oleh transfer elektron dari atom Fe netral kepada ion kation Cu²⁺ dalam larutan."
+      },
+      {
+        "id": "q2",
+        "question": "Ditinjau dari perubahan bilangan oksidasi dan perannya, spesi yang bertindak sebagai REDUKTOR dan alasannya yang benar adalah...",
+        "options": [
+          { "id": "A", "text": "Cu²⁺, karena bilangan oksidasinya turun dari +2 menjadi 0." },
+          { "id": "B", "text": "Fe, karena melepaskan elektron dan bilangan oksidasinya naik dari 0 ke +2.", "isCorrect": true },
+          { "id": "C", "text": "SO₄²⁻, karena mengikat elektron di dalam larutan air." },
+          { "id": "D", "text": "Cu(s), karena terbentuk sebagai endapan padat di paku." }
+        ],
+        "feedbackCorrect": "Benar! Reduktor adalah zat yang mereduksi spesi lain dengan mendonorkan elektron, sehingga dirinya sendiri mengalami oksidasi (biloks Fe naik dari 0 ke +2).",
+        "feedbackIncorrect": "Belum tepat. Reduktor (pereduksi) adalah spesi yang mengalami oksidasi (kehilangan elektron, biloks naik), yaitu logam Fe."
+      },
+      {
+        "id": "q3",
+        "question": "Gejala makroskopik berupa memudarnya warna biru larutan CuSO₄ secara submikroskopik dijelaskan oleh...",
+        "options": [
+          { "id": "A", "text": "Bertambahnya jumlah molekul air yang mengencerkan larutan.", "isCorrect": false },
+          { "id": "B", "text": "Mengendapnya semua ion sulfat ke dasar gelas kimia.", "isCorrect": false },
+          { "id": "C", "text": "Berkurangnya konsentrasi kation Cu²⁺ terhidrasi karena berubah menjadi atom Cu padat.", "isCorrect": true },
+          { "id": "D", "text": "Terbentuknya gas oksigen yang mendorong partikel warna keluar.", "isCorrect": false }
+        ],
+        "feedbackCorrect": "Sangat tepat! Warna biru khas CuSO₄ dihasilkan oleh kation Cu²⁺ terhidrasi. Berkurangnya ion Cu²⁺ akibat reduksi menjadi Cu(s) menyebabkan warna biru larutan memudar.",
+        "feedbackIncorrect": "Perhatikan kembali: warna biru berasal dari kation Cu²⁺ dalam air. Jika Cu²⁺ menangkap elektron dan menjadi Cu(s) padat, maka ion pembawa warna biru dalam larutan berkurang."
+      },
+      {
+        "id": "q4",
+        "question": "Perhatikan reaksi seng dengan asam klorida: Zn(s) + 2HCl(aq) → ZnCl₂(aq) + H₂(g). Persamaan setengah reaksi reduksi yang tepat adalah...",
+        "options": [
+          { "id": "A", "text": "Zn(s) → Zn²⁺(aq) + 2e⁻" },
+          { "id": "B", "text": "2H⁺(aq) + 2e⁻ → H₂(g)", "isCorrect": true },
+          { "id": "C", "text": "2Cl⁻(aq) → Cl₂(g) + 2e⁻" },
+          { "id": "D", "text": "Zn²⁺(aq) + 2e⁻ → Zn(s)" }
+        ],
+        "feedbackCorrect": "Luar biasa! Ion H⁺ menerima elektron dari Zn (reduksi) membentuk molekul gas hidrogen H₂ yang teramati sebagai gelembung gas.",
+        "feedbackIncorrect": "Ingat bahwa reduksi adalah penangkapan elektron (penurunan biloks). Biloks H turun dari +1 pada H⁺ menjadi 0 pada gas H₂."
+      },
+      {
+        "id": "q5",
+        "question": "Diberikan data E°: Ag⁺/Ag = +0,80 V dan Cu²⁺/Cu = +0,34 V. Manakah pernyataan yang BENAR mengenai reaksi antara kawat tembaga (Cu) dengan larutan AgNO₃?",
+        "options": [
+          { "id": "A", "text": "Reaksi tidak dapat berlangsung spontan karena E° Cu lebih rendah." },
+          { "id": "B", "text": "Atom Cu akan mendonorkan elektron ke ion Ag⁺ secara spontan dan kawat terlapisi perak.", "isCorrect": true },
+          { "id": "C", "text": "Ion Ag⁺ akan teroksidasi menjadi logam perak." },
+          { "id": "D", "text": "Logam Ag akan larut dan mendesak Cu dari larutan." }
+        ],
+        "feedbackCorrect": "Tepat sekali! Karena E° Ag⁺/Ag (+0,80 V) lebih positif daripada Cu²⁺/Cu (+0,34 V), ion Ag⁺ lebih kuat menarik elektron, sehingga Cu spontan teroksidasi mendonorkan elektron ke Ag⁺.",
+        "feedbackIncorrect": "Logam dengan potensial reduksi lebih rendah (lebih negatif/kecil) bertindak sebagai reduktor (mendonorkan elektron) kepada kation logam dengan E° lebih tinggi."
+      }
+    ],
+    "reflectionEssay": {
+      "question": "Jelaskan dengan bahasamu sendiri mengapa reaksi paku besi dalam larutan tembaga(II) sulfat disebut sebagai reaksi transfer elektron, dan uraikan hubungan antara apa yang terlihat di laboratorium (makroskopik), apa yang terjadi pada partikelnya (submikroskopik), dan bagaimana persamaan reaksinya dituliskan (simbolik)!",
+      "rubric": [
+        "Menyebutkan transfer elektron dari atom Fe kepada kation Cu²⁺.",
+        "Menjelaskan gejala makro: larutan biru memudar dan paku terlapisi padatan merah bata.",
+        "Menjelaskan level submikro: atom Fe lepas menjadi Fe²⁺ dan kation Cu²⁺ menangkap 2e⁻ menjadi Cu padat.",
+        "Menyertakan persamaan setengah reaksi atau total serta kenaikan/penurunan biloks."
+      ],
+      "modelAnswer": "Reaksi paku besi (Fe) dalam larutan CuSO₄ disebut reaksi transfer elektron karena terjadi perpindahan 2 elektron dari atom Fe ke ion Cu²⁺. Di level makroskopik, gejala yang tampak adalah larutan biru memudar dan muncul lapisan tembaga merah bata di paku. Di level submikroskopik, atom Fe melepaskan 2e⁻ membentuk Fe²⁺ yang larut, sedangkan ion Cu²⁺ di larutan menangkap 2e⁻ tersebut lalu mengkristal di permukaan paku sebagai Cu netral. Secara simbolik ditulis: Fe(s) → Fe²⁺(aq) + 2e⁻ (oksidasi, biloks 0 ke +2) dan Cu²⁺(aq) + 2e⁻ → Cu(s) (reduksi, biloks +2 ke 0), dengan reaksi total Fe(s) + Cu²⁺(aq) → Fe²⁺(aq) + Cu(s)."
+    }
+  }
+}
