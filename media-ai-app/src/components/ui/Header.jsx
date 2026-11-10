@@ -1,6 +1,6 @@
 import { Link, useLocation } from 'react-router-dom'
 import { useState, useEffect } from 'react'
-import { Menu, X, BookOpen, Map, Zap, GraduationCap, BookMarked } from 'lucide-react'
+import { Menu, X, BookOpen, Map, Zap, GraduationCap, BookMarked, User } from 'lucide-react'
 
 const navLinks = [
   { to: '/',       label: 'Beranda',     icon: BookOpen },
@@ -61,6 +61,17 @@ export default function Header() {
 
         {/* Right side */}
         <div className="flex items-center gap-2">
+          {/* Tautan ke Portal Akun & Autentikasi Firebase */}
+          <a
+            href="http://localhost:3000/dashboard.html"
+            id="btn-portal-akun"
+            className="hidden sm:flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium border border-white/10 text-slate-300 hover:text-white hover:border-sky-400 glass transition-all duration-200"
+            title="Buka Portal Akun & Autentikasi Firebase"
+          >
+            <User size={15} className="text-sky-400" />
+            <span>Portal Akun</span>
+          </a>
+
           <Link
             to="/guru"
             id="btn-mode-guru"
@@ -114,6 +125,15 @@ export default function Header() {
               <GraduationCap size={16} />
               Mode Guru
             </Link>
+
+            <a
+              href="http://localhost:3000/dashboard.html"
+              onClick={() => setOpen(false)}
+              className="flex items-center gap-3 px-3 py-3 rounded-xl text-sm font-medium border border-white/10 text-slate-300 hover:text-white glass mt-1"
+            >
+              <User size={16} className="text-sky-400" />
+              <span>Portal Akun & Autentikasi</span>
+            </a>
           </nav>
         </div>
       )}

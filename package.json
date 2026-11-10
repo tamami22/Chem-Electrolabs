@@ -1,5 +1,13 @@
 {
+  "name": "login-firebase-auth",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "app": "npm --prefix media-ai-app run dev"
+  },
   "dependencies": {
+    "firebase": "^13.2.0",
     "katex": "^0.19.1",
     "react-katex": "^3.1.0"
   }
