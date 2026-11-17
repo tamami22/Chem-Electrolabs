@@ -1,0 +1,227 @@
+{
+  "id": "modul-4",
+  "moduleNumber": 4,
+  "slug": "4-faraday",
+  "title": "Hukum Faraday dan Stoikiometri Elektrokimia",
+  "subtitle": "Kuantifikasi massa, mol elektron, dan volume gas hasil reaksi elektrolisis",
+  "tpCodes": ["TP5"],
+  "learningObjectives": [
+    "Menjelaskan hubungan antara kuat arus, waktu, dan jumlah muatan listrik (Coulomb dan Faraday).",
+    "Menerapkan Hukum Faraday I untuk menghitung massa logam yang mengendap atau volume gas yang dihasilkan di elektrode.",
+    "Menerapkan Hukum Faraday II untuk sel elektrolisis yang disusun secara seri.",
+    "Melakukan perhitungan stoikiometri elektrolisis secara bertahap (arus → muatan → mol elektron → mol zat → massa/volume)."
+  ],
+  "estimatedMinutes": 45,
+  "simulationType": "faraday",
+  "steps": [
+    {
+      "stepNumber": 1,
+      "title": "Hukum Faraday I dan Konsep Mol Elektron",
+      "summary": "Massa zat yang terbentuk di elektrode berbanding lurus dengan muatan listrik (Coulomb) yang dialirkan ke dalam sel.",
+      "tripleRep": {
+        "macroscopic": {
+          "title": "Pengamatan Makroskopik",
+          "description": "Semakin besar kuat arus (A) pada catu daya atau semakin lama waktu elektrolisis (s), timbangan analitik menunjukkan massa endapan logam yang semakin bertambah secara proporsional.",
+          "visualAlt": "Timbangan analitik mengukur pertambahan massa pelat katoda tembaga sebanding dengan lama waktu arus dialirkan",
+          "observations": [
+            "Arus 2 Ampere selama 10 menit menghasilkan endapan tembaga 2 kali lebih banyak daripada arus 1 Ampere dalam waktu yang sama.",
+            "Volume gelembung gas hidrogen pada buret penampung bertambah secara linear seiring waktu."
+          ]
+        },
+        "submicroscopic": {
+          "title": "Partikel Elektron sebagai Pereaksi",
+          "description": "Elektron dipandang sebagai salah satu pereaksi stoikiometris. Untuk mengendapkan 1 mol atom Cu, dibutuhkan tepat 2 mol partikel elektron.",
+          "visualAlt": "Dua mol partikel elektron kuning bergabung dengan 1 mol ion Cu2+ biru membentuk 1 mol kisi kristal Cu",
+          "particles": [
+            "1 mol elektron membawa muatan listrik sebesar 96.500 Coulomb (didefinisikan sebagai 1 Faraday).",
+            "Ion logam bervalensi n membutuhkan n elektron per atom netral yang terbentuk."
+          ]
+        },
+        "symbolic": {
+          "title": "Rumus Hukum Faraday I",
+          "latexFormulas": [
+            "Q = I \\times t \\quad (\\text{Coulomb})",
+            "n(e) = \\frac{Q}{96500} = \\text{mol elektron}",
+            "w = \\frac{e \\times I \\times t}{96500} = \\frac{A_r}{n} \\times \\frac{I \\times t}{96500}"
+          ],
+          "explanation": "Keterangan: w = massa endapan (gram), e = massa ekuivalen = Ar/n (massa molar dibagi valensi atau jumlah elektron yang ditransfer per ion), n = valensi ion logam, I = kuat arus (Ampere), t = waktu (sekon). Catatan: Dalam perhitungan elektrokimia SMA, massa molar atom / Ar dibulatkan: Ar Cu = 63,5 g/mol; Ar Ni = 59 g/mol; Ar Ag = 108 g/mol.",
+          "reactions": [
+            "Cu²⁺ + 2e⁻ → Cu (n = 2)",
+            "Ag⁺ + e⁻ → Ag (n = 1)",
+            "Al³⁺ + 3e⁻ → Al (n = 3)"
+          ]
+        }
+      },
+      "quickCheck": {
+        "question": "Berapakah jumlah mol elektron yang dialirkan jika arus 9,65 Ampere dialirkan selama 1.000 detik?",
+        "options": [
+          "0,01 mol elektron",
+          "0,10 mol elektron",
+          "1,00 mol elektron",
+          "9,65 mol elektron"
+        ],
+        "correctAnswer": 1,
+        "correctIndex": 1,
+        "explanation": "Q = I × t = 9,65 A × 1.000 s = 9.650 Coulomb. Mol elektron n(e) = Q / 96.500 = 9.650 / 96.500 = 0,10 mol elektron."
+      }
+    },
+    {
+      "stepNumber": 2,
+      "title": "Hukum Faraday II untuk Rangkaian Seri",
+      "summary": "Jika beberapa sel elektrolisis dirangkai secara seri, muatan listrik yang mengalir ke setiap sel bernilai sama persis.",
+      "tripleRep": {
+        "macroscopic": {
+          "title": "Dua Bejana Rangkaian Seri",
+          "description": "Bejana berisi larutan AgNO₃ dan bejana berisi larutan CuSO₄ dialiri arus listrik yang sama. Massa perak yang mengendap jauh lebih besar daripada massa tembaga.",
+          "visualAlt": "Dua bejana elektrolisis dirangkai seri terhubung satu sumber tegangan",
+          "observations": [
+            "Jumlah muatan (Coulomb) di kedua gelas kimia sama persis.",
+            "Massa endapan Ag lebih besar karena massa ekuivalen perak (108/1 = 108) lebih besar daripada tembaga (63,5/2 = 31,75)."
+          ]
+        },
+        "submicroscopic": {
+          "title": "Arus Elektron yang Melewati Setiap Kawat",
+          "description": "Karena dirangkai seri tanpa percabangan, jumlah partikel elektron yang masuk ke katoda sel pertama sama dengan yang masuk ke katoda sel kedua.",
+          "visualAlt": "Aliran paket elektron melewati dua sel tanpa kehilangan elektron",
+          "particles": [
+            "Jumlah mol elektron yang diserap di setiap katoda identik."
+          ]
+        },
+        "symbolic": {
+          "title": "Rumus Perbandingan Faraday II",
+          "latexFormulas": [
+            "\\frac{w_1}{e_1} = \\frac{w_2}{e_2} \\quad \\text{atau} \\quad \\frac{w_{\\text{Ag}}}{e_{\\text{Ag}}} = \\frac{w_{\\text{Cu}}}{e_{\\text{Cu}}}",
+            "e = \\frac{A_r}{n} \\quad (\\text{Massa Ekuivalen})"
+          ],
+          "explanation": "Perbandingan massa hasil elektrolisis berbanding lurus dengan massa ekuivalen masing-masing zat (e = Ar/n). Catatan: nilai Ar dibulatkan: Ar Cu = 63,5; Ar Ni = 59; Ar Ag = 108.",
+          "reactions": [
+            "e(Ag) = 108 / 1 = 108",
+            "e(Cu) = 63,5 / 2 = 31,75"
+          ]
+        }
+      }
+    }
+  ],
+  "exercises": [
+    {
+      "id": "ex-4-1",
+      "title": "Urutan Tahapan Perhitungan Hukum Faraday",
+      "instruction": "Urutkan langkah-langkah sistematis dalam menghitung massa endapan logam hasil elektrolisis dari data kuat arus dan waktu.",
+      "type": "matching",
+      "categories": ["Langkah 1", "Langkah 2", "Langkah 3", "Langkah 4"],
+      "items": [
+        { "id": "s1", "prompt": "Ubah satuan waktu ke sekon dan hitung muatan total Q = I × t", "targetCategory": "Langkah 1" },
+        { "id": "s2", "prompt": "Hitung jumlah mol elektron: n(e) = Q / 96500", "targetCategory": "Langkah 2" },
+        { "id": "s3", "prompt": "Gunakan perbandingan koefisien reaksi katoda untuk mencari mol zat", "targetCategory": "Langkah 3" },
+        { "id": "s4", "prompt": "Kalikan mol zat dengan massa molar (Ar) untuk mendapatkan gram endapan", "targetCategory": "Langkah 4" }
+      ]
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q4-1",
+      "type": "multiple_choice",
+      "tpCode": "TP5",
+      "tripleRepLevel": "simbolik",
+      "question": "Arus listrik sebesar 5 Ampere dialirkan ke dalam larutan AgNO₃ (Ar Ag = 108) selama 1.930 detik. Berapakah massa perak yang mengendap di katoda?",
+      "options": [
+        "5,40 gram",
+        "10,80 gram",
+        "21,60 gram",
+        "1,08 gram"
+      ],
+      "correctAnswer": 1,
+      "explanation": "w = (Ar × I × t) / (n × 96500) = (108 × 5 × 1930) / (1 × 96500) = 1.042.200 / 96.500 = 10,80 gram."
+    },
+    {
+      "id": "q4-2",
+      "type": "multiple_choice",
+      "tpCode": "TP5",
+      "tripleRepLevel": "submikroskopik",
+      "question": "Satu Faraday arus listrik didefinisikan secara submikroskopik setara dengan...",
+      "options": [
+        "Muatan 1 partikel elektron tunggal.",
+        "Massa 1 gram elektron murni.",
+        "1 mol partikel elektron (6,022 × 10²³ elektron) yang membawa muatan 96.500 Coulomb.",
+        "1 mol atom hidrogen netral."
+      ],
+      "correctAnswer": 2,
+      "explanation": "1 Faraday = muatan 1 mol elektron = (1,602 × 10⁻¹⁹ C) × (6,022 × 10²³) ≈ 96.500 C."
+    },
+    {
+      "id": "q4-3",
+      "type": "multiple_choice",
+      "tpCode": "TP5",
+      "tripleRepLevel": "simbolik",
+      "question": "Pada elektrolisis larutan NaCl, di anoda dihasilkan gas Cl₂ (reaksi: 2Cl⁻ → Cl₂ + 2e⁻). Jika dialirkan muatan sebesar 0,2 Faraday, berapakah volume gas Cl₂ pada kondisi standar (STP)?",
+      "options": [
+        "1,12 Liter",
+        "4,48 Liter",
+        "22,4 Liter",
+        "2,24 Liter"
+      ],
+      "correctAnswer": 3,
+      "explanation": "Mol elektron = 0,2 mol. Berdasarkan koefisien reaksi, 1 mol Cl₂ dihasilkan oleh 2 mol e⁻, sehingga mol Cl₂ = 0,2 / 2 = 0,1 mol. Volume STP = 0,1 mol × 22,4 L/mol = 2,24 Liter."
+    },
+    {
+      "id": "q4-4",
+      "type": "multiple_choice",
+      "tpCode": "TP5",
+      "tripleRepLevel": "simbolik",
+      "question": "Dua sel elektrolisis berisi larutan NiSO₄ (Ar Ni = 59 dibulatkan, n = 2) dan larutan AgNO₃ (Ar Ag = 108, n = 1) disusun secara seri. Jika pada sel pertama mengendap 5,9 gram nikel, berapakah massa perak yang mengendap pada sel kedua?",
+      "options": [
+        "10,8 gram",
+        "5,9 gram",
+        "21,6 gram",
+        "43,2 gram"
+      ],
+      "correctAnswer": 2,
+      "explanation": "e(Ni) = 59 / 2 = 29,5. e(Ag) = 108 / 1 = 108. Berdasarkan Hukum Faraday II: w(Ni) / e(Ni) = w(Ag) / e(Ag) → 5,9 / 29,5 = w(Ag) / 108 → 0,2 = w(Ag) / 108 → w(Ag) = 21,6 gram."
+    },
+    {
+      "id": "q4-5",
+      "type": "multiple_choice",
+      "tpCode": "TP5",
+      "tripleRepLevel": "makroskopik",
+      "question": "Jika waktu elektrolisis diperpanjang dari 15 menit menjadi 45 menit dengan kuat arus yang tetap, apa yang terjadi pada massa endapan di katoda?",
+      "options": [
+        "Massa endapan tetap tidak berubah.",
+        "Massa endapan bertambah menjadi 3 kali lipat semula.",
+        "Massa endapan berkurang sepertiganya.",
+        "Massa endapan meningkat secara eksponensial."
+      ],
+      "correctAnswer": 1,
+      "explanation": "Hukum Faraday I menyatakan massa sebanding lurus dengan waktu (w ~ t). Waktu meningkat 3 kali (15 menit → 45 menit), sehingga massa endapan bertambah tepat 3 kali lipat."
+    },
+    {
+      "id": "q4-6",
+      "type": "multiple_choice",
+      "tpCode": "TP5",
+      "tripleRepLevel": "simbolik",
+      "question": "Arus listrik sebesar 2 Ampere dialirkan ke dalam larutan CuSO₄ (Ar Cu = 63,5 dibulatkan, n = 2) selama 16 menit 5 detik. Berapakah massa tembaga yang mengendap di katoda?",
+      "options": [
+        "1,270 gram",
+        "0,635 gram",
+        "0,3175 gram",
+        "6,350 gram"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Ubah waktu ke sekon: t = (16 × 60) + 5 = 965 sekon. Q = I × t = 2 A × 965 s = 1.930 C. Mol elektron n(e) = 1.930 / 96.500 = 0,02 mol. Karena Cu²⁺ + 2e⁻ → Cu, maka mol Cu = 0,02 / 2 = 0,01 mol. Massa Cu = 0,01 mol × 63,5 g/mol = 0,635 gram."
+    },
+    {
+      "id": "q4-7",
+      "type": "multiple_choice",
+      "tpCode": "TP5",
+      "tripleRepLevel": "simbolik",
+      "question": "Pada elektrolisis air (larutan asam sulfat encer), gas hidrogen (H₂) dihasilkan di katoda dan gas oksigen (O₂) di anoda. Jika di katoda terbentuk 4,48 Liter gas H₂ pada kondisi STP, berapakah volume gas O₂ yang dihasilkan di anoda pada kondisi yang sama?",
+      "options": [
+        "4,48 Liter",
+        "1,12 Liter",
+        "2,24 Liter",
+        "8,96 Liter"
+      ],
+      "correctAnswer": 2,
+      "explanation": "Reaksi total penguraian air: 2H₂O(l) → 2H₂(g) + O₂(g). Berdasarkan hukum Gay-Lussac dan koefisien reaksi, perbandingan volume gas H₂ : O₂ = 2 : 1. Jika volume H₂ = 4,48 Liter, maka volume O₂ = 4,48 / 2 = 2,24 Liter."
+    }
+  ]
+}

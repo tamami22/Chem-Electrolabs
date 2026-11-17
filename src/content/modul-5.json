@@ -1,0 +1,202 @@
+{
+  "id": "modul-5",
+  "moduleNumber": 5,
+  "slug": "5-korosi",
+  "title": "Korosi Logam dan Metode Pencegahannya",
+  "subtitle": "Menganalisis fenomena sel elektrokimia alami pada perkaratan besi dan teknik perlindungan",
+  "tpCodes": ["TP6"],
+  "learningObjectives": [
+    "Menjelaskan proses perkaratan besi sebagai reaksi sel elektrokimia alami.",
+    "Mengidentifikasi faktor-faktor yang mempercepat korosi (air, oksigen, pH asam, elektrolit).",
+    "Menganalisis prinsip kerja pencegahan korosi dengan pelapisan pelindung dan proteksi katodik (anoda kurban).",
+    "Menjelaskan perbedaan perlindungan galvanisasi seng (Zn) dan pelapisan timah (Sn) pada kaleng makanan."
+  ],
+  "estimatedMinutes": 35,
+  "steps": [
+    {
+      "stepNumber": 1,
+      "title": "Mekanisme Elektrokimia Perkaratan Besi",
+      "summary": "Perkaratan besi bukan sekadar reaksi oksidasi biasa, melainkan sel volta mikroskopik yang terbentuk spontan pada tetesan air di permukaan logam.",
+      "tripleRep": {
+        "macroscopic": {
+          "title": "Gejala Korosi Kasat Mata",
+          "description": "Besi yang terpapar udara lembap perlahan berubah warna menghasilkan kerak rapuh berwarna cokelat kemerahan yang mudah mengelupas.",
+          "visualAlt": "Paku besi berkarat dengan serbuk cokelat kemerahan di permukaannya",
+          "observations": [
+            "Terbentuk lapisan karat cokelat kemerahan Fe₂O₃·xH₂O.",
+            "Struktur logam menjadi rapuh dan keropos.",
+            "Paku di dalam minyak tanah atau air yang dididihkan (tanpa oksigen) tidak mengalami perkaratan."
+          ]
+        },
+        "submicroscopic": {
+          "title": "Sel Volta Mikroskopik di Permukaan Besi",
+          "description": "Bagian lekukan besi yang kurang oksigen bertindak sebagai anoda dan melepaskan elektron. Elektron mengalir ke tepi tetesan air yang kaya oksigen (katoda).",
+          "visualAlt": "Skema tetesan air di atas besi memperlihatkan anoda di pusat tetesan dan katoda di pinggiran tetesan",
+          "particles": [
+            "Anoda besi: atom Fe melepas 2 elektron membentuk kation Fe²⁺.",
+            "Katoda: molekul O₂ terlarut dalam tetesan air menangkap elektron membentuk ion OH⁻.",
+            "Ion Fe²⁺ bertemu ion OH⁻ membentuk endapan Fe(OH)₂ yang teroksidasi lanjut oleh O₂ menjadi karat Fe₂O₃·xH₂O."
+          ]
+        },
+        "symbolic": {
+          "title": "Persamaan Reaksi Korosi",
+          "latexFormulas": [
+            "\\text{Anoda: } \\text{Fe(s)} \\rightarrow \\text{Fe}^{2+}\\text{(aq)} + 2e^- \\quad (E^\\circ = -0{,}44\\text{ V})",
+            "\\text{Katoda: } \\text{O}_2\\text{(g)} + 2\\text{H}_2\\text{O(l)} + 4e^- \\rightarrow 4\\text{OH}^{-}\\text{(aq)} \\quad (E^\\circ = +0{,}40\\text{ V})",
+            "\\text{Karat Besi: } 4\\text{Fe(OH)}_2\\text{(s)} + \\text{O}_2\\text{(g)} + x\\text{H}_2\\text{O(l)} \\rightarrow 2\\text{Fe}_2\\text{O}_3 \\cdot x\\text{H}_2\\text{O(s)}"
+          ],
+          "explanation": "Potensial sel reaksi perkaratan bernilai positif: E°sel = +0,40 - (-0,44) = +0,84 V, membuktikan bahwa korosi besi adalah proses spontan di alam.",
+          "reactions": [
+            "Anoda: Fe → Fe²⁺ + 2e⁻",
+            "Katoda: O₂ + 2H₂O + 4e⁻ → 4OH⁻",
+            "Reaksi total awal: 2Fe + O₂ + 2H₂O → 2Fe(OH)₂"
+          ]
+        }
+      },
+      "quickCheck": {
+        "question": "Dua faktor utama yang mutlak harus ada secara bersamaan agar perkaratan besi terjadi adalah...",
+        "options": [
+          "Minyak pelumas dan Gas Nitrogen murni di udara terbuka",
+          "Cahaya matahari terik dan Suhu lingkungan yang sangat dingin",
+          "Oksigen terlarut (O₂) dan Air (H₂O) secara bersamaan",
+          "Garam dapur kering murni tanpa adanya molekul uap air"
+        ],
+        "correctAnswer": 2,
+        "correctIndex": 2,
+        "explanation": "Besi hanya berkarat jika ada air (sebagai medium elektrolit) dan oksigen terlarut (sebagai oksidator penerima elektron di katoda)."
+      }
+    },
+    {
+      "stepNumber": 2,
+      "title": "Metode Pencegahan: Pelapisan vs Proteksi Katodik",
+      "summary": "Pencegahan korosi dilakukan dengan mengisolasi logam dari kontak lingkungan atau menghubungkannya dengan anoda kurban.",
+      "tripleRep": {
+        "macroscopic": {
+          "title": "Penerapan Nyata di Kehidupan",
+          "description": "Bodi mobil dicat, rantai sepeda diberi pelumas oli, kaleng biskuit dilapisi timah, dan tiang jembatan/pipa kilang minyak dipasangi balok magnesium.",
+          "visualAlt": "Pipa baja bawah tanah dihubungkan kawat ke lempeng magnesium sebagai anoda kurban",
+          "observations": [
+            "Cat dan oli mencegah kontak langsung besi dengan oksigen dan air.",
+            "Galvanisasi: pelapisan seng pada atap seng tetap melindungi besi meski permukaan tergores.",
+            "Kaleng timah (tin): jika lapisan tergores, besi di bawahnya justru berkarat jauh lebih cepat."
+          ]
+        },
+        "submicroscopic": {
+          "title": "Prinsip Anoda Kurban",
+          "description": "Logam dengan potensial reduksi lebih negatif (misal Mg atau Zn) lebih mudah melepas elektron daripada Fe. Logam ini mengorbankan dirinya teroksidasi untuk menyuplai elektron ke besi.",
+          "visualAlt": "Atom Mg melepas elektron mengalirkan muatan negatif ke kisi Fe sehingga Fe terlindungi dari oksidasi",
+          "particles": [
+            "Mg teroksidasi: Mg -> Mg²⁺ + 2e⁻.",
+            "Elektron mengalir ke besi, menjaga besi tetap berada pada kondisi netral (katoda)."
+          ]
+        },
+        "symbolic": {
+          "title": "Deret Volta dan Kespontanan Proteksi",
+          "latexFormulas": [
+            "E^\\circ_{\\text{Mg}^{2+}/\\text{Mg}} = -2{,}37\\text{ V} \\ll E^\\circ_{\\text{Fe}^{2+}/\\text{Fe}} = -0{,}44\\text{ V} \\implies \\text{Mg terkorosi lebih dulu}",
+            "E^\\circ_{\\text{Zn}^{2+}/\\text{Zn}} = -0{,}76\\text{ V} < E^\\circ_{\\text{Fe}^{2+}/\\text{Fe}} = -0{,}44\\text{ V} \\implies \\text{Galvanisasi}",
+            "E^\\circ_{\\text{Sn}^{2+}/\\text{Sn}} = -0{,}14\\text{ V} > E^\\circ_{\\text{Fe}^{2+}/\\text{Fe}} = -0{,}44\\text{ V} \\implies \\text{Fe terkorosi jika tergores}"
+          ],
+          "explanation": "Pada kaleng timah (Sn), E° Sn (-0,14 V) lebih positif daripada Fe (-0,44 V). Jika lapisan tergores, Fe menjadi anoda dan Sn menjadi katoda, sehingga besi terkorosi lebih cepat.",
+          "reactions": [
+            "Proteksi katodik: Mg(s) -> Mg²⁺(aq) + 2e⁻ (Mg larut terkorosi, Fe aman)",
+            "Galvanisasi: Zn(s) -> Zn²⁺(aq) + 2e⁻ (Zn berkorban melindungi Fe)"
+          ]
+        }
+      }
+    }
+  ],
+  "exercises": [
+    {
+      "id": "ex-5-1",
+      "title": "Pemilihan Metode Pencegahan Korosi",
+      "instruction": "Pasangkan benda logam di kehidupan sehari-hari dengan metode pencegahan korosi yang paling tepat dan efisien.",
+      "type": "matching",
+      "categories": ["Proteksi Katodik (Anoda Kurban)", "Galvanisasi (Lapisan Seng)", "Pelapisan Timah (Tin Plating)", "Pemberian Oli / Pelumas"],
+      "items": [
+        { "id": "c1", "prompt": "Pipa baja kilang minyak yang ditanam di dalam tanah basah", "targetCategory": "Proteksi Katodik (Anoda Kurban)" },
+        { "id": "c2", "prompt": "Atap seng bangunan dan pagar besi luar ruangan", "targetCategory": "Galvanisasi (Lapisan Seng)" },
+        { "id": "c3", "prompt": "Kaleng kemasan biskuit dan susu kental manis", "targetCategory": "Pelapisan Timah (Tin Plating)" },
+        { "id": "c4", "prompt": "Rantai sepeda dan mesin transmisi bergerak", "targetCategory": "Pemberian Oli / Pelumas" }
+      ]
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q5-1",
+      "type": "multiple_choice",
+      "tpCode": "TP6",
+      "tripleRepLevel": "submikroskopik",
+      "question": "Pada sel elektrokimia mikro proses perkaratan besi, bagian lekukan besi bertindak sebagai anoda karena...",
+      "options": [
+        "Bagian lekukan tersebut menyerap lebih banyak air murni dari lingkungan.",
+        "Bagian lekukan tersebut kurang kontak dengan oksigen udara sehingga atom Fe lebih mudah melepaskan elektron menjadi Fe²⁺.",
+        "Bagian lekukan memiliki massa jenis yang lebih besar dibandingkan permukaan datar.",
+        "Suhu di bagian lekukan besi selalu lebih panas daripada bagian lainnya."
+      ],
+      "correctAnswer": 1,
+      "explanation": "Perbedaan konsentrasi oksigen menciptakan sel aerasi diferensial. Daerah dengan kadar oksigen lebih rendah (lekukan/goresan) menjadi anoda dan mengalami oksidasi Fe → Fe²⁺ + 2e⁻."
+    },
+    {
+      "id": "q5-2",
+      "type": "multiple_choice",
+      "tpCode": "TP6",
+      "tripleRepLevel": "simbolik",
+      "question": "Mengapa batang magnesium (Mg) efektif digunakan sebagai anoda kurban untuk melindungi pipa besi bawah tanah?",
+      "options": [
+        "Karena magnesium adalah logam yang tahan terhadap karat air asam.",
+        "Karena magnesium memancarkan medan magnetik yang menolak oksigen.",
+        "Karena potensial reduksi Mg (E° = -2,37 V) jauh lebih negatif daripada besi (E° = -0,44 V) sehingga Mg teroksidasi lebih dahulu.",
+        "Karena harga logam magnesium lebih terjangkau daripada pipa besi."
+      ],
+      "correctAnswer": 2,
+      "explanation": "Logam dengan nilai E° paling negatif memiliki kecenderungan oksidasi paling besar. Mg akan bertindak sebagai anoda yang terkorosi, menyuplai elektron agar besi tetap terlindungi sebagai katoda."
+    },
+    {
+      "id": "q5-3",
+      "type": "multiple_choice",
+      "tpCode": "TP6",
+      "tripleRepLevel": "makroskopik",
+      "question": "Paku besi yang dimasukkan ke dalam tabung reaksi tertutup berisi air yang telah dididihkan dan dilapisi minyak tanah di atasnya tidak berkarat. Hal ini membuktikan bahwa...",
+      "options": [
+        "Air panas mendidih mematikan bakteri aerob pemicu karat.",
+        "Minyak tanah menyerap ion besi dari permukaan paku.",
+        "Paku besi memuai dan menjadi kebal terhadap reaksi korosi.",
+        "Air tanpa oksigen terlarut tidak dapat menyebabkan reaksi perkaratan besi."
+      ],
+      "correctAnswer": 3,
+      "explanation": "Pendidihan air menghilangkan gas oksigen terlarut, dan lapisan minyak mencegah oksigen udara larut kembali. Tanpa oksigen, reaksi reduksi di katoda tidak dapat berlangsung."
+    },
+    {
+      "id": "q5-4",
+      "type": "multiple_choice",
+      "tpCode": "TP6",
+      "tripleRepLevel": "simbolik",
+      "question": "Kaleng biskuit dari besi dilapisi timah (Sn, E° = -0,14 V). Mengapa kaleng tersebut sangat cepat berkarat apabila lapisannya tergores hingga mengenai besi?",
+      "options": [
+        "Karena timah bereaksi dengan udara membentuk larutan asam.",
+        "Karena E° Fe (-0,44 V) lebih negatif daripada Sn (-0,14 V), sehingga besi menjadi anoda dan teroksidasi cepat mendesak elektron ke timah.",
+        "Karena besi menyerap timah membentuk senyawa beracun yang rapuh.",
+        "Karena timah menjadi anoda kurban yang melemahkan struktur besi."
+      ],
+      "correctAnswer": 1,
+      "explanation": "Ketika tergores, besi dan timah bersentuhan dengan udara lembap membentuk pasangan sel volta. Karena E° Fe lebih negatif, besi bertindak sebagai anoda yang terkorosi hebat."
+    },
+    {
+      "id": "q5-5",
+      "type": "multiple_choice",
+      "tpCode": "TP6",
+      "tripleRepLevel": "makroskopik",
+      "question": "Di antara lingkungan berikut, besi akan mengalami perkaratan paling cepat di...",
+      "options": [
+        "Daerah pesisir pantai dengan udara asin dan berkelembapan tinggi.",
+        "Gurun pasir terbuka yang sangat kering dan panas terik.",
+        "Di dalam lemari pendingin kering bersuhu rendah.",
+        "Di dalam tabung hampa udara laboratorium tanpa gas apa pun."
+      ],
+      "correctAnswer": 0,
+      "explanation": "Udara pantai mengandung uap air tinggi dan percikan garam NaCl. Ion garam berfungsi sebagai elektrolit kuat yang mempercepat hantaran ion pada sel korosi lokal."
+    }
+  ]
+}
+

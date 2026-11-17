@@ -1,0 +1,233 @@
+{
+  "id": "modul-3",
+  "moduleNumber": 3,
+  "slug": "3-elektrolisis",
+  "title": "Sel Elektrolisis dan Aturan Reaksi Elektrode",
+  "subtitle": "Menggunakan energi listrik searah (DC) untuk memicu reaksi kimia non-spontan",
+  "tpCodes": ["TP2", "TP4"],
+  "learningObjectives": [
+    "Membedakan sel volta dan sel elektrolisis berdasarkan perubahan energi, kutub elektrode, dan spontanitas.",
+    "Menganalisis reaksi di katoda pada elektrolisis larutan vs lelehan berdasarkan potensial reduksi.",
+    "Menganalisis reaksi di anoda berdasarkan jenis elektrode (inert vs aktif) dan jenis anion.",
+    "Menuliskan persamaan reaksi setengah sel dan reaksi total pada sel elektrolisis."
+  ],
+  "estimatedMinutes": 45,
+  "simulationType": "electrolysis",
+  "steps": [
+    {
+      "stepNumber": 1,
+      "title": "Perbedaan Sel Volta vs Sel Elektrolisis",
+      "summary": "Sel elektrolisis membutuhkan sumber tegangan DC luar. Kutub katoda bermuatan negatif dan anoda bermuatan positif.",
+      "tripleRep": {
+        "macroscopic": {
+          "title": "Susunan Alat & Gejala Fisik",
+          "description": "Dua elektrode tercelup dalam satu bejana elektrolit yang dihubungkan ke sumber arus searah (baterai/catu daya). Di permukaan elektrode tampak gelembung gas atau endapan logam.",
+          "visualAlt": "Bejana elektrolisis terhubung baterai dengan gelembung gas di satu elektrode dan lapisan logam di elektrode lain",
+          "observations": [
+            "Membutuhkan sumber listrik searah (baterai/power supply DC).",
+            "Katoda terhubung ke kutub negatif baterai (menarik kation).",
+            "Anoda terhubung ke kutub positif baterai (menarik anion)."
+          ]
+        },
+        "submicroscopic": {
+          "title": "Arah Aliran Partikel",
+          "description": "Sumber arus memompa elektron masuk ke katoda sehingga katoda kaya elektron (negatif). Elektron ditarik dari anoda sehingga anoda kekurangan elektron (positif).",
+          "visualAlt": "Baterai memompa elektron dari anoda positif menuju katoda negatif",
+          "particles": [
+            "Kation (ion positif) bergerak mendekati katoda negatif untuk mengambil elektron (reduksi).",
+            "Anion (ion negatif) bergerak mendekati anoda positif untuk menyerahkan elektron (oksidasi)."
+          ]
+        },
+        "symbolic": {
+          "title": "Prinsip Perubahan Energi & Kutub",
+          "latexFormulas": [
+            "\\text{Energi Listrik (DC)} \\rightarrow \\text{Energi Kimia (Reaksi Non-Spontan)}",
+            "\\text{Katoda (-): Reduksi} \\quad \\mid \\quad \\text{Anoda (+): Oksidasi}"
+          ],
+          "explanation": "Ingat jembatan keledai: Katoda selalu Reduksi, Anoda selalu Oksidasi (Ka-Red, An-Oks). Pada elektrolisis, Katoda bermuatan Negatif dan Anoda Positif.",
+          "reactions": [
+            "Sel Volta: Kimia → Listrik (Katoda +, Anoda -)",
+            "Sel Elektrolisis: Listrik → Kimia (Katoda -, Anoda +)"
+          ]
+        }
+      }
+    },
+    {
+      "stepNumber": 2,
+      "title": "Aturan Reaksi di Katoda (Larutan vs Lelehan)",
+      "summary": "Pada katoda (reduksi), spesi yang tereduksi bergantung pada jenis kation: (1) kation golongan IA, IIA, Al, Mn → pelarut air yang tereduksi; (2) kation logam lain (Cu²⁺, Ag⁺, Zn²⁺, Ni²⁺) → kation tersebut yang tereduksi; (3) larutan asam (ion H⁺) → ion H⁺ yang tereduksi.",
+      "tripleRep": {
+        "macroscopic": {
+          "title": "Pengamatan di Katoda",
+          "description": "Pada elektrolisis larutan NaCl, tidak terbentuk logam Na, melainkan gelembung gas H₂ yang tidak berwarna. Larutan di sekitar katoda menjadi basa (berwarna merah muda dengan indikator fenolftalein).",
+          "visualAlt": "Gelembung gas H2 muncul di elektrode katoda dengan kabut warna merah muda indikator PP",
+          "observations": [
+            "Tampak gelembung gas tak berwarna (gas H₂).",
+            "Penambahan indikator fenolftalein (PP) menghasilkan warna merah muda cerah di sekitar katoda (suasana basa ion OH⁻)."
+          ]
+        },
+        "submicroscopic": {
+          "title": "Kompetisi Reduksi Kation vs Air",
+          "description": "Molekul air H₂O lebih mudah menangkap elektron di permukaan katoda daripada kation Na⁺ yang memiliki potensial reduksi sangat negatif (-2,71 V).",
+          "visualAlt": "Dua molekul H2O menangkap 2 elektron di katoda terdisosiasi membentuk molekul H2 gas dan 2 ion OH-",
+          "particles": [
+            "Molekul pelarut air (H₂O) mengelilingi katoda dan tereduksi.",
+            "Ion Na⁺ tetap berada di larutan sebagai ion spektator (penonton)."
+          ]
+        },
+        "symbolic": {
+          "title": "Persamaan Setengah Reaksi Katoda",
+          "latexFormulas": [
+            "\\text{Kasus 1 (IA, IIA, Al, Mn): } 2\\text{H}_2\\text{O(l)} + 2e^- \\rightarrow \\text{H}_2\\text{(g)} + 2\\text{OH}^{-}\\text{(aq)} \\quad (E^\\circ = -0{,}83\\text{ V})",
+            "\\text{Kasus 2 (Logam lain): } \\text{Cu}^{2+}\\text{(aq)} + 2e^- \\rightarrow \\text{Cu(s)} \\quad (E^\\circ = +0{,}34\\text{ V})",
+            "\\text{Kasus 3 (Asam): } 2\\text{H}^{+}\\text{(aq)} + 2e^- \\rightarrow \\text{H}_2\\text{(g)} \\quad (E^\\circ = 0{,}00\\text{ V})",
+            "\\text{Lelehan (tanpa air): } \\text{Na}^{+}\\text{(l)} + e^- \\rightarrow \\text{Na(s)} \\quad (E^\\circ = -2{,}71\\text{ V})"
+          ],
+          "explanation": "Aturan reaksi di katoda larutan terbagi menjadi 3 kasus: (1) Jika kation berasal dari logam aktif (golongan IA, IIA, Al³⁺, Mn²⁺), air yang tereduksi karena E° reduksi air (-0,83 V) lebih positif daripada kation tersebut; (2) Jika kation logam lain dengan E° > -0,83 V (seperti Cu²⁺, Ag⁺, Zn²⁺, Ni²⁺), ion logam tersebut yang tereduksi mengendap; (3) Jika larutan bersifat asam (mengandung H⁺), ion H⁺ yang tereduksi menghasilkan gas H₂. Pada lelehan murni tanpa air, kation logam apa pun langsung tereduksi.",
+          "reactions": [
+            "Kasus 1 (kation IA, IIA, Al, Mn): 2H₂O + 2e⁻ → H₂ + 2OH⁻",
+            "Kasus 2 (kation logam lain: Cu²⁺, Ag⁺, Zn²⁺, Ni²⁺): Cu²⁺ + 2e⁻ → Cu",
+            "Kasus 3 (larutan asam): 2H⁺ + 2e⁻ → H₂",
+            "Lelehan NaCl katoda (tanpa air): Na⁺ + e⁻ → Na(s)"
+          ]
+        }
+      }
+    },
+    {
+      "stepNumber": 3,
+      "title": "Aturan Reaksi di Anoda (Inert vs Aktif) & Reaksi Total",
+      "summary": "Jika anoda inert (C, Pt, Au), anion atau air yang teroksidasi. Jika anoda aktif (Cu, Fe, Ni), logam anoda itu sendiri yang larut teroksidasi.",
+      "tripleRep": {
+        "macroscopic": {
+          "title": "Pengamatan di Anoda",
+          "description": "Pada anoda karbon dengan larutan KI terbentuk warna kuning kecokelatan iodin. Pada anoda tembaga (aktif) dengan larutan CuSO₄, batang anoda menyusut terkikis.",
+          "visualAlt": "Perbandingan anoda karbon yang menghasilkan gas atau warna halogen vs anoda tembaga yang terkikis",
+          "observations": [
+            "Anoda inert + larutan asam oksi (SO₄²⁻): timbul gelembung gas O₂.",
+            "Anoda inert + larutan halida (Cl⁻, I⁻): timbul gas Cl₂ atau cairan kuning/cokelat I₂.",
+            "Anoda aktif (mis. pelapisan elektroplating): batang anoda larut dan menipis."
+          ]
+        },
+        "submicroscopic": {
+          "title": "Pelepasan Elektron di Anoda",
+          "description": "Ion negatif atau molekul air melepaskan elektron ke anoda. Jika anoda terbuat dari logam aktif, atom logam tersebut langsung melepaskan elektronnya sendiri.",
+          "visualAlt": "Anion halida melepaskan elektron di permukaan grafit membentuk molekul diatomik",
+          "particles": [
+            "Anion halida (Cl⁻, Br⁻, I⁻) lebih mudah teroksidasi daripada air.",
+            "Sisa asam oksi (SO₄²⁻, NO₃⁻) sangat sukar teroksidasi sehingga air yang teroksidasi menjadi gas O₂ dan ion H⁺."
+          ]
+        },
+        "symbolic": {
+          "title": "Persamaan Reaksi Anoda & Reaksi Total",
+          "latexFormulas": [
+            "\\text{Anoda Inert + Air: } 2\\text{H}_2\\text{O(l)} \\rightarrow \\text{O}_2\\text{(g)} + 4\\text{H}^{+}\\text{(aq)} + 4e^-",
+            "\\text{Anoda Inert + Halida: } 2\\text{Cl}^{-}\\text{(aq)} \\rightarrow \\text{Cl}_2\\text{(g)} + 2e^-",
+            "\\text{Anoda Aktif (Cu): } \\text{Cu(s)} \\rightarrow \\text{Cu}^{2+}\\text{(aq)} + 2e^-",
+            "\\text{Total Larutan } \\text{CuSO}_4\\text{ (Inert): } 2\\text{Cu}^{2+}\\text{(aq)} + 2\\text{H}_2\\text{O(l)} \\rightarrow 2\\text{Cu(s)} + \\text{O}_2\\text{(g)} + 4\\text{H}^{+}\\text{(aq)}",
+            "\\text{Total Larutan } \\text{NaCl (Inert): } 2\\text{H}_2\\text{O(l)} + 2\\text{Cl}^{-}\\text{(aq)} \\rightarrow \\text{H}_2\\text{(g)} + \\text{Cl}_2\\text{(g)} + 2\\text{OH}^{-}\\text{(aq)}"
+          ],
+          "explanation": "Elektrode inert (C dan Pt) tidak ikut bereaksi. Pada elektrolisis larutan CuSO₄ dengan anoda C: di katoda Cu²⁺ tereduksi menjadi endapan Cu, sedangkan di anoda air teroksidasi menghasilkan gas O₂ dan ion H⁺ (reaksi total: 2Cu²⁺ + 2H₂O → 2Cu + O₂ + 4H⁺). Pada elektrolisis larutan NaCl: di katoda air tereduksi menjadi gas H₂ dan ion OH⁻, di anoda Cl⁻ teroksidasi menjadi gas Cl₂ (reaksi total: 2H₂O + 2Cl⁻ → H₂ + Cl₂ + 2OH⁻).",
+          "reactions": [
+            "Elektrolisis CuSO₄ (Inert): 2Cu²⁺ + 2H₂O → 2Cu(s) + O₂(g) + 4H⁺(aq)",
+            "Elektrolisis NaCl (Inert): 2H₂O + 2Cl⁻ → H₂(g) + Cl₂(g) + 2OH⁻(aq)",
+            "Oksidasi air (anoda inert): 2H₂O → O₂ + 4H⁺ + 4e⁻",
+            "Oksidasi halida (anoda inert): 2Cl⁻ → Cl₂ + 2e⁻",
+            "Oksidasi anoda aktif (Cu): Cu(s) → Cu²⁺ + 2e⁻"
+          ]
+        }
+      }
+    }
+  ],
+  "exercises": [
+    {
+      "id": "ex-3-1",
+      "title": "Prediksi Produk Elektrolisis di Katoda dan Anoda",
+      "instruction": "Tentukan produk yang dihasilkan di katoda dan anoda untuk setiap sistem elektrolisis dengan elektrode karbon (C).",
+      "type": "matching",
+      "categories": ["Gas H₂ dan Gas O₂", "Gas H₂ dan Gas Cl₂", "Endapan Cu dan Gas O₂", "Logam Na dan Gas Cl₂"],
+      "items": [
+        { "id": "p1", "prompt": "Elektrolisis Larutan H₂SO₄ (Elektrode C)", "targetCategory": "Gas H₂ dan Gas O₂" },
+        { "id": "p2", "prompt": "Elektrolisis Larutan NaCl (Elektrode C)", "targetCategory": "Gas H₂ dan Gas Cl₂" },
+        { "id": "p3", "prompt": "Elektrolisis Larutan CuSO₄ (Elektrode C)", "targetCategory": "Endapan Cu dan Gas O₂" },
+        { "id": "p4", "prompt": "Elektrolisis Lelehan NaCl (Elektrode C)", "targetCategory": "Logam Na dan Gas Cl₂" }
+      ]
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q3-1",
+      "type": "multiple_choice",
+      "tpCode": "TP4",
+      "tripleRepLevel": "submikroskopik",
+      "question": "Mengapa pada elektrolisis larutan NaCl dengan elektrode karbon, di katoda dihasilkan gas hidrogen dan bukan logam natrium?",
+      "options": [
+        "Karena ion Na⁺ tidak dapat menghantarkan arus listrik.",
+        "Karena potensial reduksi air (-0,83 V) lebih besar/positif daripada potensial reduksi ion Na⁺ (-2,71 V).",
+        "Karena gas hidrogen lebih ringan daripada natrium.",
+        "Karena karbon bereaksi mengikat ion Na⁺."
+      ],
+      "correctAnswer": 1,
+      "explanation": "Zat dengan potensial reduksi (E°) lebih positif akan lebih mudah menangkap elektron di katoda. Air memiliki E° = -0,83 V, jauh lebih mudah tereduksi dibandingkan ion Na⁺ (E° = -2,71 V)."
+    },
+    {
+      "id": "q3-2",
+      "type": "multiple_choice",
+      "tpCode": "TP4",
+      "tripleRepLevel": "makroskopik",
+      "question": "Gejala makroskopik apa yang teramati di sekitar anoda pada elektrolisis larutan KI dengan elektrode karbon?",
+      "options": [
+        "Muncul endapan putih perak yang tebal.",
+        "Timbul bau gas hidrogen yang meletup-letup.",
+        "Larutan di sekitar anoda berubah warna menjadi kuning kecokelatan karena terbentuk iodin (I₂).",
+        "Elektrode karbon hancur larut ke dalam air."
+      ],
+      "correctAnswer": 2,
+      "explanation": "Ion iodida (I⁻) dioksidasi di anoda menjadi molekul iodin (I₂). Iodin dalam larutan air menghasilkan warna kuning hingga cokelat pekat."
+    },
+    {
+      "id": "q3-3",
+      "type": "multiple_choice",
+      "tpCode": "TP2",
+      "tripleRepLevel": "simbolik",
+      "question": "Muatan listrik pada elektrode katoda dan anoda dalam sel elektrolisis berturut-turut adalah...",
+      "options": [
+        "Positif dan Negatif",
+        "Keduanya Positif",
+        "Keduanya Netral",
+        "Negatif dan Positif"
+      ],
+      "correctAnswer": 3,
+      "explanation": "Pada sel elektrolisis, katoda dihubungkan ke kutub negatif sumber tegangan DC dan anoda dihubungkan ke kutub positif."
+    },
+    {
+      "id": "q3-4",
+      "type": "multiple_choice",
+      "tpCode": "TP4",
+      "tripleRepLevel": "simbolik",
+      "question": "Reaksi yang terjadi di anoda jika larutan CuSO₄ dielektrolisis menggunakan elektrode tembaga (anoda aktif Cu) adalah...",
+      "options": [
+        "Cu(s) → Cu²⁺(aq) + 2e⁻",
+        "2H₂O(l) → O₂(g) + 4H⁺(aq) + 4e⁻",
+        "Cu²⁺(aq) + 2e⁻ → Cu(s)",
+        "4OH⁻(aq) → 2H₂O(l) + O₂(g) + 4e⁻"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Jika anoda terbuat dari logam aktif (selain Pt, C, Au), anoda tembaga itu sendiri yang akan teroksidasi menjadi ion Cu²⁺, melarut ke dalam elektrolit."
+    },
+    {
+      "id": "q3-5",
+      "type": "multiple_choice",
+      "tpCode": "TP4",
+      "tripleRepLevel": "simbolik",
+      "question": "Pada elektrolisis larutan Na₂SO₄ dengan elektrode platina, spesi yang mengalami oksidasi di anoda adalah...",
+      "options": [
+        "Ion sulfat (SO₄²⁻)",
+        "Ion natrium (Na⁺)",
+        "Molekul air (H₂O)",
+        "Logam platina (Pt)"
+      ],
+      "correctAnswer": 2,
+      "explanation": "Ion SO₄²⁻ adalah sisa asam oksi dengan bilangan oksidasi S tertinggi (+6), sehingga tidak dapat dioksidasi lebih lanjut dan pelarut air jauh lebih mudah teroksidasi daripada SO₄²⁻. Oleh karena itu, pelarut air yang teroksidasi di anoda menghasilkan gas O₂ dan suasana asam ion H⁺."
+    }
+  ]
+}
