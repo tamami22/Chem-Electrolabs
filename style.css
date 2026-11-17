@@ -1,0 +1,737 @@
+/* ==========================================================================
+   VARIABEL WARNA & DESIGN TOKENS
+   Palet: Biru Tua (#0f172a, #1e3a8a, #2563eb) dan Putih (#ffffff, #f8fafc)
+   Sudut membulat: 12px
+   ========================================================================== */
+:root {
+  /* Warna Utama & Latar */
+  --color-primary: #1e3a8a;          /* Biru tua utama */
+  --color-primary-hover: #1e40af;    /* Biru tua hover */
+  --color-primary-active: #172554;   /* Biru tua active */
+  --color-accent: #2563eb;           /* Biru aksen cerah */
+  --color-accent-light: #eff6ff;     /* Biru sangat muda untuk latar fokus */
+  
+  --color-navy-dark: #0f172a;        /* Biru gelap pekat (latar branding panel) */
+  --color-navy-card: #1e293b;        /* Biru gelap kartu branding */
+  --color-bg-page: #f8fafc;          /* Latar belakang halaman (slate-50) */
+  --color-surface: #ffffff;          /* Putih kartu formulir */
+  
+  /* Teks */
+  --color-text-main: #0f172a;        /* Teks utama gelap (WCAG AAA kontras > 15:1) */
+  --color-text-muted: #475569;       /* Teks sekunder (WCAG AA kontras > 6.5:1) */
+  --color-text-light: #94a3b8;       /* Teks placeholder */
+  --color-text-white: #ffffff;       /* Teks putih pada latar gelap */
+
+  /* Border & Garis */
+  --color-border: #cbd5e1;           /* Border abu-abu slate */
+  --color-border-hover: #94a3b8;     /* Border saat hover */
+  --color-border-focus: #2563eb;     /* Border saat aktif / fokus */
+
+  /* Status Validasi (Umpan Balik) */
+  --color-error: #dc2626;            /* Merah error (WCAG AA kontras > 4.6:1) */
+  --color-error-bg: #fef2f2;         /* Latar pesan error */
+  --color-error-border: #f87171;     /* Border pesan error */
+  
+  --color-success: #15803d;          /* Hijau sukses (WCAG AA kontras > 4.8:1) */
+  --color-success-bg: #f0fdf4;       /* Latar pesan sukses */
+  --color-success-border: #86efac;   /* Border pesan sukses */
+
+  /* Radius & Bayangan Sesuai Spesifikasi */
+  --radius-default: 12px;            /* Sudut membulat 12px */
+  --radius-sm: 8px;
+  --radius-full: 9999px;
+  
+  --shadow-card: 0 10px 25px -5px rgba(15, 23, 42, 0.08), 
+                 0 8px 10px -6px rgba(15, 23, 42, 0.04);
+  --shadow-input-focus: 0 0 0 3px rgba(37, 99, 235, 0.2);
+  --shadow-error-focus: 0 0 0 3px rgba(220, 38, 38, 0.2);
+
+  /* Tipografi */
+  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --transition-fast: 0.18s ease;
+}
+
+/* ==========================================================================
+   RESET & DASAR
+   ========================================================================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  min-height: 100%;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--color-bg-page);
+  color: var(--color-text-main);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+/* Aksesibilitas: Fokus keyboard yang terlihat tegas (WCAG AA) */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* ==========================================================================
+   LAYOUT UTAMA: DUA KOLOM DI DESKTOP
+   ========================================================================== */
+.login-wrapper {
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  width: 100%;
+  max-width: 1060px;
+  min-height: 640px;
+  background-color: var(--color-surface);
+  border-radius: var(--radius-default);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+  border: 1px solid rgba(226, 232, 240, 0.8);
+}
+
+/* ==========================================================================
+   KOLOM KIRI: BRANDING & ILUSTRASI
+   ========================================================================== */
+.branding-panel {
+  background: linear-gradient(145deg, var(--color-navy-dark) 0%, #1e3a8a 100%);
+  color: var(--color-text-white);
+  padding: 3rem 2.75rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Ornamen visual halus di latar belakang */
+.branding-panel::before {
+  content: '';
+  position: absolute;
+  top: -20%;
+  right: -20%;
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.18) 0%, rgba(30, 58, 138, 0) 70%);
+  border-radius: var(--radius-full);
+  pointer-events: none;
+}
+
+.branding-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  z-index: 1;
+}
+
+.brand-logo {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-sm);
+  background: linear-gradient(135deg, #2563eb, #38bdf8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35);
+}
+
+.brand-logo svg {
+  width: 22px;
+  height: 22px;
+}
+
+.brand-name {
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+}
+
+.illustration-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1.5rem 0;
+  z-index: 1;
+}
+
+.hero-svg {
+  width: 100%;
+  max-width: 360px;
+  height: auto;
+  filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.25));
+}
+
+.branding-footer {
+  z-index: 1;
+}
+
+.branding-title {
+  font-size: 1.45rem;
+  font-weight: 700;
+  line-height: 1.3;
+  margin-bottom: 0.6rem;
+  color: #ffffff;
+}
+
+.branding-desc {
+  font-size: 0.925rem;
+  color: #94a3b8;
+  line-height: 1.55;
+  margin-bottom: 1.25rem;
+}
+
+.feature-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.feature-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.875rem;
+  color: #e2e8f0;
+}
+
+.check-icon {
+  width: 18px;
+  height: 18px;
+  color: #38bdf8;
+  flex-shrink: 0;
+}
+
+/* ==========================================================================
+   KOLOM KANAN: FORM PANEL
+   ========================================================================== */
+.form-panel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 2.75rem;
+  background-color: var(--color-surface);
+}
+
+.form-card {
+  width: 100%;
+  max-width: 400px;
+}
+
+.mobile-brand {
+  display: none; /* Disembunyikan di desktop, muncul di mobile */
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--color-primary);
+  font-weight: 700;
+  font-size: 1.15rem;
+  margin-bottom: 1.25rem;
+}
+
+.mobile-brand svg {
+  width: 24px;
+  height: 24px;
+}
+
+.form-header {
+  margin-bottom: 1.75rem;
+}
+
+.form-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--color-text-main);
+  letter-spacing: -0.025em;
+  margin-bottom: 0.35rem;
+}
+
+.form-subtitle {
+  font-size: 0.925rem;
+  color: var(--color-text-muted);
+}
+
+/* ==========================================================================
+   ALERT BOX (UMPAN BALIK SUKSES / GAGAL DARI SERVER)
+   ========================================================================== */
+.alert-box {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.875rem 1rem;
+  border-radius: var(--radius-default);
+  font-size: 0.875rem;
+  line-height: 1.45;
+  margin-bottom: 1.25rem;
+  transition: all var(--transition-fast);
+}
+
+.alert-box[hidden] {
+  display: none !important;
+}
+
+.alert-box.success {
+  background-color: var(--color-success-bg);
+  border: 1px solid var(--color-success-border);
+  color: var(--color-success);
+}
+
+.alert-box.error {
+  background-color: var(--color-error-bg);
+  border: 1px solid var(--color-error-border);
+  color: var(--color-error);
+}
+
+.alert-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.alert-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.alert-message {
+  font-weight: 500;
+}
+
+.alert-message code {
+  background-color: rgba(0, 0, 0, 0.08);
+  padding: 0.15rem 0.35rem;
+  border-radius: 4px;
+  font-size: 0.85em;
+  font-family: monospace;
+}
+
+/* ==========================================================================
+   KOMPONEN FORM & INPUT
+   ========================================================================== */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.form-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-text-main);
+  margin-bottom: 0.4rem;
+}
+
+.required {
+  color: var(--color-error);
+}
+
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.form-input {
+  width: 100%;
+  height: 46px;
+  padding: 0 2.75rem 0 0.95rem;
+  font-family: inherit;
+  font-size: 0.95rem;
+  color: var(--color-text-main);
+  background-color: #ffffff;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-default); /* Sudut membulat 12px */
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+/* Khusus input email agar icon berada di kanan */
+#email {
+  padding-right: 2.75rem;
+}
+
+.form-input::placeholder {
+  color: var(--color-text-light);
+  font-size: 0.9rem;
+}
+
+.form-input:hover:not(:disabled):not([aria-invalid="true"]) {
+  border-color: var(--color-border-hover);
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--color-border-focus);
+  box-shadow: var(--shadow-input-focus);
+}
+
+/* Status TIDAK VALID (Border Merah) */
+.form-input[aria-invalid="true"] {
+  border-color: var(--color-error) !important;
+  background-color: #fffbfa;
+}
+
+.form-input[aria-invalid="true"]:focus {
+  box-shadow: var(--shadow-error-focus);
+}
+
+/* Ikon Email dan Password Toggle */
+.input-icon {
+  position: absolute;
+  right: 0.85rem;
+  color: var(--color-text-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.input-icon svg {
+  width: 19px;
+  height: 19px;
+}
+
+.btn-icon {
+  position: absolute;
+  right: 0.5rem;
+  background: transparent;
+  border: none;
+  padding: 0.4rem;
+  cursor: pointer;
+  color: var(--color-text-muted);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color var(--transition-fast), background-color var(--transition-fast);
+}
+
+.btn-icon:hover {
+  color: var(--color-text-main);
+  background-color: #f1f5f9;
+}
+
+.btn-icon:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 1px;
+}
+
+.eye-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.eye-icon.hidden {
+  display: none;
+}
+
+/* Pesan Error di Bawah Input */
+.error-text {
+  font-size: 0.8125rem;
+  color: var(--color-error);
+  margin-top: 0.35rem;
+  min-height: 1.15rem; /* Menjaga tata letak agar tidak melompat */
+  font-weight: 500;
+  transition: opacity var(--transition-fast);
+}
+
+.error-text:empty {
+  visibility: hidden;
+}
+
+/* ==========================================================================
+   CHECKBOX & TAUTAN
+   ========================================================================== */
+.form-options {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: -0.25rem;
+  margin-bottom: 0.25rem;
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  gap: 0.55rem;
+}
+
+.checkbox-container input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.custom-checkbox {
+  width: 18px;
+  height: 18px;
+  border: 1.5px solid var(--color-border);
+  border-radius: 4px;
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+}
+
+.checkbox-container:hover .custom-checkbox {
+  border-color: var(--color-accent);
+}
+
+.checkbox-container input[type="checkbox"]:focus-visible + .custom-checkbox {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.checkbox-container input[type="checkbox"]:checked + .custom-checkbox {
+  background-color: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+.checkbox-container input[type="checkbox"]:checked + .custom-checkbox::after {
+  content: '';
+  width: 5px;
+  height: 9px;
+  border: solid #ffffff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg) translate(-1px, -1px);
+}
+
+.checkbox-label {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+}
+
+.text-link {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-accent);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+  border-radius: 4px;
+}
+
+.text-link:hover {
+  color: var(--color-primary-hover);
+  text-decoration: underline;
+}
+
+/* ==========================================================================
+   TOMBOL GOOGLE & PEMBATAS (DIVIDER)
+   ========================================================================== */
+.btn-google {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  width: 100%;
+  height: 48px;
+  background-color: #ffffff;
+  color: var(--color-text-main);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-default); /* Sudut membulat 12px */
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05);
+  transition: all var(--transition-fast);
+}
+
+.btn-google:hover:not(:disabled) {
+  background-color: #f8fafc;
+  border-color: var(--color-border-hover);
+  box-shadow: 0 4px 10px rgba(15, 23, 42, 0.08);
+  transform: translateY(-1px);
+}
+
+.btn-google:active:not(:disabled) {
+  background-color: #f1f5f9;
+  transform: translateY(0);
+}
+
+.btn-google:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.btn-google:disabled {
+  background-color: #f1f5f9;
+  color: var(--color-text-muted);
+  cursor: not-allowed;
+  opacity: 0.7;
+  transform: none;
+  box-shadow: none;
+}
+
+.google-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.auth-divider {
+  display: flex;
+  align-items: center;
+  margin: 1.25rem 0;
+  text-align: center;
+}
+
+.auth-divider::before,
+.auth-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background-color: var(--color-border);
+}
+
+.auth-divider span {
+  padding: 0 0.85rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  text-transform: lowercase;
+}
+
+/* ==========================================================================
+   TOMBOL SUBMIT (MASUK) DENGAN STATUS LOADING
+   ========================================================================== */
+.btn-submit {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 48px;
+  background: var(--color-primary);
+  color: #ffffff;
+  border: none;
+  border-radius: var(--radius-default); /* 12px */
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(30, 58, 138, 0.25);
+  transition: background-color var(--transition-fast), 
+              opacity var(--transition-fast), 
+              transform 0.1s ease,
+              box-shadow var(--transition-fast);
+  margin-top: 0.5rem;
+}
+
+.btn-submit:hover:not(:disabled) {
+  background-color: var(--color-primary-hover);
+  box-shadow: 0 6px 16px rgba(30, 58, 138, 0.35);
+  transform: translateY(-1px);
+}
+
+.btn-submit:active:not(:disabled) {
+  background-color: var(--color-primary-active);
+  transform: translateY(0);
+}
+
+/* Status Nonaktif / Disabled */
+.btn-submit:disabled {
+  background-color: #94a3b8;
+  cursor: not-allowed;
+  box-shadow: none;
+  opacity: 0.65;
+  transform: none;
+}
+
+/* Status Loading Spinner */
+.spinner {
+  display: none;
+  width: 18px;
+  height: 18px;
+  margin-right: 0.5rem;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: spin 0.75s linear infinite;
+}
+
+.btn-submit.loading .spinner {
+  display: inline-block;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ==========================================================================
+   FOOTER FORM (DAFTAR AKUN)
+   ========================================================================== */
+.form-footer {
+  margin-top: 2rem;
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  border-top: 1px solid #f1f5f9;
+  padding-top: 1.25rem;
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN (MOBILE: 1 KOLOM)
+   ========================================================================== */
+@media (max-width: 860px) {
+  body {
+    padding: 1rem;
+    align-items: flex-start;
+  }
+
+  .login-wrapper {
+    grid-template-columns: 1fr; /* 1 kolom di mobile */
+    max-width: 480px;
+    margin: 1rem auto;
+  }
+
+  /* Sembunyikan panel ilustrasi di layar kecil */
+  .branding-panel {
+    display: none;
+  }
+
+  /* Tampilkan branding di form header */
+  .mobile-brand {
+    display: flex;
+  }
+
+  .form-panel {
+    padding: 2.25rem 1.75rem;
+  }
+
+  .form-title {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .form-panel {
+    padding: 1.75rem 1.25rem;
+  }
+}
+
