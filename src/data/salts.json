@@ -1,0 +1,296 @@
+[
+  {
+    "id": "znso4",
+    "formula": "ZnSO_4",
+    "name": "Seng Sulfat",
+    "formattedFormula": "\\text{ZnSO}_4",
+    "cation": {
+      "formula": "Zn^{2+}",
+      "name": "Seng(II)",
+      "charge": 2
+    },
+    "anion": {
+      "formula": "SO_4^{2-}",
+      "name": "Sulfat",
+      "charge": -2
+    },
+    "relatedMetalId": "zn",
+    "solutionColor": "rgba(226, 232, 240, 0.25)",
+    "colorDescription": "Larutan jernih tidak berwarna",
+    "category": ["volta"],
+    "description": "Larutan elektrolit setengah sel anoda seng pada sel Daniell"
+  },
+  {
+    "id": "cuso4",
+    "formula": "CuSO_4",
+    "name": "Tembaga(II) Sulfat",
+    "formattedFormula": "\\text{CuSO}_4",
+    "cation": {
+      "formula": "Cu^{2+}",
+      "name": "Tembaga(II)",
+      "charge": 2
+    },
+    "anion": {
+      "formula": "SO_4^{2-}",
+      "name": "Sulfat",
+      "charge": -2
+    },
+    "relatedMetalId": "cu",
+    "solutionColor": "rgba(14, 165, 233, 0.35)",
+    "colorDescription": "Larutan biru terang khas ion Cu²⁺(aq)",
+    "category": ["volta", "electrolysis"],
+    "description": "Larutan elektrolit setengah sel katoda tembaga pada sel Daniell (Modul 2) serta larutan elektrolisis dan penyepuhan tembaga (Modul 3 & 4)"
+  },
+  {
+    "id": "feso4",
+    "formula": "FeSO_4",
+    "name": "Besi(II) Sulfat",
+    "formattedFormula": "\\text{FeSO}_4",
+    "cation": {
+      "formula": "Fe^{2+}",
+      "name": "Besi(II)",
+      "charge": 2
+    },
+    "anion": {
+      "formula": "SO_4^{2-}",
+      "name": "Sulfat",
+      "charge": -2
+    },
+    "relatedMetalId": "fe",
+    "solutionColor": "rgba(134, 239, 172, 0.3)",
+    "colorDescription": "Larutan hijau muda pucat",
+    "category": ["volta"],
+    "description": "Larutan elektrolit setengah sel besi. Catatan: Kation Fe²⁺ mudah teroksidasi oleh oksigen di udara bebas menjadi Fe³⁺ (larutan berubah warna menjadi kekuningan/keruh sehingga harus dibuat baru)."
+  },
+  {
+    "id": "agno3",
+    "formula": "AgNO_3",
+    "name": "Perak Nitrat",
+    "formattedFormula": "\\text{AgNO}_3",
+    "cation": {
+      "formula": "Ag^{+}",
+      "name": "Perak(I)",
+      "charge": 1
+    },
+    "anion": {
+      "formula": "NO_3^{-}",
+      "name": "Nitrat",
+      "charge": -1
+    },
+    "relatedMetalId": "ag",
+    "solutionColor": "rgba(226, 232, 240, 0.2)",
+    "colorDescription": "Larutan jernih tidak berwarna (sensitif terhadap cahaya)",
+    "category": ["volta", "electrolysis"],
+    "description": "Larutan garam perak yang mudah larut, digunakan sebagai pasangan katoda sel volta (Modul 2) dan elektrolit penyepuhan perak (Modul 4)"
+  },
+  {
+    "id": "mgso4",
+    "formula": "MgSO_4",
+    "name": "Magnesium Sulfat",
+    "formattedFormula": "\\text{MgSO}_4",
+    "cation": {
+      "formula": "Mg^{2+}",
+      "name": "Magnesium",
+      "charge": 2
+    },
+    "anion": {
+      "formula": "SO_4^{2-}",
+      "name": "Sulfat",
+      "charge": -2
+    },
+    "relatedMetalId": "mg",
+    "solutionColor": "rgba(241, 245, 249, 0.2)",
+    "colorDescription": "Larutan jernih tidak berwarna",
+    "category": ["volta"],
+    "description": "Larutan elektrolit untuk pasangan elektrode magnesium"
+  },
+  {
+    "id": "pbno32",
+    "formula": "Pb(NO_3)_2",
+    "name": "Timbal(II) Nitrat",
+    "formattedFormula": "\\text{Pb(NO}_3\\text{)}_2",
+    "cation": {
+      "formula": "Pb^{2+}",
+      "name": "Timbal(II)",
+      "charge": 2
+    },
+    "anion": {
+      "formula": "NO_3^{-}",
+      "name": "Nitrat",
+      "charge": -1
+    },
+    "relatedMetalId": "pb",
+    "solutionColor": "rgba(226, 232, 240, 0.2)",
+    "colorDescription": "Larutan jernih tidak berwarna",
+    "category": ["volta"],
+    "description": "Larutan garam timbal terlarut untuk elektrode timbal"
+  },
+  {
+    "id": "niso4",
+    "formula": "NiSO_4",
+    "name": "Nikel(II) Sulfat",
+    "formattedFormula": "\\text{NiSO}_4",
+    "cation": {
+      "formula": "Ni^{2+}",
+      "name": "Nikel(II)",
+      "charge": 2
+    },
+    "anion": {
+      "formula": "SO_4^{2-}",
+      "name": "Sulfat",
+      "charge": -2
+    },
+    "relatedMetalId": "ni",
+    "solutionColor": "rgba(52, 211, 153, 0.35)",
+    "colorDescription": "Larutan hijau zamrud terang",
+    "category": ["volta", "electrolysis"],
+    "description": "Larutan elektrolit setengah sel nikel (Modul 2) dan larutan elektrolisis penyepuhan nikel (Modul 4)"
+  },
+  {
+    "id": "snso4",
+    "formula": "SnSO_4",
+    "name": "Timah(II) Sulfat",
+    "formattedFormula": "\\text{SnSO}_4",
+    "cation": {
+      "formula": "Sn^{2+}",
+      "name": "Timah(II)",
+      "charge": 2
+    },
+    "anion": {
+      "formula": "SO_4^{2-}",
+      "name": "Sulfat",
+      "charge": -2
+    },
+    "relatedMetalId": "sn",
+    "solutionColor": "rgba(241, 245, 249, 0.25)",
+    "colorDescription": "Larutan jernih tak berwarna",
+    "category": ["volta"],
+    "description": "Larutan elektrolit setengah sel timah"
+  },
+  {
+    "id": "kcl",
+    "formula": "KCl",
+    "name": "Kalium Klorida",
+    "formattedFormula": "\\text{KCl}",
+    "cation": {
+      "formula": "K^{+}",
+      "name": "Kalium",
+      "charge": 1
+    },
+    "anion": {
+      "formula": "Cl^{-}",
+      "name": "Klorida",
+      "charge": -1
+    },
+    "relatedMetalId": null,
+    "solutionColor": "rgba(255, 255, 255, 0.2)",
+    "colorDescription": "Larutan jernih tidak berwarna",
+    "category": ["salt_bridge"],
+    "description": "Larutan elektrolit utama pengisi jembatan garam agar-agar untuk menetralkan kelebihan muatan ion di kedua setengah sel. Catatan: Tidak cocok digunakan bila terdapat kation Ag⁺ karena ion Cl⁻ akan bereaksi membentuk endapan putih sukar larut AgCl."
+  },
+  {
+    "id": "kno3",
+    "formula": "KNO_3",
+    "name": "Kalium Nitrat",
+    "formattedFormula": "\\text{KNO}_3",
+    "cation": {
+      "formula": "K^{+}",
+      "name": "Kalium",
+      "charge": 1
+    },
+    "anion": {
+      "formula": "NO_3^{-}",
+      "name": "Nitrat",
+      "charge": -1
+    },
+    "relatedMetalId": null,
+    "solutionColor": "rgba(255, 255, 255, 0.2)",
+    "colorDescription": "Larutan jernih tidak berwarna",
+    "category": ["salt_bridge"],
+    "description": "Larutan alternatif jembatan garam yang ideal karena mobilitas ion K⁺ dan NO₃⁻ hampir setara. Dipilih secara khusus jika setengah sel mengandung kation perak (Ag⁺) agar tidak terbentuk endapan garam klorida."
+  },
+  {
+    "id": "nacl",
+    "formula": "NaCl",
+    "name": "Natrium Klorida",
+    "formattedFormula": "\\text{NaCl}",
+    "cation": {
+      "formula": "Na^{+}",
+      "name": "Natrium",
+      "charge": 1
+    },
+    "anion": {
+      "formula": "Cl^{-}",
+      "name": "Klorida",
+      "charge": -1
+    },
+    "relatedMetalId": "na",
+    "solutionColor": "rgba(255, 255, 255, 0.2)",
+    "colorDescription": "Larutan jernih tidak berwarna",
+    "category": ["electrolysis"],
+    "description": "Garam dapur, objek perbandingan utama elektrolisis larutan vs lelehan pada Modul 3. Catatan: relatedMetalId ('na') hanyalah referensi data; pada elektrolisis larutan, yang tereduksi di katoda adalah air (H₂O) menghasilkan gas H₂, bukan logam Na."
+  },
+  {
+    "id": "ki",
+    "formula": "KI",
+    "name": "Kalium Iodida",
+    "formattedFormula": "\\text{KI}",
+    "cation": {
+      "formula": "K^{+}",
+      "name": "Kalium",
+      "charge": 1
+    },
+    "anion": {
+      "formula": "I^{-}",
+      "name": "Iodida",
+      "charge": -1
+    },
+    "relatedMetalId": "k",
+    "solutionColor": "rgba(255, 255, 255, 0.2)",
+    "colorDescription": "Larutan tak berwarna; saat dielektrolisis membentuk warna kuning/cokelat iodin di anoda dan merah muda di katoda dengan indikator PP",
+    "category": ["electrolysis"],
+    "description": "Larutan elektrolit klasik untuk demonstrasi perubahan warna elektrolisis di laboratorium SMA. Catatan: relatedMetalId ('k') hanyalah referensi data; pada elektrolisis larutan, yang tereduksi di katoda adalah air menghasilkan gas H₂, bukan logam K."
+  },
+  {
+    "id": "h2so4",
+    "formula": "H_2SO_4",
+    "name": "Asam Sulfat",
+    "formattedFormula": "\\text{H}_2\\text{SO}_4",
+    "cation": {
+      "formula": "H^{+}",
+      "name": "Hidrogen (Asam)",
+      "charge": 1
+    },
+    "anion": {
+      "formula": "SO_4^{2-}",
+      "name": "Sulfat",
+      "charge": -2
+    },
+    "relatedMetalId": "h2",
+    "solutionColor": "rgba(255, 255, 255, 0.2)",
+    "colorDescription": "Larutan asam jernih tidak berwarna",
+    "category": ["electrolysis"],
+    "description": "Elektrolit asam yang pada elektrolisisnya menghasilkan gas H₂ di katoda dan gas O₂ di anoda inert (digunakan pada Modul 3 dan perhitungan Faraday Modul 4)"
+  },
+  {
+    "id": "na2so4",
+    "formula": "Na_2SO_4",
+    "name": "Natrium Sulfat",
+    "formattedFormula": "\\text{Na}_2\\text{SO}_4",
+    "cation": {
+      "formula": "Na^{+}",
+      "name": "Natrium",
+      "charge": 1
+    },
+    "anion": {
+      "formula": "SO_4^{2-}",
+      "name": "Sulfat",
+      "charge": -2
+    },
+    "relatedMetalId": "na",
+    "solutionColor": "rgba(255, 255, 255, 0.2)",
+    "colorDescription": "Larutan jernih tidak berwarna",
+    "category": ["electrolysis"],
+    "description": "Larutan elektrolit tak berwarna untuk demonstrasi elektrolisis air (di katoda air tereduksi menghasilkan gas H₂ dan ion OH⁻, di anoda inert air teroksidasi menghasilkan gas O₂ dan ion H⁺)"
+  }
+]

@@ -1,0 +1,250 @@
+{
+  "id": "modul-2",
+  "moduleNumber": 2,
+  "slug": "2-sel-volta",
+  "title": "Sel Volta dan Potensial Sel Standar",
+  "subtitle": "Mengubah energi kimia reaksi redoks spontan menjadi energi listrik terukur",
+  "tpCodes": ["TP2", "TP3"],
+  "learningObjectives": [
+    "Menganalisis prinsip kerja sel volta: peran anoda, katoda, jembatan garam, dan aliran elektron.",
+    "Menentukan arah aliran elektron dan pergerakan ion pada jembatan garam.",
+    "Menuliskan reaksi setengah sel, reaksi sel total, dan notasi sel volta standar.",
+    "Menghitung nilai potensial sel standar (E°sel) dan memprediksi kespontanan reaksi kimia."
+  ],
+  "estimatedMinutes": 45,
+  "simulationType": "volta",
+  "steps": [
+    {
+      "stepNumber": 1,
+      "title": "Anatomi Sel Volta & Aliran Elektron",
+      "summary": "Sel volta memisahkan setengah reaksi oksidasi dan reduksi ke dalam dua bejana terpisah yang dihubungkan kawat penghantar dan jembatan garam.",
+      "tripleRep": {
+        "macroscopic": {
+          "title": "Gejala Makroskopik",
+          "description": "Elektrode seng (Zn) dicelupkan ke dalam larutan ZnSO₄ (1 M) dan elektrode tembaga (Cu) dicelupkan ke dalam larutan CuSO₄ (1 M). Jarum voltmeter menyimpang menunjukkan beda potensial positif (+1,10 V). Lampu LED menyala terang, elektrode Zn menipis (terkikis), dan elektrode Cu menebal (pertambahan endapan).",
+          "visualAlt": "Dua gelas kimia berisi larutan ZnSO4 dan CuSO4 terhubung jembatan garam dan kabel voltmeter dengan lampu menyala",
+          "observations": [
+            "Elektrode Zn tercelup dalam larutan ZnSO₄ dan elektrode Cu tercelup dalam larutan CuSO₄.",
+            "Voltmeter membaca tegangan positif konstan (+1,10 V).",
+            "Lampu LED indikator menyala menunjukkan adanya aliran arus listrik.",
+            "Anoda seng (Zn) mengalami penyusutan massa (larut menjadi ion).",
+            "Katoda tembaga (Cu) bertambah tebal karena ion tembaga mengendap menjadi logam tembaga murni."
+          ]
+        },
+        "submicroscopic": {
+          "title": "Aliran Elektron dan Ion",
+          "description": "Atom Zn di anoda melepaskan elektron menjadi ion Zn²⁺ yang larut ke dalam larutan ZnSO₄. Elektron mengalir melalui kawat luar menuju katoda Cu. Ion Cu²⁺ dari larutan CuSO₄ menangkap elektron tersebut dan tereduksi menjadi logam Cu(s). Jembatan garam menjaga netralitas listrik kedua larutan.",
+          "visualAlt": "Elektron mengalir lewat kawat dari Zn ke Cu; ion K+ bergerak ke larutan CuSO4 dan anion Cl- bergerak ke larutan ZnSO4",
+          "particles": [
+            "Elektron mengalir secara spontan dari anoda seng (Zn) menuju katoda tembaga (Cu) melalui kawat penghantar luar.",
+            "Anion jembatan garam (Cl⁻ atau NO₃⁻) bergerak ke bejana anoda untuk menetralkan kelebihan kation Zn²⁺ hasil oksidasi.",
+            "Kation jembatan garam (K⁺) bergerak ke bejana katoda untuk mengimbangi penurunan konsentrasi kation Cu²⁺ yang tereduksi.",
+            "Catatan jembatan garam: Elektrolit KCl umum digunakan, namun jika larutan mengandung kation Ag⁺, jembatan garam yang wajib digunakan adalah KNO₃ karena ion Cl⁻ dari KCl akan bereaksi mengendapkan Ag⁺ menjadi AgCl (endapan putih sukar larut)."
+          ]
+        },
+        "symbolic": {
+          "title": "Reaksi & Notasi Sel",
+          "latexFormulas": [
+            "\\text{Anoda (-): } \\text{Zn(s)} \\rightarrow \\text{Zn}^{2+}\\text{(aq)} + 2e^- \\quad (E^\\circ = -0{,}76\\text{ V})",
+            "\\text{Katoda (+): } \\text{Cu}^{2+}\\text{(aq)} + 2e^- \\rightarrow \\text{Cu(s)} \\quad (E^\\circ = +0{,}34\\text{ V})",
+            "\\text{Reaksi Sel: } \\text{Zn(s)} + \\text{Cu}^{2+}\\text{(aq)} \\rightarrow \\text{Zn}^{2+}\\text{(aq)} + \\text{Cu(s)} \\quad (E^\\circ_{\\text{sel}} = +1{,}10\\text{ V})",
+            "\\text{Notasi Sel: } \\text{Zn(s)} \\mid \\text{Zn}^{2+}\\text{(aq, 1 M)} \\parallel \\text{Cu}^{2+}\\text{(aq, 1 M)} \\mid \\text{Cu(s)}"
+          ],
+          "explanation": "Notasi sel ditulis dengan aturan baku: [Anoda | Larutan Anoda (ZnSO₄) || Larutan Katoda (CuSO₄) | Katoda]. Garis tunggal (|) menandai batas fase padat-larutan, dan garis ganda (||) menandai jembatan garam. Jembatan garam umumnya berisi larutan KCl atau KNO₃; jika terdapat ion Ag⁺, wajib digunakan KNO₃ agar tidak terbentuk endapan AgCl.",
+          "reactions": [
+            "Anoda (Oksidasi): Zn(s) → Zn²⁺(aq) + 2e⁻",
+            "Katoda (Reduksi): Cu²⁺(aq) + 2e⁻ → Cu(s)",
+            "Reaksi Sel Total: Zn(s) + Cu²⁺(aq) → Zn²⁺(aq) + Cu(s)",
+            "E°sel = E°katoda - E°anoda = +0,34 - (-0,76) = +1,10 V"
+          ]
+        }
+      },
+      "quickCheck": {
+        "question": "Mengapa jembatan garam mutlak diperlukan agar sel volta dapat terus menghasilkan arus listrik?",
+        "options": [
+          "Untuk mengalirkan partikel elektron secara langsung dari bejana anoda menuju katoda.",
+          "Untuk memicu kenaikan suhu larutan agar laju reaksi redoks berlangsung lebih cepat.",
+          "Untuk menjaga kenetralan muatan listrik dengan menyalurkan ion ke kedua larutan setengah sel.",
+          "Untuk mengubah reaksi redoks non-spontan menjadi reaksi yang berlangsung spontan."
+        ],
+        "correctAnswer": 2,
+        "correctIndex": 2,
+        "explanation": "Tanpa jembatan garam, bejana anoda akan mengalami kelebihan muatan positif (ion Zn²⁺) dan bejana katoda kelebihan muatan negatif (ion SO₄²⁻), sehingga terjadi hambatan muatan yang seketika menghentikan aliran elektron."
+      }
+    },
+    {
+      "stepNumber": 2,
+      "title": "Perhitungan Potensial Sel (E°sel) dan Kespontanan",
+      "summary": "Nilai E°sel dihitung pada kondisi standar (25 °C, 1 M, 1 atm). Jika E°sel > 0 reaksi spontan menghasilkan listrik; jika E°sel ≤ 0 reaksi tidak spontan dan tidak menghasilkan arus.",
+      "tripleRep": {
+        "macroscopic": {
+          "title": "Indikator Kespontanan",
+          "description": "Pada reaksi spontan seperti pasangan Zn/Cu, voltmeter menunjukkan angka positif (+1,10 V) dan lampu menyala. Sebaliknya, pada reaksi tidak spontan seperti memasukkan kepingan tembaga Cu ke dalam larutan ZnSO₄ (reaksi: Cu + Zn²⁺ → Cu²⁺ + Zn dengan E°sel = -1,10 V), tidak terjadi reaksi kimia apa pun, voltmeter tetap di angka 0 V, dan tidak ada arus listrik yang dihasilkan.",
+          "visualAlt": "Voltmeter digital bernilai 0 V dengan lampu padam saat reaksi non-spontan tembaga dalam larutan seng",
+          "observations": [
+            "Pengukuran nilai potensial standar berlaku pada kondisi standar: suhu 25 °C (298 K), konsentrasi larutan 1 M, dan tekanan gas 1 atm.",
+            "Reaksi spontan (E°sel > 0): Voltmeter membaca nilai positif, arus listrik mengalir, dan lampu menyala.",
+            "Reaksi tidak spontan (E°sel ≤ 0): Seperti pasangan Cu(s) + Zn²⁺(aq) dengan E°sel = -1,10 V, voltmeter menunjukkan 0 V dan tidak ada arus listrik."
+          ]
+        },
+        "submicroscopic": {
+          "title": "Kekuatan Desakan Elektron",
+          "description": "Logam dengan kecenderungan melepas elektron lebih besar (reduktor kuat, E° lebih negatif) mendesak elektron ke ion logam yang memiliki kecenderungan reduksi lebih besar (oksidator kuat, E° lebih positif). Pada pasangan Cu + Zn²⁺, ion Zn²⁺ tidak mempunyai daya tarik elektron yang cukup kuat untuk menarik elektron dari atom Cu.",
+          "visualAlt": "Model gaya dorong potensial elektrokimia dari tingkat energi tinggi ke rendah dan hambatan potensial pada reaksi non-spontan",
+          "particles": [
+            "Perbedaan energi potensial kimia pendorong elektron disebut Gaya Gerak Listrik (GGL) sel.",
+            "Pada kondisi standar (suhu 25 °C, konsentrasi 1 M, tekanan 1 atm), arah desakan elektron ditentukan sepenuhnya oleh selisih potensial reduksi standar (E°sel = E°katoda - E°anoda)."
+          ]
+        },
+        "symbolic": {
+          "title": "Rumus Potensial Sel Standar",
+          "latexFormulas": [
+            "E^\\circ_{\\text{sel}} = E^\\circ_{\\text{katoda}} - E^\\circ_{\\text{anoda}}",
+            "\\text{Kondisi Standar: } T = 25^\\circ\\text{C } (298\\text{ K}), \\; [\\text{ion}] = 1\\text{ M}, \\; P = 1\\text{ atm}",
+            "\\text{Reaksi Spontan: } \\text{Zn(s)} + \\text{Cu}^{2+}\\text{(aq)} \\rightarrow \\text{Zn}^{2+}\\text{(aq)} + \\text{Cu(s)} \\quad (E^\\circ_{\\text{sel}} = +1{,}10\\text{ V} > 0)",
+            "\\text{Reaksi Non-Spontan: } \\text{Cu(s)} + \\text{Zn}^{2+}\\text{(aq)} \\rightarrow \\text{Cu}^{2+}\\text{(aq)} + \\text{Zn(s)} \\quad (E^\\circ_{\\text{sel}} = -1{,}10\\text{ V} < 0)"
+          ],
+          "explanation": "Nilai E°sel diukur pada kondisi standar (suhu 25 °C, konsentrasi 1 M, tekanan 1 atm). Elektrode dengan nilai E° lebih positif bertindak sebagai katoda (reduksi), dan elektrode dengan E° lebih negatif bertindak sebagai anoda (oksidasi). Jika perhitungan menghasilkan E°sel > 0, reaksi redoks berlangsung spontan dan menghasilkan arus listrik. Jika E°sel < 0 (seperti Cu + Zn²⁺ menghasilkan E°sel = -1,10 V), reaksi tidak berlangsung spontan sehingga tidak ada arus listrik.",
+          "reactions": [
+            "Zn(s) + Cu²⁺(aq) → Zn²⁺(aq) + Cu(s) : E°sel = +0,34 - (-0,76) = +1,10 V (Spontan, ada arus)",
+            "Cu(s) + Zn²⁺(aq) → Cu²⁺(aq) + Zn(s) : E°sel = -0,76 - (+0,34) = -1,10 V (Tidak spontan, tidak ada arus)",
+            "Zn/Ag: E°sel = +0,80 - (-0,76) = +1,56 V (Spontan)",
+            "Fe/Cu: E°sel = +0,34 - (-0,44) = +0,78 V (Spontan)"
+          ]
+        }
+      }
+    }
+  ],
+  "exercises": [
+    {
+      "id": "ex-2-1",
+      "title": "Identifikasi Komponen Sel Daniell",
+      "instruction": "Pasangkan setiap komponen sel volta berikut dengan fungsi dan perannya yang tepat.",
+      "type": "matching",
+      "categories": ["Kutub Negatif (Anoda)", "Kutub Positif (Katoda)", "Penjaga Netralitas", "Penghantar Elektron"],
+      "items": [
+        { "id": "m1", "prompt": "Elektrode Seng (Zn)", "targetCategory": "Kutub Negatif (Anoda)" },
+        { "id": "m2", "prompt": "Elektrode Tembaga (Cu)", "targetCategory": "Kutub Positif (Katoda)" },
+        { "id": "m3", "prompt": "Pipa U Berisi Agar-Agar KCl", "targetCategory": "Penjaga Netralitas" },
+        { "id": "m4", "prompt": "Kawat Tembaga Luar", "targetCategory": "Penghantar Elektron" }
+      ]
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q2-1",
+      "type": "multiple_choice",
+      "tpCode": "TP3",
+      "tripleRepLevel": "simbolik",
+      "question": "Diketahui: E° Zn²⁺/Zn = -0,76 V dan E° Ag⁺/Ag = +0,80 V. Berapakah potensial sel standar (E°sel) yang dihasilkan pasangan sel volta tersebut?",
+      "options": ["-1,56 V", "+0,04 V", "+1,56 V", "+0,96 V"],
+      "correctAnswer": 2,
+      "explanation": "E°sel = E°katoda - E°anoda = E°(Ag) - E°(Zn) = +0,80 V - (-0,76 V) = +1,56 V."
+    },
+    {
+      "id": "q2-2",
+      "type": "multiple_choice",
+      "tpCode": "TP3",
+      "tripleRepLevel": "submikroskopik",
+      "question": "Pada sel volta Zn | Zn²⁺ || Cu²⁺ | Cu, ke arah manakah elektron mengalir pada kawat penghantar luar?",
+      "options": [
+        "Dari elektrode Cu menuju elektrode Zn melalui kawat penghantar luar.",
+        "Dari elektrode Zn menuju elektrode Cu melalui kawat penghantar luar.",
+        "Dari larutan CuSO₄ menuju larutan ZnSO₄ melewati jembatan garam.",
+        "Dari jembatan garam menuju elektrode seng (Zn)."
+      ],
+      "correctAnswer": 1,
+      "explanation": "Seng (Zn) bertindak sebagai anoda dan melepaskan elektron karena memiliki E° lebih negatif. Elektron tersebut mengalir spontan melalui kawat eksternal menuju katoda tembaga (Cu)."
+    },
+    {
+      "id": "q2-3",
+      "type": "multiple_choice",
+      "tpCode": "TP2",
+      "tripleRepLevel": "makroskopik",
+      "question": "Perubahan energi apa yang terjadi pada sel volta saat bekerja?",
+      "options": [
+        "Energi listrik searah menjadi energi kimia reaksi non-spontan.",
+        "Energi kalor/panas menjadi energi mekanik pergerakan partikel.",
+        "Energi radiasi cahaya menjadi energi potensial listrik.",
+        "Energi kimia reaksi redoks spontan menjadi energi listrik terukur."
+      ],
+      "correctAnswer": 3,
+      "explanation": "Sel volta memanfaatkan reaksi redoks kimia yang berlangsung spontan untuk menghasilkan aliran arus listrik (energi kimia menjadi energi listrik)."
+    },
+    {
+      "id": "q2-4",
+      "type": "multiple_choice",
+      "tpCode": "TP3",
+      "tripleRepLevel": "simbolik",
+      "question": "Penulisan notasi sel yang benar untuk reaksi: Mg(s) + Fe²⁺(aq) → Mg²⁺(aq) + Fe(s) adalah...",
+      "options": [
+        "Fe(s) | Fe²⁺(aq) || Mg²⁺(aq) | Mg(s)",
+        "Mg(s) | Mg²⁺(aq) || Fe²⁺(aq) | Fe(s)",
+        "Mg²⁺(aq) | Mg(s) || Fe(s) | Fe²⁺(aq)",
+        "Mg(s) | Fe²⁺(aq) || Mg²⁺(aq) | Fe(s)"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Penulisan notasi sel diawali dengan setengah sel anoda (oksidasi): Mg(s) | Mg²⁺(aq), diikuti jembatan garam (||), lalu setengah sel katoda (reduksi): Fe²⁺(aq) | Fe(s)."
+    },
+    {
+      "id": "q2-5",
+      "type": "multiple_choice",
+      "tpCode": "TP3",
+      "tripleRepLevel": "submikroskopik",
+      "question": "Pada jembatan garam yang berisi ion K⁺ dan Cl⁻, ion klorida (Cl⁻) akan bermigrasi menuju...",
+      "options": [
+        "Setengah sel katoda untuk mengikat elektron yang masuk dari kawat.",
+        "Kabel eksternal untuk menggantikan pergerakan arus elektron.",
+        "Setengah sel anoda untuk menetralkan kelebihan kation Zn²⁺ hasil oksidasi.",
+        "Lampu LED indikator untuk memperkuat intensitas nyala listrik."
+      ],
+      "correctAnswer": 2,
+      "explanation": "Di bejana anoda terjadi penambahan kation Zn²⁺ secara terus-menerus (kelebihan muatan positif). Anion Cl⁻ dari jembatan garam bermigrasi masuk ke larutan anoda untuk menetralkan kelebihan muatan tersebut."
+    },
+    {
+      "id": "q2-6",
+      "type": "multiple_choice",
+      "tpCode": "TP3",
+      "tripleRepLevel": "simbolik",
+      "question": "Persamaan reaksi sel total yang terjadi pada sel volta dengan anoda seng (Zn) dan katoda tembaga (Cu) adalah...",
+      "options": [
+        "Zn(s) + Cu(s) → Zn²⁺(aq) + Cu²⁺(aq)",
+        "Zn²⁺(aq) + Cu(s) → Zn(s) + Cu²⁺(aq)",
+        "Zn²⁺(aq) + Cu²⁺(aq) → Zn(s) + Cu(s)",
+        "Zn(s) + Cu²⁺(aq) → Zn²⁺(aq) + Cu(s)"
+      ],
+      "correctAnswer": 3,
+      "explanation": "Di anoda seng teroksidasi: Zn(s) → Zn²⁺(aq) + 2e⁻. Di katoda ion tembaga tereduksi: Cu²⁺(aq) + 2e⁻ → Cu(s). Penjumlahan kedua setengah reaksi menghasilkan persamaan reaksi sel total: Zn(s) + Cu²⁺(aq) → Zn²⁺(aq) + Cu(s)."
+    },
+    {
+      "id": "q2-7",
+      "type": "multiple_choice",
+      "tpCode": "TP3",
+      "tripleRepLevel": "simbolik",
+      "question": "Diketahui E° Zn²⁺/Zn = -0,76 V dan E° Cu²⁺/Cu = +0,34 V. Apakah reaksi Cu(s) + Zn²⁺(aq) → Cu²⁺(aq) + Zn(s) dapat berlangsung secara spontan pada kondisi standar?",
+      "options": [
+        "Dapat berlangsung spontan karena potensial selnya bernilai positif (+1,10 V).",
+        "Tidak dapat berlangsung spontan karena potensial selnya bernilai negatif (-1,10 V) sehingga tidak menghasilkan arus listrik.",
+        "Dapat berlangsung spontan karena tembaga merupakan logam yang sangat mudah melepaskan elektron.",
+        "Dapat berlangsung spontan hanya jika jembatan garam diganti dengan larutan asam pekat."
+      ],
+      "correctAnswer": 1,
+      "explanation": "Pada reaksi tersebut, Cu teroksidasi (anoda) dan Zn²⁺ tereduksi (katoda). E°sel = E°katoda - E°anoda = E°(Zn) - E°(Cu) = -0,76 V - (+0,34 V) = -1,10 V. Karena E°sel bernilai negatif (< 0), reaksi berlangsung tidak spontan pada kondisi standar (25 °C, 1 M, 1 atm) dan tidak ada arus listrik yang dihasilkan."
+    },
+    {
+      "id": "q2-8",
+      "type": "multiple_choice",
+      "tpCode": "TP3",
+      "tripleRepLevel": "simbolik",
+      "question": "Dua elektrode memiliki potensial reduksi standar: E° Ni²⁺/Ni = -0,25 V dan E° Ag⁺/Ag = +0,80 V. Jika keduanya dirangkai menjadi sel volta spontan, elektrode yang bertindak sebagai anoda dan alasannya adalah...",
+      "options": [
+        "Elektrode Ni, karena memiliki potensial reduksi standar lebih negatif sehingga lebih mudah melepaskan elektron (mengalami oksidasi).",
+        "Elektrode Ag, karena memiliki potensial reduksi standar lebih positif sehingga lebih mudah mengalami oksidasi.",
+        "Elektrode Ag, karena logam perak selalu bertindak sebagai kutub negatif dalam semua sel elektrokimia.",
+        "Elektrode Ni, karena ion Ni²⁺ lebih cepat mengikat elektron di dalam larutan dibandingkan ion Ag⁺."
+      ],
+      "correctAnswer": 0,
+      "explanation": "Pada sel volta spontan, elektrode dengan nilai E° lebih negatif (lebih kecil) memiliki kecenderungan oksidasi lebih besar sehingga bertindak sebagai anoda (kutub negatif). Karena E° Ni (-0,25 V) < E° Ag (+0,80 V), maka logam Ni bertindak sebagai anoda dan Ag bertindak sebagai katoda."
+    }
+  ]
+}
