@@ -116,14 +116,33 @@ export default function StudentEntryPage() {
         return;
       }
       if (res.needsClass) {
-        // Pengguna belum punya kelas — arahkan ke form pilih kelas
         setIsRegisterMode(true);
         setIsEditing(true);
       } else {
         navigate(fromPath, { replace: true });
       }
-    } catch {
-      setError('Terjadi kesalahan saat masuk dengan Google. Silakan coba lagi.');
+    } catch (err: unknown) {
+      // Tampilkan pesan error spesifik dari Firebase
+      let msg = 'Terjadi kesalahan saat masuk dengan Google.';
+      if (err && typeof err === 'object' && 'code' in err) {
+        const code = (err as { code: string }).code;
+        if (code === 'auth/popup-closed-by-user' || code === 'auth/cancelled-popup-request') {
+          msg = 'Jendela masuk Google ditutup. Silakan coba lagi.';
+        } else if (code === 'auth/popup-blocked') {
+          msg = 'Popup Google diblokir browser. Izinkan popup untuk situs ini lalu coba lagi.';
+        } else if (code === 'auth/network-request-failed') {
+          msg = 'Koneksi internet terputus. Periksa jaringan Anda dan coba lagi.';
+        } else if (code === 'auth/operation-not-allowed') {
+          msg = 'Login Google belum diaktifkan. Aktifkan Google Sign-In di Firebase Console → Authentication → Sign-in method.';
+        } else if (code === 'auth/unauthorized-domain') {
+          msg = 'Domain ini belum diizinkan di Firebase. Tambahkan "localhost" di Firebase Console → Authentication → Settings → Authorized domains.';
+        } else {
+          msg = `Gagal masuk dengan Google (${code}). Silakan coba lagi.`;
+        }
+      } else if (err instanceof Error) {
+        msg = `Gagal masuk dengan Google: ${err.message}`;
+      }
+      setError(msg);
     } finally {
       setIsBusy(false);
     }
