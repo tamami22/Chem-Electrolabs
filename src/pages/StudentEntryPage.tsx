@@ -17,6 +17,9 @@ import {
   Cloud,
   Eye,
   EyeOff,
+  CheckCircle2,
+  ArrowLeft,
+  Send,
 } from 'lucide-react';
 import { useStudentStore } from '../stores/useStudentStore.ts';
 import { isFirebaseConfigured } from '../lib/firebase.ts';
@@ -45,6 +48,7 @@ export default function StudentEntryPage() {
     clearProfile,
     loginWithEmail,
     registerWithEmail,
+    sendPasswordReset,
   } = useStudentStore();
 
   const fromPath =
@@ -55,6 +59,12 @@ export default function StudentEntryPage() {
   // Status tampilan
   const [isEditing, setIsEditing] = useState(!hasSavedProfile);
   const [isRegisterMode, setIsRegisterMode] = useState(false);
+  const [isForgotMode, setIsForgotMode] = useState(false);
+
+  // Form Lupa Kata Sandi
+  const [forgotEmail, setForgotEmail] = useState('');
+  const [resetSuccess, setResetSuccess] = useState<string | null>(null);
+  const [isResetting, setIsResetting] = useState(false);
 
   // Form Login
   const [loginEmail, setLoginEmail] = useState('');
@@ -101,6 +111,31 @@ export default function StudentEntryPage() {
     }
 
     navigate(fromPath, { replace: true });
+  };
+
+  // Submit Lupa Kata Sandi (Kirim Email Reset)
+  const handleForgotSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError(null);
+    setResetSuccess(null);
+
+    const cleanedEmail = forgotEmail.trim();
+    if (!cleanedEmail || !cleanedEmail.includes('@')) {
+      setError('Silakan masukkan alamat email yang valid.');
+      return;
+    }
+
+    setIsResetting(true);
+    const res = await sendPasswordReset(cleanedEmail);
+    setIsResetting(false);
+
+    if (res.success) {
+      setResetSuccess(
+        `Tautan pemulihan kata sandi telah dikirim ke ${cleanedEmail}. Silakan periksa kotak masuk (inbox) atau folder spam email Anda.`
+      );
+    } else {
+      setError(res.error || 'Gagal mengirim email pemulihan kata sandi.');
+    }
   };
 
   // Submit Pendaftaran Akun Baru (Nama, Kelas, Email, Password)
@@ -264,10 +299,16 @@ export default function StudentEntryPage() {
               {/* Header Form */}
               <div className="space-y-1 text-left">
                 <h2 className="text-lg sm:text-xl font-extrabold text-slate-900">
-                  {isRegisterMode ? 'Daftar Akun Siswa' : 'Masuk Akun Siswa'}
+                  {isForgotMode
+                    ? 'Lupa Kata Sandi'
+                    : isRegisterMode
+                    ? 'Daftar Akun Siswa'
+                    : 'Masuk Akun Siswa'}
                 </h2>
                 <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                  {isRegisterMode
+                  {isForgotMode
+                    ? 'Masukkan alamat email Anda untuk menerima tautan pemulihan kata sandi.'
+                    : isRegisterMode
                     ? 'Daftarkan akun baru Anda untuk menyimpan riwayat belajar, simulasi, dan nilai kuis di cloud Firestore.'
                     : 'Masuk dengan email dan kata sandi Anda untuk mengakses materi pembelajaran.'}
                 </p>
@@ -284,8 +325,71 @@ export default function StudentEntryPage() {
                 </div>
               )}
 
-              {/* Form Mode: Login vs Register */}
-              {!isRegisterMode ? (
+              {/* Kotak Pesan Sukses Reset */}
+              {resetSuccess && (
+                <div
+                  role="status"
+                  className="p-3.5 rounded-xl bg-emerald-50 border-2 border-emerald-300 text-emerald-900 text-xs sm:text-sm font-semibold flex items-start gap-2.5 animate-in fade-in"
+                >
+                  <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" aria-hidden="true" />
+                  <span className="leading-relaxed">{resetSuccess}</span>
+                </div>
+              )}
+
+              {/* Form Mode: Forgot vs Register vs Login */}
+              {isForgotMode ? (
+                /* 0. FORM LUPA KATA SANDI */
+                <form onSubmit={handleForgotSubmit} noValidate className="space-y-4 text-left">
+                  <div className="space-y-1.5">
+                    <label
+                      htmlFor="student-forgot-email"
+                      className="block text-xs sm:text-sm font-bold text-slate-800"
+                    >
+                      Alamat Email Akun Siswa <span className="text-rose-500">*</span>
+                    </label>
+                    <div className="relative">
+                      <Mail className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                      <input
+                        id="student-forgot-email"
+                        type="email"
+                        required
+                        value={forgotEmail}
+                        onChange={(e) => {
+                          setForgotEmail(e.target.value);
+                          if (error) setError(null);
+                          if (resetSuccess) setResetSuccess(null);
+                        }}
+                        placeholder="nama@sekolah.sch.id"
+                        className="w-full pl-10 pr-4 py-3 rounded-xl border-2 border-slate-300 text-slate-900 placeholder:text-slate-400 text-xs sm:text-sm focus:border-sky-500 focus:outline-none min-h-[44px]"
+                      />
+                    </div>
+                  </div>
+
+                  <button
+                    type="submit"
+                    disabled={isResetting}
+                    className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl text-white font-extrabold text-sm bg-sky-600 hover:bg-sky-500 shadow-md shadow-sky-600/20 transition-all min-h-[44px] cursor-pointer disabled:opacity-60"
+                  >
+                    <Send className="w-4 h-4" />
+                    <span>{isResetting ? 'Mengirim Tautan...' : 'Kirim Tautan Pemulihan Kata Sandi'}</span>
+                  </button>
+
+                  <div className="text-center pt-2">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setIsForgotMode(false);
+                        setError(null);
+                        setResetSuccess(null);
+                      }}
+                      className="inline-flex items-center gap-1.5 text-xs font-bold text-sky-600 hover:text-sky-700 cursor-pointer min-h-[44px]"
+                    >
+                      <ArrowLeft className="w-3.5 h-3.5" />
+                      <span>Kembali ke Halaman Masuk</span>
+                    </button>
+                  </div>
+                </form>
+              ) : !isRegisterMode ? (
                 /* 1. FORM LOGIN DENGAN FIREBASE AUTH */
                 <form onSubmit={handleLoginSubmit} noValidate className="space-y-4 text-left">
                   <div className="space-y-1.5">
@@ -313,12 +417,26 @@ export default function StudentEntryPage() {
                   </div>
 
                   <div className="space-y-1.5">
-                    <label
-                      htmlFor="student-login-password"
-                      className="block text-xs sm:text-sm font-bold text-slate-800"
-                    >
-                      Kata Sandi <span className="text-rose-500">*</span>
-                    </label>
+                    <div className="flex items-center justify-between">
+                      <label
+                        htmlFor="student-login-password"
+                        className="block text-xs sm:text-sm font-bold text-slate-800"
+                      >
+                        Kata Sandi <span className="text-rose-500">*</span>
+                      </label>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setIsForgotMode(true);
+                          setForgotEmail(loginEmail);
+                          setError(null);
+                          setResetSuccess(null);
+                        }}
+                        className="text-xs text-sky-600 hover:text-sky-700 font-semibold hover:underline cursor-pointer"
+                      >
+                        Lupa kata sandi?
+                      </button>
+                    </div>
                     <div className="relative">
                       <KeyRound className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
                       <input

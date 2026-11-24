@@ -5,6 +5,7 @@ import {
   signOut,
   onAuthStateChanged,
   updateProfile,
+  sendPasswordResetEmail,
 } from 'firebase/auth';
 import { auth } from '../lib/firebase.ts';
 import {
@@ -96,6 +97,7 @@ export interface StudentStoreState {
     profile: { studentName: string; className: string; attendanceNumber?: string }
   ) => Promise<{ success: boolean; error?: string }>;
   logout: () => Promise<void>;
+  sendPasswordReset: (email: string) => Promise<{ success: boolean; error?: string }>;
   syncWithFirestore: () => Promise<void>;
 }
 
@@ -339,6 +341,38 @@ export const useStudentStore = create<StudentStoreState>((set, get) => ({
       email: null,
       isEntered: false,
     });
+  },
+
+  sendPasswordReset: async (email: string) => {
+    if (!auth) {
+      const msg = 'Firebase Auth belum terkonfigurasi. Pastikan variabel lingkungan .env sudah diisi.';
+      set({ error: msg });
+      return { success: false, error: msg };
+    }
+    set({ isLoading: true, error: null });
+    try {
+      await authWithTimeout(sendPasswordResetEmail(auth, email.trim()));
+      set({ isLoading: false, error: null });
+      return { success: true };
+    } catch (err: unknown) {
+      let msg = 'Gagal mengirim email pemulihan kata sandi. Silakan coba kembali.';
+      if (err && typeof err === 'object' && 'code' in err) {
+        const code = (err as { code: string }).code;
+        if (code === 'auth/user-not-found') {
+          msg = 'Alamat email tidak terdaftar dalam sistem.';
+        } else if (code === 'auth/invalid-email') {
+          msg = 'Format alamat email tidak valid.';
+        } else if (code === 'auth/missing-email') {
+          msg = 'Silakan masukkan alamat email Anda terlebih dahulu.';
+        } else if (code === 'auth/network-request-failed') {
+          msg = 'Koneksi jaringan terputus (offline). Periksa koneksi internet Anda.';
+        } else if (code === 'auth/too-many-requests') {
+          msg = 'Terlalu banyak permintaan. Silakan tunggu sesaat sebelum mencoba lagi.';
+        }
+      }
+      set({ isLoading: false, error: msg });
+      return { success: false, error: msg };
+    }
   },
 
   syncWithFirestore: async () => {

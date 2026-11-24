@@ -23,7 +23,7 @@ import {
   Mail,
   LogIn,
 } from 'lucide-react';
-import { signInWithEmailAndPassword, signOut } from 'firebase/auth';
+import { signInWithEmailAndPassword, signOut, sendPasswordResetEmail } from 'firebase/auth';
 import { doc, deleteDoc } from 'firebase/firestore';
 import { auth, db } from '../lib/firebase.ts';
 import { FIRESTORE_PROGRESS_COLLECTION } from '../lib/storage.ts';
@@ -56,6 +56,8 @@ export default function TeacherModePage() {
   const [showTeacherPassword, setShowTeacherPassword] = useState(false);
   const [isAuthLoading, setIsAuthLoading] = useState(false);
   const [authError, setAuthError] = useState('');
+  const [resetSuccessMsg, setResetSuccessMsg] = useState('');
+  const [isResetting, setIsResetting] = useState(false);
 
   // State Form Kode Akses & Jeda Bertahap (Rate Limiting)
   const [accessCode, setAccessCode] = useState('');
@@ -171,6 +173,43 @@ export default function TeacherModePage() {
       setAuthError(msg);
     } finally {
       setIsAuthLoading(false);
+    }
+  };
+
+  // Handler Lupa Kata Sandi Guru via Firebase Auth
+  const handleTeacherForgotPassword = async () => {
+    setAuthError('');
+    setResetSuccessMsg('');
+    const email = teacherEmail.trim();
+    if (!email || !email.includes('@')) {
+      setAuthError('Silakan masukkan alamat email pendidik terlebih dahulu pada kolom email di atas.');
+      return;
+    }
+    if (!auth) {
+      setAuthError('Firebase Auth belum terkonfigurasi. Pastikan variabel lingkungan .env sudah diisi.');
+      return;
+    }
+    setIsResetting(true);
+    try {
+      await sendPasswordResetEmail(auth, email);
+      setResetSuccessMsg(`Tautan reset kata sandi telah dikirim ke ${email}. Silakan periksa kotak masuk atau spam email Anda.`);
+    } catch (err: unknown) {
+      let msg = 'Gagal mengirim email reset kata sandi.';
+      if (err && typeof err === 'object' && 'code' in err) {
+        const code = (err as { code: string }).code;
+        if (code === 'auth/user-not-found') {
+          msg = 'Email pendidik tidak terdaftar dalam sistem.';
+        } else if (code === 'auth/invalid-email') {
+          msg = 'Format alamat email tidak valid.';
+        } else if (code === 'auth/network-request-failed') {
+          msg = 'Koneksi jaringan terputus (offline). Periksa koneksi internet Anda.';
+        } else if (code === 'auth/too-many-requests') {
+          msg = 'Terlalu banyak permintaan reset kata sandi. Silakan coba sesaat lagi.';
+        }
+      }
+      setAuthError(msg);
+    } finally {
+      setIsResetting(false);
     }
   };
 
@@ -459,9 +498,19 @@ export default function TeacherModePage() {
             </div>
 
             <div className="space-y-1.5">
-              <label htmlFor="teacher-password-input" className="block text-xs font-bold text-slate-700">
-                Kata Sandi Guru <span className="text-rose-500">*</span>
-              </label>
+              <div className="flex items-center justify-between">
+                <label htmlFor="teacher-password-input" className="block text-xs font-bold text-slate-700">
+                  Kata Sandi Guru <span className="text-rose-500">*</span>
+                </label>
+                <button
+                  type="button"
+                  onClick={handleTeacherForgotPassword}
+                  disabled={isResetting}
+                  className="text-[11px] text-purple-600 hover:text-purple-700 font-semibold hover:underline cursor-pointer"
+                >
+                  {isResetting ? 'Mengirim tautan...' : 'Lupa kata sandi?'}
+                </button>
+              </div>
               <div className="relative">
                 <KeyRound className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
                 <input
@@ -488,6 +537,13 @@ export default function TeacherModePage() {
               <div className="p-3.5 rounded-xl bg-rose-50 border border-rose-200 text-rose-900 text-xs flex items-start gap-2.5 leading-relaxed">
                 <AlertCircle className="w-4 h-4 text-rose-600 shrink-0 mt-0.5" />
                 <span>{authError}</span>
+              </div>
+            )}
+
+            {resetSuccessMsg && (
+              <div className="p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-900 text-xs flex items-start gap-2.5 leading-relaxed">
+                <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                <span>{resetSuccessMsg}</span>
               </div>
             )}
 

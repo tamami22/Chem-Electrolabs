@@ -185,4 +185,31 @@ describe('Student Entry Flow & Route Guarding Tests', () => {
     expect(screen.getByText(/Sesi Akun Siswa Aktif/i)).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /Lanjutkan sebagai Rian Pratama/i })).toBeInTheDocument();
   });
+
+  it('allows toggling to "Lupa kata sandi" form and returning to login', () => {
+    render(
+      <MemoryRouter initialEntries={['/masuk']}>
+        <AppRoutes />
+      </MemoryRouter>
+    );
+
+    // Pastikan tombol "Lupa kata sandi?" ada di form login
+    const forgotBtn = screen.getByRole('button', { name: /Lupa kata sandi\?/i });
+    expect(forgotBtn).toBeInTheDocument();
+
+    // Klik tombol lupa kata sandi
+    fireEvent.click(forgotBtn);
+
+    // Harus menampilkan heading dan form Lupa Kata Sandi
+    expect(screen.getByRole('heading', { name: /Lupa Kata Sandi/i })).toBeInTheDocument();
+    expect(screen.getByLabelText(/Alamat Email Akun Siswa/i)).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /Kirim Tautan Pemulihan Kata Sandi/i })).toBeInTheDocument();
+
+    // Klik Kembali ke Halaman Masuk
+    const backBtn = screen.getByRole('button', { name: /Kembali ke Halaman Masuk/i });
+    fireEvent.click(backBtn);
+
+    // Kembali ke form login
+    expect(screen.getByRole('heading', { name: /Masuk Akun Siswa/i })).toBeInTheDocument();
+  });
 });
