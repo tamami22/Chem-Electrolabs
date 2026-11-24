@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { QuizQuestion, QuizzesJSON } from '../types/content';
+import type { QuizQuestion, QuizzesJSON } from '../types/content';
 import quizzesDataRaw from '../content/quizzes.json';
 import { LatexText } from './LatexText';
 import {

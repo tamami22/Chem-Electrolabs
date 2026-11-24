@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { ExerciseData, MatchingItem, ExercisesJSON } from '../types/content';
+import type { ExerciseData, MatchingItem, ExercisesJSON } from '../types/content';
 import exercisesDataRaw from '../content/exercises.json';
 import { LatexText } from './LatexText';
 import {

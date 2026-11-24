@@ -1,0 +1,163 @@
+[
+  {
+    "id": "anoda",
+    "term": "Anoda",
+    "category": "umum",
+    "definition": "Elektrode tempat terjadinya reaksi oksidasi (pelepasan elektron). Pada sel volta bermuatan negatif (-), sedangkan pada sel elektrolisis bermuatan positif (+).",
+    "tripleRepRole": "Makroskopik: sering mengalami penyusutan massa / pelarutan logam; Submikroskopik: sumber awal pelepasan elektron.",
+    "relatedModuleId": "modul-2"
+  },
+  {
+    "id": "katoda",
+    "term": "Katoda",
+    "category": "umum",
+    "definition": "Elektrode tempat terjadinya reaksi reduksi (penangkapan elektron). Pada sel volta bermuatan positif (+), sedangkan pada sel elektrolisis bermuatan negatif (-).",
+    "tripleRepRole": "Makroskopik: tempat terbentuknya endapan logam atau gelembung gas; Submikroskopik: titik penerimaan elektron oleh kation/molekul air.",
+    "relatedModuleId": "modul-2"
+  },
+  {
+    "id": "oksidasi",
+    "term": "Oksidasi",
+    "category": "redoks",
+    "definition": "Proses pelepasan elektron oleh suatu atom, ion, atau molekul, yang ditandai dengan kenaikan bilangan oksidasi.",
+    "tripleRepRole": "Simbolik: spesi ditulis melepas elektron di ruas kanan (mis. Zn → Zn²⁺ + 2e⁻).",
+    "relatedModuleId": "modul-1"
+  },
+  {
+    "id": "reduksi",
+    "term": "Reduksi",
+    "category": "redoks",
+    "definition": "Proses penerimaan/penangkapan elektron oleh suatu atom, ion, atau molekul, yang ditandai dengan penurunan bilangan oksidasi.",
+    "tripleRepRole": "Simbolik: spesi ditulis mengikat elektron di ruas kiri (mis. Cu²⁺ + 2e⁻ → Cu).",
+    "relatedModuleId": "modul-1"
+  },
+  {
+    "id": "reduktor",
+    "term": "Reduktor (Pereduksi)",
+    "category": "redoks",
+    "definition": "Zat yang mengalami oksidasi dan menyebabkan zat lain tereduksi dengan cara mendonorkan elektronnya.",
+    "tripleRepRole": "Submikroskopik: spesi pemberi elektron; Makroskopik: logam yang umumnya terkorosi/larut.",
+    "relatedModuleId": "modul-1"
+  },
+  {
+    "id": "oksidator",
+    "term": "Oksidator (Pengoksidasi)",
+    "category": "redoks",
+    "definition": "Zat yang mengalami reduksi dan menyebabkan zat lain teroksidasi dengan cara menarik/menerima elektron.",
+    "tripleRepRole": "Submikroskopik: spesi penangkap elektron (afinitas elektron tinggi).",
+    "relatedModuleId": "modul-1"
+  },
+  {
+    "id": "bilangan-oksidasi",
+    "term": "Bilangan Oksidasi (Biloks)",
+    "category": "redoks",
+    "definition": "Muatan formal hipotetis yang dimiliki suatu atom dalam senyawa jika seluruh ikatan kovalen dianggap sebagai ikatan ionik sempurna.",
+    "tripleRepRole": "Simbolik: angka bulat bertanda (+ atau -) untuk melacak perpindahan elektron dalam persamaan kimia.",
+    "relatedModuleId": "modul-1"
+  },
+  {
+    "id": "sel-volta",
+    "term": "Sel Volta (Sel Galvani)",
+    "category": "volta",
+    "definition": "Sel elektrokimia yang memanfaatkan reaksi redoks kimia spontan untuk menghasilkan energi listrik terukur.",
+    "tripleRepRole": "Makroskopik: menghasilkan beda potensial pada voltmeter dan menyalakan lampu indikator.",
+    "relatedModuleId": "modul-2"
+  },
+  {
+    "id": "jembatan-garam",
+    "term": "Jembatan Garam",
+    "category": "volta",
+    "definition": "Pipa kaca berbentuk U atau membran berisi gel elektrolit inert (misalnya KCl atau KNO₃) yang menghubungkan dua setengah sel tanpa mencampurkan larutan, berfungsi menjaga kenetralan muatan listrik. Elektrolit KNO₃ wajib dipilih apabila setengah sel mengandung ion Ag⁺ (karena ion Cl⁻ dari KCl akan mengendapkan AgCl).",
+    "tripleRepRole": "Submikroskopik: anion bermigrasi ke anoda dan kation bermigrasi ke katoda.",
+    "relatedModuleId": "modul-2"
+  },
+  {
+    "id": "potensial-sel-standar",
+    "term": "Potensial Sel Standar (E°sel)",
+    "category": "volta",
+    "definition": "Beda potensial pada kondisi standar (25°C, tekanan gas 1 atm, dan konsentrasi larutan 1 M) yang dihasilkan antara dua setengah sel. Dihitung dari selisih E°katoda - E°anoda.",
+    "tripleRepRole": "Simbolik: jika E°sel > 0 maka reaksi spontan; jika E°sel ≤ 0 reaksi tidak spontan.",
+    "relatedModuleId": "modul-2"
+  },
+  {
+    "id": "she",
+    "term": "Elektrode Hidrogen Standar (SHE)",
+    "category": "volta",
+    "definition": "Elektrode acuan internasional yang terdiri atas gas hidrogen murni pada 1 atm dialirkan ke keping platina dalam larutan asam 1 M H⁺, yang potensial reduksinya disepakati bernilai tepat 0,00 Volt.",
+    "tripleRepRole": "Simbolik: patokan nol untuk menentukan nilai potensial reduksi semua unsur lainnya.",
+    "relatedModuleId": "modul-2"
+  },
+  {
+    "id": "deret-volta",
+    "term": "Deret Volta (Deret Kereaktifan Logam)",
+    "category": "volta",
+    "definition": "Susunan unsur-unsur logam berdasarkan kenaikan nilai potensial reduksi standarnya (dari reduktor terkuat / paling reaktif di sebelah kiri hingga oksidator terkuat di sebelah kanan).",
+    "tripleRepRole": "Simbolik (sesuai data acuan): Li - K - Ca - Na - Mg - Al - Zn - Fe - Ni - Sn - Pb - (H) - Cu - Ag - Au.",
+    "relatedModuleId": "modul-2"
+  },
+  {
+    "id": "sel-elektrolisis",
+    "term": "Sel Elektrolisis",
+    "category": "elektrolisis",
+    "definition": "Sel elektrokimia yang menggunakan energi listrik dari sumber luar (arus searah DC) untuk memaksa terjadinya reaksi redoks yang tidak spontan.",
+    "tripleRepRole": "Makroskopik: membutuhkan catu daya baterai; Katoda (-), Anoda (+).",
+    "relatedModuleId": "modul-3"
+  },
+  {
+    "id": "elektrode-inert",
+    "term": "Elektrode Inert",
+    "category": "elektrolisis",
+    "definition": "Elektrode berbahan zat yang sukar bereaksi dan tidak ikut teroksidasi saat digunakan di anoda (contoh utama: Karbon Grafit / C, Platina / Pt, dan Emas / Au).",
+    "tripleRepRole": "Submikroskopik: hanya bertindak sebagai jembatan penghantar elektron.",
+    "relatedModuleId": "modul-3"
+  },
+  {
+    "id": "elektrode-aktif",
+    "term": "Elektrode Aktif",
+    "category": "elektrolisis",
+    "definition": "Elektrode logam yang mudah teroksidasi di anoda (misalnya Cu, Fe, Ni, Ag). Biasa dimanfaatkan pada proses penyepuhan logam (elektroplating) dan pemurnian logam.",
+    "tripleRepRole": "Makroskopik: anoda larut dan menipis massanya seiring waktu.",
+    "relatedModuleId": "modul-3"
+  },
+  {
+    "id": "hukum-faraday",
+    "term": "Hukum Faraday",
+    "category": "faraday",
+    "definition": "Hukum kuantitatif elektrolisis: Hukum I menyatakan massa zat yang dihasilkan berbanding lurus dengan muatan listrik (w ∝ Q). Hukum II menyatakan jika beberapa sel elektrolisis dialiri arus listrik yang sama (seri), massa zat yang dihasilkan pada masing-masing sel berbanding lurus dengan massa ekuivalennya (w₁/e₁ = w₂/e₂).",
+    "tripleRepRole": "Simbolik: w = (e × I × t) / 96500, dengan e = massa ekuivalen (Ar dibagi jumlah elektron yang ditransfer atau valensi).",
+    "relatedModuleId": "modul-4"
+  },
+  {
+    "id": "konstanta-faraday",
+    "term": "Konstanta Faraday (F)",
+    "category": "faraday",
+    "definition": "Besarnya muatan listrik yang dibawa oleh satu mol elektron, bernilai sekitar 96.485 C/mol (dibulatkan menjadi 96.500 C/mol dalam pembelajaran kimia SMA).",
+    "tripleRepRole": "Submikroskopik: 1 F = 1 mol elektron = 6,022 × 10²³ partikel elektron.",
+    "relatedModuleId": "modul-4"
+  },
+  {
+    "id": "korosi",
+    "term": "Korosi (Perkaratan)",
+    "category": "korosi",
+    "definition": "Kerusakan atau penurunan mutu logam akibat reaksi elektrokimia spontan antara logam dengan lingkungan sekitarnya (terutama oksigen dan air).",
+    "tripleRepRole": "Makroskopik: timbul kerak cokelat kemerahan Fe₂O₃·xH₂O yang membuat besi keropos.",
+    "relatedModuleId": "modul-5"
+  },
+  {
+    "id": "galvanisasi",
+    "term": "Galvanisasi",
+    "category": "korosi",
+    "definition": "Proses pelapisan besi atau baja dengan lapisan tipis logam seng (Zn). Seng melindungi besi secara fisik sekaligus memberikan proteksi katodik jika lapisan tergores.",
+    "tripleRepRole": "Makroskopik: diterapkan pada lembaran atap seng dan pagar luar ruangan.",
+    "relatedModuleId": "modul-5"
+  },
+  {
+    "id": "proteksi-katodik",
+    "term": "Proteksi Katodik (Anoda Kurban)",
+    "category": "korosi",
+    "definition": "Metode pencegahan korosi logam dengan cara menghubungkan logam yang dilindungi (sebagai katoda) ke logam lain yang memiliki nilai potensial reduksi jauh lebih negatif (sebagai anoda kurban yang sengaja dikorbankan terkorosi).",
+    "tripleRepRole": "Makroskopik: balok magnesium (Mg) yang ditancapkan pada pipa baja kilang minyak bawah tanah.",
+    "relatedModuleId": "modul-5"
+  }
+]
+

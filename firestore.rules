@@ -1,0 +1,47 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // =========================================================================
+    // HELPER FUNCTIONS
+    // =========================================================================
+
+    // Memeriksa apakah pengguna sudah terautentikasi (login via Firebase Auth)
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    // Memeriksa apakah akun yang login adalah PENDIDIK / GURU.
+    // Aturan ini membaca alamat email akun pada token autentikasi (request.auth.token.email).
+    // Masukkan alamat email guru resmi pada daftar di bawah ini.
+    function isTeacher() {
+      return isAuthenticated() && (
+        request.auth.token.email in [
+          'guru@chemelectrolab.web.id',
+          'guru.kimia@gmail.com',
+          'admin.guru@chemelectrolab.com'
+          // Tambahkan email guru Anda di sini:
+          // contoh: 'budi.santoso@guru.sma.belajar.id'
+        ] ||
+        (request.auth.token.email != null && request.auth.token.email.matches('.*guru.*@.*'))
+      );
+    }
+
+    // =========================================================================
+    // KOLEKSI PROGRES SISWA: progress/{uid}
+    // =========================================================================
+    match /progress/{uid} {
+      // HAK BACA:
+      // - Siswa hanya boleh membaca dokumen progres miliknya sendiri (uid sesuai).
+      // - Guru berhak membaca SELURUH data dokumen progres siswa untuk rekapitulasi kelas.
+      allow read: if isAuthenticated() && (request.auth.uid == uid || isTeacher());
+
+      // HAK TULIS (Create / Update / Delete):
+      // - Siswa hanya boleh menulis dan memperbarui dokumen progres miliknya sendiri.
+      // - Guru berhak mengelola data siswa jika diperlukan pembersihan rekapitulasi.
+      allow write: if isAuthenticated() && (request.auth.uid == uid || isTeacher());
+    }
+  }
+}
+
