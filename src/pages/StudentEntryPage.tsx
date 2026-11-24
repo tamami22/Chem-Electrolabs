@@ -20,6 +20,7 @@ import {
   CheckCircle2,
   ArrowLeft,
   Send,
+  Loader2,
 } from 'lucide-react';
 import { useStudentStore } from '../stores/useStudentStore.ts';
 import { isFirebaseConfigured } from '../lib/firebase.ts';
@@ -36,6 +37,18 @@ const CLASS_OPTIONS = [
   'Lainnya',
 ];
 
+// Komponen SVG logo Google
+function GoogleIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+      <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+      <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+      <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+    </svg>
+  );
+}
+
 export default function StudentEntryPage() {
   const location = useLocation();
   const navigate = useNavigate();
@@ -43,7 +56,6 @@ export default function StudentEntryPage() {
     studentName,
     className,
     email,
-    isLoading,
     enterSession,
     clearProfile,
     loginWithEmail,
@@ -62,17 +74,19 @@ export default function StudentEntryPage() {
   const [isRegisterMode, setIsRegisterMode] = useState(false);
   const [isForgotMode, setIsForgotMode] = useState(false);
 
+  // State loading lokal (tidak bergantung pada store.isLoading)
+  const [isBusy, setIsBusy] = useState(false);
+
   // Form Lupa Kata Sandi
   const [forgotEmail, setForgotEmail] = useState('');
   const [resetSuccess, setResetSuccess] = useState<string | null>(null);
-  const [isResetting, setIsResetting] = useState(false);
 
   // Form Login
   const [loginEmail, setLoginEmail] = useState('');
   const [loginPassword, setLoginPassword] = useState('');
   const [showLoginPassword, setShowLoginPassword] = useState(false);
 
-  // Form Register (Nama, Kelas, Email, Password, Konfirmasi Password)
+  // Form Register
   const [regName, setRegName] = useState('');
   const [selectedClass, setSelectedClass] = useState('');
   const [customClass, setCustomClass] = useState('');
@@ -90,9 +104,35 @@ export default function StudentEntryPage() {
     navigate(fromPath, { replace: true });
   };
 
-  // Submit Login Akun
+  // Login dengan Google
+  const handleGoogleLogin = async () => {
+    if (isBusy) return;
+    setError(null);
+    setIsBusy(true);
+    try {
+      const res = await loginWithGoogle();
+      if (!res.success) {
+        setError(res.error || 'Gagal masuk dengan Google.');
+        return;
+      }
+      if (res.needsClass) {
+        // Pengguna belum punya kelas — arahkan ke form pilih kelas
+        setIsRegisterMode(true);
+        setIsEditing(true);
+      } else {
+        navigate(fromPath, { replace: true });
+      }
+    } catch {
+      setError('Terjadi kesalahan saat masuk dengan Google. Silakan coba lagi.');
+    } finally {
+      setIsBusy(false);
+    }
+  };
+
+  // Submit Login Email
   const handleLoginSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (isBusy) return;
     setError(null);
 
     const cleanedEmail = loginEmail.trim();
@@ -105,35 +145,23 @@ export default function StudentEntryPage() {
       return;
     }
 
-    const res = await loginWithEmail(cleanedEmail, loginPassword);
-    if (!res.success) {
-      setError(res.error || 'Gagal masuk akun.');
-      return;
-    }
-
-    navigate(fromPath, { replace: true });
-  };
-
-  // Handler for Google Sign‑In
-  const handleGoogleLogin = async () => {
-    setError(null);
-    const res = await loginWithGoogle();
-    if (!res.success) {
-      setError(res.error || 'Gagal masuk dengan Google.');
-      return;
-    }
-    if (res.needsClass) {
-      // User needs to select class – switch to register mode
-      setIsRegisterMode(true);
-      setIsEditing(true);
-    } else {
+    setIsBusy(true);
+    try {
+      const res = await loginWithEmail(cleanedEmail, loginPassword);
+      if (!res.success) {
+        setError(res.error || 'Gagal masuk akun.');
+        return;
+      }
       navigate(fromPath, { replace: true });
+    } finally {
+      setIsBusy(false);
     }
   };
 
-  // Submit Lupa Kata Sandi (Kirim Email Reset)
+  // Submit Lupa Kata Sandi
   const handleForgotSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (isBusy) return;
     setError(null);
     setResetSuccess(null);
 
@@ -143,25 +171,27 @@ export default function StudentEntryPage() {
       return;
     }
 
-    setIsResetting(true);
-    const res = await sendPasswordReset(cleanedEmail);
-    setIsResetting(false);
-
-    if (res.success) {
-      setResetSuccess(
-        `Tautan pemulihan kata sandi telah dikirim ke ${cleanedEmail}. Silakan periksa kotak masuk (inbox) atau folder spam email Anda.`
-      );
-    } else {
-      setError(res.error || 'Gagal mengirim email pemulihan kata sandi.');
+    setIsBusy(true);
+    try {
+      const res = await sendPasswordReset(cleanedEmail);
+      if (res.success) {
+        setResetSuccess(
+          `Tautan pemulihan kata sandi telah dikirim ke ${cleanedEmail}. Silakan periksa kotak masuk (inbox) atau folder spam email Anda.`
+        );
+      } else {
+        setError(res.error || 'Gagal mengirim email pemulihan kata sandi.');
+      }
+    } finally {
+      setIsBusy(false);
     }
   };
 
-  // Submit Pendaftaran Akun Baru (Nama, Kelas, Email, Password)
+  // Submit Pendaftaran Akun Baru
   const handleRegisterSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (isBusy) return;
     setError(null);
 
-    // 1. Validasi Nama Siswa
     const cleanedName = regName.trim().replace(/\s+/g, ' ');
     if (!cleanedName || cleanedName.length < 2) {
       setError('Nama lengkap wajib diisi minimal 2 karakter.');
@@ -172,7 +202,6 @@ export default function StudentEntryPage() {
       return;
     }
 
-    // 2. Validasi Kelas
     if (!selectedClass) {
       setError('Silakan pilih kelas Anda.');
       return;
@@ -187,7 +216,6 @@ export default function StudentEntryPage() {
       return;
     }
 
-    // 3. Validasi Email & Password
     const cleanedEmail = regEmail.trim();
     if (!cleanedEmail || !cleanedEmail.includes('@')) {
       setError('Silakan masukkan alamat email yang valid.');
@@ -202,24 +230,26 @@ export default function StudentEntryPage() {
       return;
     }
 
-    // Eksekusi Pendaftaran via Firebase Auth & Simpan di Firestore progress/{uid}
-    const res = await registerWithEmail(cleanedEmail, regPassword, {
-      studentName: cleanedName,
-      className: finalClass,
-    });
-
-    if (!res.success) {
-      setError(res.error || 'Gagal mendaftar akun.');
-      return;
+    setIsBusy(true);
+    try {
+      const res = await registerWithEmail(cleanedEmail, regPassword, {
+        studentName: cleanedName,
+        className: finalClass,
+      });
+      if (!res.success) {
+        setError(res.error || 'Gagal mendaftar akun.');
+        return;
+      }
+      navigate(fromPath, { replace: true });
+    } finally {
+      setIsBusy(false);
     }
-
-    navigate(fromPath, { replace: true });
   };
 
   return (
     <div className="min-h-[80vh] flex flex-col items-center justify-center py-6 px-4 sm:px-6">
       <div className="w-full max-w-lg bg-white rounded-3xl border-2 border-slate-200 shadow-xl overflow-hidden">
-        {/* Header Header Aksen Biru */}
+        {/* Header */}
         <div className="bg-slate-900 text-white p-6 sm:p-8 text-center relative overflow-hidden">
           <div className="absolute top-0 right-0 -mt-10 -mr-10 w-44 h-44 bg-sky-500/15 rounded-full blur-2xl pointer-events-none" />
           <div className="w-14 h-14 rounded-2xl bg-sky-500/20 text-sky-300 border border-sky-400/30 flex items-center justify-center mx-auto mb-4 shadow-sm">
@@ -233,9 +263,9 @@ export default function StudentEntryPage() {
           </p>
         </div>
 
-        {/* Konten Halaman */}
+        {/* Konten */}
         <div className="p-6 sm:p-8 space-y-6">
-          {/* Tampilan 1: Sudah Ada Sesi / Data Tersimpan */}
+          {/* Tampilan 1: Ada Sesi Tersimpan */}
           {hasSavedProfile && !isEditing ? (
             <div className="space-y-6 animate-in fade-in duration-200">
               <div className="p-5 rounded-2xl bg-sky-50/70 border border-sky-200 space-y-3">
@@ -271,7 +301,6 @@ export default function StudentEntryPage() {
                 </p>
               </div>
 
-              {/* Tombol Aksi */}
               <div className="space-y-3">
                 <button
                   type="button"
@@ -312,9 +341,9 @@ export default function StudentEntryPage() {
               </div>
             </div>
           ) : (
-            /* Tampilan 2: Langsung Form Login atau Daftar (Tanpa Tab) */
+            /* Tampilan 2: Form Login / Register */
             <div className="space-y-5 animate-in fade-in duration-200">
-              {/* Header Form */}
+              {/* Judul Form */}
               <div className="space-y-1 text-left">
                 <h2 className="text-lg sm:text-xl font-extrabold text-slate-900">
                   {isForgotMode
@@ -328,11 +357,11 @@ export default function StudentEntryPage() {
                     ? 'Masukkan alamat email Anda untuk menerima tautan pemulihan kata sandi.'
                     : isRegisterMode
                     ? 'Daftarkan akun baru Anda untuk menyimpan riwayat belajar, simulasi, dan nilai kuis di cloud Firestore.'
-                    : 'Masuk dengan email dan kata sandi Anda untuk mengakses materi pembelajaran.'}
+                    : 'Masuk dengan akun Google atau email dan kata sandi Anda.'}
                 </p>
               </div>
 
-              {/* Kotak Pesan Error */}
+              {/* Pesan Error */}
               {error && (
                 <div
                   role="alert"
@@ -343,7 +372,7 @@ export default function StudentEntryPage() {
                 </div>
               )}
 
-              {/* Kotak Pesan Sukses Reset */}
+              {/* Pesan Sukses Reset */}
               {resetSuccess && (
                 <div
                   role="status"
@@ -354,9 +383,8 @@ export default function StudentEntryPage() {
                 </div>
               )}
 
-              {/* Form Mode: Forgot vs Register vs Login */}
+              {/* ===== FORM LUPA KATA SANDI ===== */}
               {isForgotMode ? (
-                /* 0. FORM LUPA KATA SANDI */
                 <form onSubmit={handleForgotSubmit} noValidate className="space-y-4 text-left">
                   <div className="space-y-1.5">
                     <label
@@ -385,17 +413,21 @@ export default function StudentEntryPage() {
 
                   <button
                     type="submit"
-                    disabled={isResetting}
+                    disabled={isBusy}
                     className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl text-white font-extrabold text-sm bg-sky-600 hover:bg-sky-500 shadow-md shadow-sky-600/20 transition-all min-h-[44px] cursor-pointer disabled:opacity-60"
                   >
-                    <Send className="w-4 h-4" />
-                    <span>{isResetting ? 'Mengirim Tautan...' : 'Kirim Tautan Pemulihan Kata Sandi'}</span>
+                    {isBusy ? (
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                    ) : (
+                      <Send className="w-4 h-4" />
+                    )}
+                    <span>{isBusy ? 'Mengirim Tautan...' : 'Kirim Tautan Pemulihan Kata Sandi'}</span>
                   </button>
 
                   <div className="p-3 bg-sky-50 border border-sky-200 rounded-xl text-left space-y-1">
                     <p className="text-[11px] font-bold text-sky-900">Tips Penting:</p>
                     <p className="text-[11px] text-sky-800 leading-relaxed">
-                      Tautan reset hanya berlaku <strong>satu kali</strong>. Jika Anda mengirim permintaan lebih dari sekali, tautan lama otomatis kedaluwarsa—pastikan membuka tautan dari <strong>email paling terakhir</strong> yang masuk. Buka tautan sekali dan jangan me-refresh (F5) halaman.
+                      Tautan reset hanya berlaku <strong>satu kali</strong>. Jika Anda mengirim permintaan lebih dari sekali, tautan lama otomatis kedaluwarsa—pastikan membuka tautan dari <strong>email paling terakhir</strong> yang masuk.
                     </p>
                   </div>
 
@@ -414,373 +446,329 @@ export default function StudentEntryPage() {
                     </button>
                   </div>
                 </form>
+
               ) : !isRegisterMode ? (
-                /* 1. FORM LOGIN DENGAN FIREBASE AUTH */
-                <form onSubmit={handleLoginSubmit} noValidate className="space-y-4 text-left">
-                  {/* Tombol Login dengan Google */}
+                /* ===== FORM LOGIN ===== */
+                <div className="space-y-4 text-left">
+                  {/* Tombol Google */}
                   <button
                     type="button"
                     onClick={handleGoogleLogin}
-                    disabled={isLoading}
-                    className="w-full inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl font-extrabold text-sm bg-white hover:bg-gray-50 border-2 border-slate-200 hover:border-slate-300 text-slate-800 shadow-sm transition-all min-h-[44px] cursor-pointer disabled:opacity-60"
+                    disabled={isBusy}
+                    className="w-full inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl font-bold text-sm bg-white hover:bg-gray-50 border-2 border-slate-200 hover:border-slate-300 text-slate-700 shadow-sm transition-all min-h-[44px] cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
                   >
-                    {/* Google Logo SVG */}
-                    <svg className="w-5 h-5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
-                      <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
-                      <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
-                      <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
-                    </svg>
-                    <span>{isLoading ? 'Memproses...' : 'Masuk dengan Google'}</span>
+                    {isBusy ? (
+                      <Loader2 className="w-5 h-5 animate-spin text-slate-400" />
+                    ) : (
+                      <GoogleIcon className="w-5 h-5" />
+                    )}
+                    <span>{isBusy ? 'Memproses...' : 'Masuk dengan Google'}</span>
                   </button>
 
                   {/* Pembatas */}
-                  <div className="flex items-center gap-2 my-1">
+                  <div className="flex items-center gap-3">
                     <div className="flex-1 h-px bg-slate-200" />
-                    <span className="text-xs text-slate-400 font-medium">atau masuk dengan email</span>
+                    <span className="text-xs text-slate-400 font-medium whitespace-nowrap">atau masuk dengan email</span>
                     <div className="flex-1 h-px bg-slate-200" />
                   </div>
 
-                  <div className="space-y-1.5">
-                    <label
-                      htmlFor="student-login-email"
-                      className="block text-xs sm:text-sm font-bold text-slate-800"
-                    >
-                      Alamat Email Siswa <span className="text-rose-500">*</span>
-                    </label>
-                    <div className="relative">
-                      <Mail className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
-                      <input
-                        id="student-login-email"
-                        type="email"
-                        required
-                        value={loginEmail}
-                        onChange={(e) => {
-                          setLoginEmail(e.target.value);
-                          if (error) setError(null);
-                        }}
-                        placeholder="nama@sekolah.sch.id"
-                        className="w-full pl-10 pr-4 py-3 rounded-xl border-2 border-slate-300 text-slate-900 placeholder:text-slate-400 text-xs sm:text-sm focus:border-sky-500 focus:outline-none min-h-[44px]"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="space-y-1.5">
-                    <div className="flex items-center justify-between">
+                  {/* Form email/password */}
+                  <form onSubmit={handleLoginSubmit} noValidate className="space-y-4">
+                    <div className="space-y-1.5">
                       <label
-                        htmlFor="student-login-password"
+                        htmlFor="student-login-email"
                         className="block text-xs sm:text-sm font-bold text-slate-800"
                       >
-                        Kata Sandi <span className="text-rose-500">*</span>
+                        Alamat Email Siswa <span className="text-rose-500">*</span>
                       </label>
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setIsForgotMode(true);
-                          setForgotEmail(loginEmail);
-                          setError(null);
-                          setResetSuccess(null);
-                        }}
-                        className="text-xs text-sky-600 hover:text-sky-700 font-semibold hover:underline cursor-pointer"
-                      >
-                        Lupa kata sandi?
-                      </button>
+                      <div className="relative">
+                        <Mail className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                        <input
+                          id="student-login-email"
+                          type="email"
+                          required
+                          value={loginEmail}
+                          onChange={(e) => {
+                            setLoginEmail(e.target.value);
+                            if (error) setError(null);
+                          }}
+                          placeholder="nama@sekolah.sch.id"
+                          className="w-full pl-10 pr-4 py-3 rounded-xl border-2 border-slate-300 text-slate-900 placeholder:text-slate-400 text-xs sm:text-sm focus:border-sky-500 focus:outline-none min-h-[44px]"
+                        />
+                      </div>
                     </div>
-                    <div className="relative">
-                      <KeyRound className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
-                      <input
-                        id="student-login-password"
-                        type={showLoginPassword ? 'text' : 'password'}
-                        required
-                        value={loginPassword}
-                        onChange={(e) => {
-                          setLoginPassword(e.target.value);
-                          if (error) setError(null);
-                        }}
-                        placeholder="Masukkan kata sandi"
-                        className="w-full pl-10 pr-10 py-3 rounded-xl border-2 border-slate-300 text-slate-900 placeholder:text-slate-400 text-xs sm:text-sm focus:border-sky-500 focus:outline-none min-h-[44px]"
-                      />
-                      <button
-                        type="button"
-                        onClick={() => setShowLoginPassword((prev) => !prev)}
-                        className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 focus:outline-none p-1 cursor-pointer"
-                        aria-label={showLoginPassword ? 'Sembunyikan kata sandi' : 'Tampilkan kata sandi'}
-                      >
-                        {showLoginPassword ? (
-                          <EyeOff className="w-4 h-4" />
-                        ) : (
-                          <Eye className="w-4 h-4" />
-                        )}
-                      </button>
+
+                    <div className="space-y-1.5">
+                      <div className="flex items-center justify-between">
+                        <label
+                          htmlFor="student-login-password"
+                          className="block text-xs sm:text-sm font-bold text-slate-800"
+                        >
+                          Kata Sandi <span className="text-rose-500">*</span>
+                        </label>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setIsForgotMode(true);
+                            setForgotEmail(loginEmail);
+                            setError(null);
+                            setResetSuccess(null);
+                          }}
+                          className="text-xs text-sky-600 hover:text-sky-700 font-semibold hover:underline cursor-pointer"
+                        >
+                          Lupa kata sandi?
+                        </button>
+                      </div>
+                      <div className="relative">
+                        <KeyRound className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                        <input
+                          id="student-login-password"
+                          type={showLoginPassword ? 'text' : 'password'}
+                          required
+                          value={loginPassword}
+                          onChange={(e) => {
+                            setLoginPassword(e.target.value);
+                            if (error) setError(null);
+                          }}
+                          placeholder="Masukkan kata sandi"
+                          className="w-full pl-10 pr-10 py-3 rounded-xl border-2 border-slate-300 text-slate-900 placeholder:text-slate-400 text-xs sm:text-sm focus:border-sky-500 focus:outline-none min-h-[44px]"
+                        />
+                        <button
+                          type="button"
+                          onClick={() => setShowLoginPassword((prev) => !prev)}
+                          className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 focus:outline-none p-1 cursor-pointer"
+                          aria-label={showLoginPassword ? 'Sembunyikan kata sandi' : 'Tampilkan kata sandi'}
+                        >
+                          {showLoginPassword ? (
+                            <EyeOff className="w-4 h-4" />
+                          ) : (
+                            <Eye className="w-4 h-4" />
+                          )}
+                        </button>
+                      </div>
                     </div>
-                  </div>
 
-                  <button
-                    type="submit"
-                    disabled={isLoading}
-                    className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl text-white font-extrabold text-sm bg-sky-600 hover:bg-sky-500 shadow-md shadow-sky-600/20 transition-all min-h-[44px] cursor-pointer disabled:opacity-60"
-                  >
-                    <LogIn className="w-4 h-4" />
-                    <span>{isLoading ? 'Memeriksa Akun...' : 'Masuk Akun Siswa'}</span>
-                    <ArrowRight className="w-4 h-4 ml-1" />
-                  </button>
+                    <button
+                      type="submit"
+                      disabled={isBusy}
+                      className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl text-white font-extrabold text-sm bg-sky-600 hover:bg-sky-500 shadow-md shadow-sky-600/20 transition-all min-h-[44px] cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
+                    >
+                      {isBusy ? (
+                        <Loader2 className="w-4 h-4 animate-spin" />
+                      ) : (
+                        <LogIn className="w-4 h-4" />
+                      )}
+                      <span>{isBusy ? 'Memeriksa Akun...' : 'Masuk Akun Siswa'}</span>
+                      {!isBusy && <ArrowRight className="w-4 h-4 ml-1" />}
+                    </button>
 
-                  {/* Opsi Switch ke Form Pendaftaran */}
-                  <div className="text-center pt-2">
-                    <p className="text-xs text-slate-600">
-                      Belum punya akun?{' '}
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setIsRegisterMode(true);
-                          setError(null);
-                        }}
-                        className="font-bold text-sky-600 hover:text-sky-700 underline cursor-pointer p-1"
-                      >
-                        Daftar di sini
-                      </button>
-                    </p>
-                  </div>
-                </form>
+                    <div className="text-center pt-1">
+                      <p className="text-xs text-slate-600">
+                        Belum punya akun?{' '}
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setIsRegisterMode(true);
+                            setError(null);
+                          }}
+                          className="font-bold text-sky-600 hover:text-sky-700 underline cursor-pointer p-1"
+                        >
+                          Daftar di sini
+                        </button>
+                      </p>
+                    </div>
+                  </form>
+                </div>
+
               ) : (
-                /* 2. FORM DAFTAR AKUN BARU (NAMA, KELAS, EMAIL, PASSWORD) */
-                <form onSubmit={handleRegisterSubmit} noValidate className="space-y-4 text-left">
-                  {/* Daftar dengan Google */}
+                /* ===== FORM DAFTAR ===== */
+                <div className="space-y-4 text-left">
+                  {/* Tombol Google */}
                   <button
                     type="button"
                     onClick={handleGoogleLogin}
-                    disabled={isLoading}
-                    className="w-full inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl font-extrabold text-sm bg-white hover:bg-gray-50 border-2 border-slate-200 hover:border-slate-300 text-slate-800 shadow-sm transition-all min-h-[44px] cursor-pointer disabled:opacity-60"
+                    disabled={isBusy}
+                    className="w-full inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl font-bold text-sm bg-white hover:bg-gray-50 border-2 border-slate-200 hover:border-slate-300 text-slate-700 shadow-sm transition-all min-h-[44px] cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
                   >
-                    <svg className="w-5 h-5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
-                      <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
-                      <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
-                      <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
-                    </svg>
-                    <span>Daftar dengan Google</span>
+                    {isBusy ? (
+                      <Loader2 className="w-5 h-5 animate-spin text-slate-400" />
+                    ) : (
+                      <GoogleIcon className="w-5 h-5" />
+                    )}
+                    <span>{isBusy ? 'Memproses...' : 'Daftar dengan Google'}</span>
                   </button>
 
                   {/* Pembatas */}
-                  <div className="flex items-center gap-2 my-1">
+                  <div className="flex items-center gap-3">
                     <div className="flex-1 h-px bg-slate-200" />
-                    <span className="text-xs text-slate-400 font-medium">atau daftar dengan email</span>
+                    <span className="text-xs text-slate-400 font-medium whitespace-nowrap">atau daftar dengan email</span>
                     <div className="flex-1 h-px bg-slate-200" />
                   </div>
 
-                  {/* Nama Lengkap Siswa */}
-                  <div className="space-y-1.5">
-                    <label
-                      htmlFor="register-name"
-                      className="block text-xs sm:text-sm font-bold text-slate-800"
-                    >
-                      Nama Lengkap Siswa <span className="text-rose-500">*</span>
-                    </label>
-                    <div className="relative">
-                      <User className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
-                      <input
-                        id="register-name"
-                        type="text"
-                        required
-                        value={regName}
-                        onChange={(e) => {
-                          setRegName(e.target.value);
-                          if (error) setError(null);
-                        }}
-                        placeholder="Contoh: Siti Rahmawati / Ahmad Fauzi"
-                        className="w-full pl-10 pr-4 py-3 rounded-xl border-2 border-slate-300 text-slate-900 placeholder:text-slate-400 text-xs sm:text-sm focus:border-sky-500 focus:outline-none min-h-[44px]"
-                      />
-                    </div>
-                  </div>
-
-                  {/* Kelas / Rombel */}
-                  <div className="space-y-1.5">
-                    <label
-                      htmlFor="register-class"
-                      className="block text-xs sm:text-sm font-bold text-slate-800"
-                    >
-                      Kelas / Rombel <span className="text-rose-500">*</span>
-                    </label>
-                    <div className="relative">
-                      <GraduationCap className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
-                      <select
-                        id="register-class"
-                        required
-                        value={selectedClass}
-                        onChange={(e) => {
-                          setSelectedClass(e.target.value);
-                          if (error) setError(null);
-                        }}
-                        className="w-full pl-10 pr-8 py-3 rounded-xl border-2 border-slate-300 text-slate-900 text-xs sm:text-sm focus:border-sky-500 focus:outline-none min-h-[44px] bg-white cursor-pointer"
-                      >
-                        <option value="" disabled>
-                          -- Pilih Kelas XII --
-                        </option>
-                        {CLASS_OPTIONS.map((cls) => (
-                          <option key={cls} value={cls}>
-                            {cls}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-
-                    {/* Jika memilih Lainnya */}
-                    {selectedClass === 'Lainnya' && (
-                      <div className="pt-2 space-y-1">
-                        <label
-                          htmlFor="register-custom-class"
-                          className="block text-xs font-semibold text-slate-700"
-                        >
-                          Tuliskan Nama Kelas Lainnya <span className="text-rose-500">*</span>
-                        </label>
+                  <form onSubmit={handleRegisterSubmit} noValidate className="space-y-4">
+                    {/* Nama Lengkap */}
+                    <div className="space-y-1.5">
+                      <label htmlFor="register-name" className="block text-xs sm:text-sm font-bold text-slate-800">
+                        Nama Lengkap Siswa <span className="text-rose-500">*</span>
+                      </label>
+                      <div className="relative">
+                        <User className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
                         <input
-                          id="register-custom-class"
+                          id="register-name"
                           type="text"
                           required
-                          value={customClass}
-                          onChange={(e) => {
-                            setCustomClass(e.target.value);
-                            if (error) setError(null);
-                          }}
-                          placeholder="Contoh: XII MIPA 9 / XII Kimia 3"
-                          className="w-full px-4 py-2.5 rounded-xl border-2 border-slate-300 text-slate-900 placeholder:text-slate-400 text-xs sm:text-sm focus:border-sky-500 focus:outline-none min-h-[44px]"
+                          value={regName}
+                          onChange={(e) => { setRegName(e.target.value); if (error) setError(null); }}
+                          placeholder="Contoh: Siti Rahmawati / Ahmad Fauzi"
+                          className="w-full pl-10 pr-4 py-3 rounded-xl border-2 border-slate-300 text-slate-900 placeholder:text-slate-400 text-xs sm:text-sm focus:border-sky-500 focus:outline-none min-h-[44px]"
                         />
                       </div>
-                    )}
-                  </div>
-
-                  {/* Alamat Email */}
-                  <div className="space-y-1.5">
-                    <label
-                      htmlFor="register-email"
-                      className="block text-xs sm:text-sm font-bold text-slate-800"
-                    >
-                      Alamat Email Siswa <span className="text-rose-500">*</span>
-                    </label>
-                    <div className="relative">
-                      <Mail className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
-                      <input
-                        id="register-email"
-                        type="email"
-                        required
-                        value={regEmail}
-                        onChange={(e) => {
-                          setRegEmail(e.target.value);
-                          if (error) setError(null);
-                        }}
-                        placeholder="nama@sekolah.sch.id"
-                        className="w-full pl-10 pr-4 py-3 rounded-xl border-2 border-slate-300 text-slate-900 placeholder:text-slate-400 text-xs sm:text-sm focus:border-sky-500 focus:outline-none min-h-[44px]"
-                      />
                     </div>
-                  </div>
 
-                  {/* Kata Sandi */}
-                  <div className="space-y-1.5">
-                    <label
-                      htmlFor="register-password"
-                      className="block text-xs sm:text-sm font-bold text-slate-800"
-                    >
-                      Kata Sandi <span className="text-rose-500">*</span>
-                    </label>
-                    <div className="relative">
-                      <KeyRound className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
-                      <input
-                        id="register-password"
-                        type={showRegPassword ? 'text' : 'password'}
-                        required
-                        value={regPassword}
-                        onChange={(e) => {
-                          setRegPassword(e.target.value);
-                          if (error) setError(null);
-                        }}
-                        placeholder="Minimal 6 karakter"
-                        className="w-full pl-10 pr-10 py-3 rounded-xl border-2 border-slate-300 text-slate-900 placeholder:text-slate-400 text-xs sm:text-sm focus:border-sky-500 focus:outline-none min-h-[44px]"
-                      />
-                      <button
-                        type="button"
-                        onClick={() => setShowRegPassword((prev) => !prev)}
-                        className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 focus:outline-none p-1 cursor-pointer"
-                        aria-label={showRegPassword ? 'Sembunyikan kata sandi' : 'Tampilkan kata sandi'}
-                      >
-                        {showRegPassword ? (
-                          <EyeOff className="w-4 h-4" />
-                        ) : (
-                          <Eye className="w-4 h-4" />
-                        )}
-                      </button>
+                    {/* Kelas */}
+                    <div className="space-y-1.5">
+                      <label htmlFor="register-class" className="block text-xs sm:text-sm font-bold text-slate-800">
+                        Kelas / Rombel <span className="text-rose-500">*</span>
+                      </label>
+                      <div className="relative">
+                        <GraduationCap className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                        <select
+                          id="register-class"
+                          required
+                          value={selectedClass}
+                          onChange={(e) => { setSelectedClass(e.target.value); if (error) setError(null); }}
+                          className="w-full pl-10 pr-8 py-3 rounded-xl border-2 border-slate-300 text-slate-900 text-xs sm:text-sm focus:border-sky-500 focus:outline-none min-h-[44px] bg-white cursor-pointer"
+                        >
+                          <option value="" disabled>-- Pilih Kelas XII --</option>
+                          {CLASS_OPTIONS.map((cls) => (
+                            <option key={cls} value={cls}>{cls}</option>
+                          ))}
+                        </select>
+                      </div>
+                      {selectedClass === 'Lainnya' && (
+                        <div className="pt-2 space-y-1">
+                          <label htmlFor="register-custom-class" className="block text-xs font-semibold text-slate-700">
+                            Tuliskan Nama Kelas Lainnya <span className="text-rose-500">*</span>
+                          </label>
+                          <input
+                            id="register-custom-class"
+                            type="text"
+                            required
+                            value={customClass}
+                            onChange={(e) => { setCustomClass(e.target.value); if (error) setError(null); }}
+                            placeholder="Contoh: XII MIPA 9 / XII Kimia 3"
+                            className="w-full px-4 py-2.5 rounded-xl border-2 border-slate-300 text-slate-900 placeholder:text-slate-400 text-xs sm:text-sm focus:border-sky-500 focus:outline-none min-h-[44px]"
+                          />
+                        </div>
+                      )}
                     </div>
-                  </div>
 
-                  {/* Konfirmasi Kata Sandi */}
-                  <div className="space-y-1.5">
-                    <label
-                      htmlFor="register-confirm-password"
-                      className="block text-xs sm:text-sm font-bold text-slate-800"
-                    >
-                      Konfirmasi Kata Sandi <span className="text-rose-500">*</span>
-                    </label>
-                    <div className="relative">
-                      <KeyRound className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
-                      <input
-                        id="register-confirm-password"
-                        type={showRegConfirmPassword ? 'text' : 'password'}
-                        required
-                        value={regConfirmPassword}
-                        onChange={(e) => {
-                          setRegConfirmPassword(e.target.value);
-                          if (error) setError(null);
-                        }}
-                        placeholder="Ulangi kata sandi"
-                        className="w-full pl-10 pr-10 py-3 rounded-xl border-2 border-slate-300 text-slate-900 placeholder:text-slate-400 text-xs sm:text-sm focus:border-sky-500 focus:outline-none min-h-[44px]"
-                      />
-                      <button
-                        type="button"
-                        onClick={() => setShowRegConfirmPassword((prev) => !prev)}
-                        className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 focus:outline-none p-1 cursor-pointer"
-                        aria-label={showRegConfirmPassword ? 'Sembunyikan kata sandi' : 'Tampilkan kata sandi'}
-                      >
-                        {showRegConfirmPassword ? (
-                          <EyeOff className="w-4 h-4" />
-                        ) : (
-                          <Eye className="w-4 h-4" />
-                        )}
-                      </button>
+                    {/* Email */}
+                    <div className="space-y-1.5">
+                      <label htmlFor="register-email" className="block text-xs sm:text-sm font-bold text-slate-800">
+                        Alamat Email Siswa <span className="text-rose-500">*</span>
+                      </label>
+                      <div className="relative">
+                        <Mail className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                        <input
+                          id="register-email"
+                          type="email"
+                          required
+                          value={regEmail}
+                          onChange={(e) => { setRegEmail(e.target.value); if (error) setError(null); }}
+                          placeholder="nama@sekolah.sch.id"
+                          className="w-full pl-10 pr-4 py-3 rounded-xl border-2 border-slate-300 text-slate-900 placeholder:text-slate-400 text-xs sm:text-sm focus:border-sky-500 focus:outline-none min-h-[44px]"
+                        />
+                      </div>
                     </div>
-                  </div>
 
-                  {/* Tombol Submit Daftar */}
-                  <button
-                    type="submit"
-                    disabled={isLoading}
-                    className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl text-white font-extrabold text-sm bg-sky-600 hover:bg-sky-500 shadow-md shadow-sky-600/20 transition-all min-h-[44px] cursor-pointer disabled:opacity-60"
-                  >
-                    <UserPlus className="w-4 h-4" />
-                    <span>{isLoading ? 'Mendaftarkan Akun...' : 'Daftar & Mulai Belajar'}</span>
-                    <ArrowRight className="w-4 h-4 ml-1" />
-                  </button>
+                    {/* Kata Sandi */}
+                    <div className="space-y-1.5">
+                      <label htmlFor="register-password" className="block text-xs sm:text-sm font-bold text-slate-800">
+                        Kata Sandi <span className="text-rose-500">*</span>
+                      </label>
+                      <div className="relative">
+                        <KeyRound className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                        <input
+                          id="register-password"
+                          type={showRegPassword ? 'text' : 'password'}
+                          required
+                          value={regPassword}
+                          onChange={(e) => { setRegPassword(e.target.value); if (error) setError(null); }}
+                          placeholder="Minimal 6 karakter"
+                          className="w-full pl-10 pr-10 py-3 rounded-xl border-2 border-slate-300 text-slate-900 placeholder:text-slate-400 text-xs sm:text-sm focus:border-sky-500 focus:outline-none min-h-[44px]"
+                        />
+                        <button
+                          type="button"
+                          onClick={() => setShowRegPassword((prev) => !prev)}
+                          className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 focus:outline-none p-1 cursor-pointer"
+                          aria-label={showRegPassword ? 'Sembunyikan kata sandi' : 'Tampilkan kata sandi'}
+                        >
+                          {showRegPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                        </button>
+                      </div>
+                    </div>
 
-                  {/* Opsi Kembali ke Login */}
-                  <div className="text-center pt-2">
-                    <p className="text-xs text-slate-600">
-                      Sudah punya akun?{' '}
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setIsRegisterMode(false);
-                          setError(null);
-                        }}
-                        className="font-bold text-sky-600 hover:text-sky-700 underline cursor-pointer p-1"
-                      >
-                        Masuk di sini
-                      </button>
-                    </p>
-                  </div>
-                </form>
+                    {/* Konfirmasi Kata Sandi */}
+                    <div className="space-y-1.5">
+                      <label htmlFor="register-confirm-password" className="block text-xs sm:text-sm font-bold text-slate-800">
+                        Konfirmasi Kata Sandi <span className="text-rose-500">*</span>
+                      </label>
+                      <div className="relative">
+                        <KeyRound className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                        <input
+                          id="register-confirm-password"
+                          type={showRegConfirmPassword ? 'text' : 'password'}
+                          required
+                          value={regConfirmPassword}
+                          onChange={(e) => { setRegConfirmPassword(e.target.value); if (error) setError(null); }}
+                          placeholder="Ulangi kata sandi"
+                          className="w-full pl-10 pr-10 py-3 rounded-xl border-2 border-slate-300 text-slate-900 placeholder:text-slate-400 text-xs sm:text-sm focus:border-sky-500 focus:outline-none min-h-[44px]"
+                        />
+                        <button
+                          type="button"
+                          onClick={() => setShowRegConfirmPassword((prev) => !prev)}
+                          className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 focus:outline-none p-1 cursor-pointer"
+                          aria-label={showRegConfirmPassword ? 'Sembunyikan kata sandi' : 'Tampilkan kata sandi'}
+                        >
+                          {showRegConfirmPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                        </button>
+                      </div>
+                    </div>
+
+                    <button
+                      type="submit"
+                      disabled={isBusy}
+                      className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl text-white font-extrabold text-sm bg-sky-600 hover:bg-sky-500 shadow-md shadow-sky-600/20 transition-all min-h-[44px] cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
+                    >
+                      {isBusy ? (
+                        <Loader2 className="w-4 h-4 animate-spin" />
+                      ) : (
+                        <UserPlus className="w-4 h-4" />
+                      )}
+                      <span>{isBusy ? 'Mendaftarkan Akun...' : 'Daftar & Mulai Belajar'}</span>
+                      {!isBusy && <ArrowRight className="w-4 h-4 ml-1" />}
+                    </button>
+
+                    <div className="text-center pt-1">
+                      <p className="text-xs text-slate-600">
+                        Sudah punya akun?{' '}
+                        <button
+                          type="button"
+                          onClick={() => { setIsRegisterMode(false); setError(null); }}
+                          className="font-bold text-sky-600 hover:text-sky-700 underline cursor-pointer p-1"
+                        >
+                          Masuk di sini
+                        </button>
+                      </p>
+                    </div>
+                  </form>
+                </div>
               )}
             </div>
           )}
 
-          {/* Footer Card: Info & Tautan Akses Guru */}
+          {/* Footer */}
           <div className="pt-4 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500">
             <div className="flex items-center gap-1.5">
               <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
@@ -791,7 +779,6 @@ export default function StudentEntryPage() {
               </span>
             </div>
 
-            {/* Tautan Masuk Guru */}
             <Link
               to="/guru"
               className="inline-flex items-center gap-1.5 text-xs text-slate-600 hover:text-sky-700 font-bold py-2 px-2 hover:bg-slate-100 rounded-lg transition-colors min-h-[44px]"
