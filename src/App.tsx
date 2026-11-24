@@ -8,6 +8,7 @@ import ModulePage from './pages/ModulePage.tsx';
 import PracticePage from './pages/PracticePage.tsx';
 import AssessmentPage from './pages/AssessmentPage.tsx';
 import TeacherModePage from './pages/TeacherModePage.tsx';
+import ResetPasswordPage from './pages/ResetPasswordPage.tsx';
 import GlossaryPage from './pages/GlossaryPage.tsx';
 import AboutPage from './pages/AboutPage.tsx';
 import NotFoundPage from './pages/NotFoundPage.tsx';
@@ -16,9 +17,10 @@ export function AppRoutes() {
   return (
     <Routes>
       <Route path="/" element={<AppLayout />}>
-        {/* Halaman Masuk Data Diri & Mode Guru tidak terkunci oleh gerbang siswa */}
+        {/* Halaman Masuk Data Diri, Mode Guru, & Reset Password tidak terkunci oleh gerbang siswa */}
         <Route path="masuk" element={<StudentEntryPage />} />
         <Route path="guru" element={<TeacherModePage />} />
+        <Route path="reset-password" element={<ResetPasswordPage />} />
 
         {/* Semua halaman pembelajaran dilindungi gerbang data diri siswa */}
         <Route

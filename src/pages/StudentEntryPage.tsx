@@ -374,6 +374,13 @@ export default function StudentEntryPage() {
                     <span>{isResetting ? 'Mengirim Tautan...' : 'Kirim Tautan Pemulihan Kata Sandi'}</span>
                   </button>
 
+                  <div className="p-3 bg-sky-50 border border-sky-200 rounded-xl text-left space-y-1">
+                    <p className="text-[11px] font-bold text-sky-900">Tips Penting:</p>
+                    <p className="text-[11px] text-sky-800 leading-relaxed">
+                      Tautan reset hanya berlaku <strong>satu kali</strong>. Jika Anda mengirim permintaan lebih dari sekali, tautan lama otomatis kedaluwarsa—pastikan membuka tautan dari <strong>email paling terakhir</strong> yang masuk. Buka tautan sekali dan jangan me-refresh (F5) halaman.
+                    </p>
+                  </div>
+
                   <div className="text-center pt-2">
                     <button
                       type="button"

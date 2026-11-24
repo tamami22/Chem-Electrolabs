@@ -351,7 +351,24 @@ export const useStudentStore = create<StudentStoreState>((set, get) => ({
     }
     set({ isLoading: true, error: null });
     try {
-      await authWithTimeout(sendPasswordResetEmail(auth, email.trim()));
+      const actionCodeSettings = {
+        url: `${typeof window !== 'undefined' ? window.location.origin : ''}/reset-password`,
+        handleCodeInApp: true,
+      };
+      try {
+        await authWithTimeout(sendPasswordResetEmail(auth, email.trim(), actionCodeSettings));
+      } catch (err: unknown) {
+        if (
+          err &&
+          typeof err === 'object' &&
+          'code' in err &&
+          (err as { code: string }).code === 'auth/unauthorized-continue-uri'
+        ) {
+          await authWithTimeout(sendPasswordResetEmail(auth, email.trim()));
+        } else {
+          throw err;
+        }
+      }
       set({ isLoading: false, error: null });
       return { success: true };
     } catch (err: unknown) {

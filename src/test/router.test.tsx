@@ -57,6 +57,16 @@ describe('Router & Navigation Skeleton Tests', () => {
     expect(screen.getByText(/Glosarium & Tabel Potensial Standar/i)).toBeInTheDocument();
   });
 
+  it('renders ResetPasswordPage at "/reset-password"', () => {
+    render(
+      <MemoryRouter initialEntries={['/reset-password']}>
+        <AppRoutes />
+      </MemoryRouter>
+    );
+    expect(screen.getByText(/Pemulihan & Reset Kata Sandi Akun/i)).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /Minta Tautan Reset Kata Sandi/i })).toBeInTheDocument();
+  });
+
   it('renders NotFoundPage at unknown route', () => {
     render(
       <MemoryRouter initialEntries={['/halaman-tidak-ada']}>
