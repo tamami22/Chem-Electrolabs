@@ -267,7 +267,66 @@ export const useStudentStore = create<StudentStoreState>((set, get) => ({
     }
   },
 
-/* duplicate loginWithGoogle removed */
+  loginWithGoogle: async () => {
+    if (!auth) {
+      const msg = 'Firebase Auth belum terkonfigurasi. Pastikan variabel lingkungan .env sudah diisi.';
+      set({ error: msg });
+      return { success: false, error: msg };
+    }
+    set({ isLoading: true, error: null });
+    try {
+      const provider = new GoogleAuthProvider();
+      provider.setCustomParameters({ prompt: 'select_account' });
+      const cred = await signInWithPopup(auth, provider);
+      const user = cred.user;
+      writeSessionActive(true);
+
+      const synced = await syncProgressWithFirestore(user.uid);
+      const studentName = synced.student.studentName || user.displayName || user.email?.split('@')[0] || 'Siswa';
+      const className = synced.student.className || '';
+      const attendanceNumber = synced.student.attendanceNumber || '';
+
+      if (studentName) {
+        saveStudentProfile(studentName, className, attendanceNumber, user.uid);
+      }
+
+      const hasClass = Boolean(className.trim());
+
+      set({
+        uid: user.uid,
+        email: user.email,
+        studentName,
+        className,
+        attendanceNumber,
+        attempts: synced.attempts,
+        isEntered: hasClass,
+        isLoading: false,
+        error: null,
+      });
+
+      return { success: true, needsClass: !hasClass };
+    } catch (err: unknown) {
+      let msg = 'Gagal masuk dengan akun Google.';
+      if (err && typeof err === 'object' && 'code' in err) {
+        const code = (err as { code: string }).code;
+        if (code === 'auth/popup-closed-by-user') {
+          msg = 'Jendela masuk Google ditutup sebelum proses selesai.';
+        } else if (code === 'auth/cancelled-popup-request') {
+          msg = 'Permintaan jendela masuk Google dibatalkan.';
+        } else if (code === 'auth/popup-blocked') {
+          msg = 'Jendela popup Google diblokir oleh browser. Harap izinkan popup di situs ini.';
+        } else if (code === 'auth/network-request-failed') {
+          msg = 'Koneksi jaringan terputus (offline). Silakan periksa jaringan internet Anda.';
+        } else if (code === 'auth/operation-not-allowed') {
+          msg = 'Login Google belum diaktifkan di Firebase Console.';
+        } else if (code === 'auth/account-exists-with-different-credential') {
+          msg = 'Email ini sudah terdaftar dengan metode masuk lain (Email & Kata Sandi).';
+        }
+      }
+      set({ isLoading: false, error: msg });
+      return { success: false, error: msg };
+    }
+  },
 
   registerWithEmail: async (
     email: string,
