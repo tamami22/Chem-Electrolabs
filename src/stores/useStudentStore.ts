@@ -6,6 +6,8 @@ import {
   onAuthStateChanged,
   updateProfile,
   sendPasswordResetEmail,
+  GoogleAuthProvider,
+  signInWithPopup,
 } from 'firebase/auth';
 import { auth } from '../lib/firebase.ts';
 import {
@@ -91,6 +93,7 @@ export interface StudentStoreState {
 
   // Firebase Auth & Firestore Sync Actions
   loginWithEmail: (email: string, password: string) => Promise<{ success: boolean; error?: string }>;
+  loginWithGoogle: () => Promise<{ success: boolean; error?: string; needsClass?: boolean }>;
   registerWithEmail: (
     email: string,
     password: string,
@@ -264,6 +267,8 @@ export const useStudentStore = create<StudentStoreState>((set, get) => ({
     }
   },
 
+/* duplicate loginWithGoogle removed */
+
   registerWithEmail: async (
     email: string,
     password: string,
@@ -326,6 +331,8 @@ export const useStudentStore = create<StudentStoreState>((set, get) => ({
       return { success: false, error: msg };
     }
   },
+
+/* duplicate loginWithGoogle removed */
 
   logout: async () => {
     if (auth) {
@@ -391,6 +398,8 @@ export const useStudentStore = create<StudentStoreState>((set, get) => ({
       return { success: false, error: msg };
     }
   },
+
+/* duplicate loginWithGoogle removed */
 
   syncWithFirestore: async () => {
     const { uid } = get();
