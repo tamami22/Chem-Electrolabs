@@ -53,10 +53,13 @@ export default function StudentEntryPage() {
   const location = useLocation();
   const navigate = useNavigate();
   const {
+    uid,
     studentName,
     className,
     email,
+    setProfile,
     enterSession,
+    leaveSession,
     clearProfile,
     loginWithEmail,
     loginWithGoogle,
@@ -73,6 +76,9 @@ export default function StudentEntryPage() {
   const [isEditing, setIsEditing] = useState(!hasSavedProfile);
   const [isRegisterMode, setIsRegisterMode] = useState(false);
   const [isForgotMode, setIsForgotMode] = useState(false);
+  const [isGoogleCompleteMode, setIsGoogleCompleteMode] = useState(
+    Boolean(uid && email && !className?.trim())
+  );
 
   // State loading lokal (tidak bergantung pada store.isLoading)
   const [isBusy, setIsBusy] = useState(false);
@@ -116,7 +122,12 @@ export default function StudentEntryPage() {
         return;
       }
       if (res.needsClass) {
-        setIsRegisterMode(true);
+        const googleName = useStudentStore.getState().studentName;
+        if (googleName && !regName.trim()) {
+          setRegName(googleName);
+        }
+        setIsGoogleCompleteMode(true);
+        setIsRegisterMode(false);
         setIsEditing(true);
       } else {
         navigate(fromPath, { replace: true });
@@ -205,25 +216,20 @@ export default function StudentEntryPage() {
     }
   };
 
-  // Submit Pendaftaran Akun Baru
-  const handleRegisterSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (isBusy) return;
-    setError(null);
-
+  const validateNameAndClass = () => {
     const cleanedName = regName.trim().replace(/\s+/g, ' ');
     if (!cleanedName || cleanedName.length < 2) {
       setError('Nama lengkap wajib diisi minimal 2 karakter.');
-      return;
+      return null;
     }
     if (!/[a-zA-Z]/.test(cleanedName)) {
       setError('Nama lengkap harus mengandung huruf alfabet.');
-      return;
+      return null;
     }
 
     if (!selectedClass) {
       setError('Silakan pilih kelas Anda.');
-      return;
+      return null;
     }
     const finalClass =
       selectedClass === 'Lainnya'
@@ -232,8 +238,31 @@ export default function StudentEntryPage() {
 
     if (selectedClass === 'Lainnya' && (!finalClass || finalClass.length < 2)) {
       setError('Silakan tuliskan nama kelas Anda.');
-      return;
+      return null;
     }
+    return { cleanedName, finalClass };
+  };
+
+  // Lengkapi profil setelah login Google pertama kali
+  const handleGoogleCompleteSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (isBusy) return;
+    setError(null);
+    const validated = validateNameAndClass();
+    if (!validated) return;
+    setProfile(validated.cleanedName, validated.finalClass);
+    setIsGoogleCompleteMode(false);
+    navigate(fromPath, { replace: true });
+  };
+
+  // Submit Pendaftaran Akun Baru
+  const handleRegisterSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (isBusy) return;
+    setError(null);
+
+    const validated = validateNameAndClass();
+    if (!validated) return;
 
     const cleanedEmail = regEmail.trim();
     if (!cleanedEmail || !cleanedEmail.includes('@')) {
@@ -252,8 +281,8 @@ export default function StudentEntryPage() {
     setIsBusy(true);
     try {
       const res = await registerWithEmail(cleanedEmail, regPassword, {
-        studentName: cleanedName,
-        className: finalClass,
+        studentName: validated.cleanedName,
+        className: validated.finalClass,
       });
       if (!res.success) {
         setError(res.error || 'Gagal mendaftar akun.');
@@ -367,6 +396,8 @@ export default function StudentEntryPage() {
                 <h2 className="text-lg sm:text-xl font-extrabold text-slate-900">
                   {isForgotMode
                     ? 'Lupa Kata Sandi'
+                    : isGoogleCompleteMode
+                    ? 'Lengkapi Data Siswa'
                     : isRegisterMode
                     ? 'Daftar Akun Siswa'
                     : 'Masuk Akun Siswa'}
@@ -374,6 +405,8 @@ export default function StudentEntryPage() {
                 <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
                   {isForgotMode
                     ? 'Masukkan alamat email Anda untuk menerima tautan pemulihan kata sandi.'
+                    : isGoogleCompleteMode
+                    ? `Akun Google (${email || 'terhubung'}) berhasil masuk. Lengkapi nama dan kelas Anda untuk melanjutkan.`
                     : isRegisterMode
                     ? 'Daftarkan akun baru Anda untuk menyimpan riwayat belajar, simulasi, dan nilai kuis di cloud Firestore.'
                     : 'Masuk dengan akun Google atau email dan kata sandi Anda.'}
@@ -462,6 +495,90 @@ export default function StudentEntryPage() {
                     >
                       <ArrowLeft className="w-3.5 h-3.5" />
                       <span>Kembali ke Halaman Masuk</span>
+                    </button>
+                  </div>
+                </form>
+
+              ) : isGoogleCompleteMode ? (
+                /* ===== LENGKAPI PROFIL GOOGLE ===== */
+                <form onSubmit={handleGoogleCompleteSubmit} noValidate className="space-y-4 text-left">
+                  <div className="space-y-1.5">
+                    <label htmlFor="register-name" className="block text-xs sm:text-sm font-bold text-slate-800">
+                      Nama Lengkap Siswa <span className="text-rose-500">*</span>
+                    </label>
+                    <div className="relative">
+                      <User className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                      <input
+                        id="register-name"
+                        type="text"
+                        required
+                        value={regName}
+                        onChange={(e) => { setRegName(e.target.value); if (error) setError(null); }}
+                        placeholder="Contoh: Siti Rahmawati / Ahmad Fauzi"
+                        className="w-full pl-10 pr-4 py-3 rounded-xl border-2 border-slate-300 text-slate-900 placeholder:text-slate-400 text-xs sm:text-sm focus:border-sky-500 focus:outline-none min-h-[44px]"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="space-y-1.5">
+                    <label htmlFor="register-class" className="block text-xs sm:text-sm font-bold text-slate-800">
+                      Kelas / Rombel <span className="text-rose-500">*</span>
+                    </label>
+                    <div className="relative">
+                      <GraduationCap className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                      <select
+                        id="register-class"
+                        required
+                        value={selectedClass}
+                        onChange={(e) => { setSelectedClass(e.target.value); if (error) setError(null); }}
+                        className="w-full pl-10 pr-8 py-3 rounded-xl border-2 border-slate-300 text-slate-900 text-xs sm:text-sm focus:border-sky-500 focus:outline-none min-h-[44px] bg-white cursor-pointer"
+                      >
+                        <option value="" disabled>-- Pilih Kelas XII --</option>
+                        {CLASS_OPTIONS.map((cls) => (
+                          <option key={cls} value={cls}>{cls}</option>
+                        ))}
+                      </select>
+                    </div>
+                    {selectedClass === 'Lainnya' && (
+                      <div className="pt-2 space-y-1">
+                        <label htmlFor="register-custom-class" className="block text-xs font-semibold text-slate-700">
+                          Tuliskan Nama Kelas Lainnya <span className="text-rose-500">*</span>
+                        </label>
+                        <input
+                          id="register-custom-class"
+                          type="text"
+                          required
+                          value={customClass}
+                          onChange={(e) => { setCustomClass(e.target.value); if (error) setError(null); }}
+                          placeholder="Contoh: XII MIPA 9 / XII Kimia 3"
+                          className="w-full px-4 py-2.5 rounded-xl border-2 border-slate-300 text-slate-900 placeholder:text-slate-400 text-xs sm:text-sm focus:border-sky-500 focus:outline-none min-h-[44px]"
+                        />
+                      </div>
+                    )}
+                  </div>
+
+                  <button
+                    type="submit"
+                    disabled={isBusy}
+                    className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl text-white font-extrabold text-sm bg-sky-600 hover:bg-sky-500 shadow-md shadow-sky-600/20 transition-all min-h-[44px] cursor-pointer disabled:opacity-60"
+                  >
+                    <CheckCircle2 className="w-4 h-4" />
+                    <span>Simpan &amp; Masuk</span>
+                    <ArrowRight className="w-4 h-4 ml-1" />
+                  </button>
+
+                  <div className="text-center pt-1">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        leaveSession();
+                        setIsGoogleCompleteMode(false);
+                        setError(null);
+                      }}
+                      className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-600 hover:text-slate-800 underline cursor-pointer p-1"
+                    >
+                      <ArrowLeft className="w-3.5 h-3.5" />
+                      <span>Gunakan akun lain</span>
                     </button>
                   </div>
                 </form>

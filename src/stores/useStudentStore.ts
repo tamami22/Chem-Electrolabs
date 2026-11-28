@@ -279,7 +279,6 @@ export const useStudentStore = create<StudentStoreState>((set, get) => ({
       provider.setCustomParameters({ prompt: 'select_account' });
       const cred = await signInWithPopup(auth, provider);
       const user = cred.user;
-      writeSessionActive(true);
 
       const synced = await syncProgressWithFirestore(user.uid);
       const studentName = synced.student.studentName || user.displayName || user.email?.split('@')[0] || 'Siswa';
@@ -291,6 +290,7 @@ export const useStudentStore = create<StudentStoreState>((set, get) => ({
       }
 
       const hasClass = Boolean(className.trim());
+      writeSessionActive(hasClass);
 
       set({
         uid: user.uid,
@@ -484,22 +484,27 @@ if (typeof window !== 'undefined' && auth) {
   try {
     onAuthStateChanged(auth, async (user) => {
       if (user) {
+        const currentClass = useStudentStore.getState().className;
         useStudentStore.setState({
           uid: user.uid,
           email: user.email || null,
-          isEntered: true,
         });
-        writeSessionActive(true);
         try {
           const synced = await syncProgressWithFirestore(user.uid);
+          const resolvedClass = synced.student.className || currentClass || '';
+          const hasClass = Boolean(resolvedClass.trim());
+          writeSessionActive(hasClass);
           useStudentStore.setState({
             studentName: synced.student.studentName || user.displayName || '',
-            className: synced.student.className || '',
+            className: resolvedClass,
             attendanceNumber: synced.student.attendanceNumber || '',
             attempts: synced.attempts,
+            isEntered: hasClass,
           });
         } catch {
-          // offline fallback
+          const hasClass = Boolean(currentClass.trim());
+          writeSessionActive(hasClass);
+          useStudentStore.setState({ isEntered: hasClass });
         }
       } else {
         const state = useStudentStore.getState();

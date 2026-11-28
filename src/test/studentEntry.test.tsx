@@ -1,5 +1,5 @@
-import { describe, it, expect, beforeEach } from 'vitest';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { describe, it, expect, beforeEach, vi } from 'vitest';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { AppRoutes } from '../App.tsx';
 import { useStudentStore } from '../stores/useStudentStore.ts';
@@ -211,5 +211,54 @@ describe('Student Entry Flow & Route Guarding Tests', () => {
 
     // Kembali ke form login
     expect(screen.getByRole('heading', { name: /Masuk Akun Siswa/i })).toBeInTheDocument();
+  });
+
+  it('prompts for class completion after Google sign-in from login and register modes and enters session on submit', async () => {
+    const spy = vi.spyOn(useStudentStore.getState(), 'loginWithGoogle').mockImplementation(async () => {
+      useStudentStore.setState({
+        uid: 'google-uid-1',
+        email: 'andi@gmail.com',
+        studentName: 'Andi Wijaya',
+        className: '',
+        isEntered: false,
+      });
+      return { success: true, needsClass: true };
+    });
+
+    const { unmount } = render(
+      <MemoryRouter initialEntries={['/masuk']}>
+        <AppRoutes />
+      </MemoryRouter>
+    );
+
+    // 1. Dari halaman Masuk: klik Masuk dengan Google
+    fireEvent.click(screen.getByRole('button', { name: /Masuk dengan Google/i }));
+    await waitFor(() => {
+      expect(screen.getByRole('heading', { name: /Lengkapi Data Siswa/i })).toBeInTheDocument();
+    });
+    expect(screen.getByLabelText(/Nama Lengkap Siswa/i)).toHaveValue('Andi Wijaya');
+
+    // Pilih kelas & simpan
+    fireEvent.change(screen.getByLabelText(/Kelas \/ Rombel/i), { target: { value: 'XII-3' } });
+    fireEvent.click(screen.getByRole('button', { name: /Simpan & Masuk/i }));
+    expect(useStudentStore.getState().isEntered).toBe(true);
+    expect(useStudentStore.getState().className).toBe('XII-3');
+    unmount();
+
+    // 2. Dari halaman Daftar: klik Daftar dengan Google juga masuk ke Lengkapi Data Siswa
+    resetProgress();
+    useStudentStore.getState().reset();
+    render(
+      <MemoryRouter initialEntries={['/masuk']}>
+        <AppRoutes />
+      </MemoryRouter>
+    );
+    fireEvent.click(screen.getByRole('button', { name: /Daftar di sini/i }));
+    fireEvent.click(screen.getByRole('button', { name: /Daftar dengan Google/i }));
+    await waitFor(() => {
+      expect(screen.getByRole('heading', { name: /Lengkapi Data Siswa/i })).toBeInTheDocument();
+    });
+
+    spy.mockRestore();
   });
 });
